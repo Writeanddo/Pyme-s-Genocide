@@ -49,6 +49,12 @@ public class PlayerControllerRB : MonoBehaviour
             HandleAirborneInput();
         }
 
+        if (m_movement.x != 0.0f || m_movement.y != 0.0f)
+        {
+
+            m_RigidBody.rotation = Quaternion.Euler(0.0f, Mathf.Rad2Deg * Mathf.Atan2(m_movement.x, m_movement.z), 0.0f);
+        }
+
         m_RigidBody.velocity = new Vector3(m_movement.x, y, m_movement.z);
     }
 
