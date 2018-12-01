@@ -91,7 +91,14 @@ public class PlayerControllerRB : MonoBehaviour
             {
                 m_RigidBody.velocity = Vector3.zero;
             }
-            m_RigidBody.AddForce(externalForces[i].force, externalForces[i].mode);
+            if (m_IsGrounded)
+            {
+                m_RigidBody.AddForce(externalForces[i].force * 200.0f, externalForces[i].mode);
+            }
+            else
+            {
+                m_RigidBody.AddForce(externalForces[i].force, externalForces[i].mode);
+            }
         }
 
         float friction = m_IsGrounded ? m_GroundFriction : m_AirFriction;
