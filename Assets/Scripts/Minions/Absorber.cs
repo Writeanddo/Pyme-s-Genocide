@@ -10,7 +10,7 @@ public class Absorber : MonoBehaviour {
     public GameObject bullet;
 
     void Update() {
-        if (Input.GetMouseButtonDown(0) && type == Type.force) {
+        if (Input.GetButtonDown("Fire1") && type == Type.force) {
             GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
             newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * force * 20);
         }

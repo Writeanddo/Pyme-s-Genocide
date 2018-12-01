@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class PlayerControllerRB : MonoBehaviour
 {
-    [SerializeField] float m_Speed = 5.0f;
+    [SerializeField] float m_GroundSpeed = 10.0f;
+    [SerializeField] float m_AirSpeed = 8.0f;
     [SerializeField] float m_JumpForce = 4000.0f;
     [SerializeField] float m_GroundCheckDistance = 1.2f;
     [SerializeField] float m_TurnSmoothTime;
+    [SerializeField] float m_GroundFriction;
+    [SerializeField] float m_AirFriction;
+    [SerializeField] float m_ExtraGravityFactor;
+    [SerializeField] float m_MaxMovementVelocity;
+    [SerializeField] float m_MaxGravityVelocity;
 
     private bool m_WantsToJump;
     private bool m_WantsToJetpack;
@@ -17,8 +23,6 @@ public class PlayerControllerRB : MonoBehaviour
 
     Rigidbody m_RigidBody;
     Vector3 m_movement;
-
-    private float y;
 
     private bool m_IsGrounded;
     private Vector3 m_GroundNormal;
@@ -50,11 +54,11 @@ public class PlayerControllerRB : MonoBehaviour
         m_TargetRotation = m_Cam.eulerAngles.y;
 
         m_CurrentVelocity = inputDir.x * m_Cam.right - inputDir.y * Vector3.Cross(Vector3.up, m_Cam.right);
-        m_CurrentVelocity = m_Speed * m_CurrentVelocity.normalized;
-
-        y = m_RigidBody.velocity.y;
 
         CheckGroundStatus();
+
+        float speed = m_IsGrounded ? m_GroundSpeed : m_AirSpeed;
+        m_CurrentVelocity = speed * m_CurrentVelocity.normalized;
 
         if (m_IsGrounded)
         {
@@ -79,34 +83,54 @@ public class PlayerControllerRB : MonoBehaviour
         }
 
         m_RigidBody.rotation = Quaternion.Slerp(m_RigidBody.rotation, Quaternion.Euler(0.0f, m_TargetRotation, 0.0f), 15.0f * Time.deltaTime);
+        m_RigidBody.AddForce(m_CurrentVelocity * Time.deltaTime, ForceMode.VelocityChange);
 
-        if (externalForces.Count == 0)
+        for (int i = 0; i < externalForces.Count; i++)
         {
-            if (m_IsGrounded)
+            if (externalForces[i].resetVelocity)
             {
-                m_RigidBody.velocity = new Vector3(
-                    m_CurrentVelocity.x,
-                    m_RigidBody.velocity.y,
-                    m_CurrentVelocity.z);
+                m_RigidBody.velocity = Vector3.zero;
             }
-            else
-            {
-                m_RigidBody.MovePosition(m_RigidBody.position + m_CurrentVelocity * Time.deltaTime);
-            }
+            m_RigidBody.AddForce(externalForces[i].force, externalForces[i].mode);
         }
-        else
-        {
-            m_RigidBody.MovePosition(m_RigidBody.position + m_CurrentVelocity * Time.deltaTime);
 
-            for (int i = 0; i < externalForces.Count; i++)
+        float friction = m_IsGrounded ? m_GroundFriction : m_AirFriction;
+        Vector2 horizontalVelocity = new Vector3(m_RigidBody.velocity.x, m_RigidBody.velocity.z);
+        if (friction == 0.0f)
+        {
+            friction = 1.0f;
+        }
+
+        Vector3 vel = transform.InverseTransformDirection(m_RigidBody.velocity);
+        vel.x *= friction;
+        vel.z *= friction;
+
+        if (!m_IsGrounded)
+        {
+            if (m_RigidBody.velocity.y <= 0.0f)
             {
-                if (externalForces[i].resetVelocity)
+                if (m_WantsToJetpack)
                 {
-                    m_RigidBody.velocity = Vector3.zero;
+                    vel.y *= 0.95f;
                 }
-                m_RigidBody.AddForce(externalForces[i].force, externalForces[i].mode);
+                else
+                {
+                    vel.y *= m_ExtraGravityFactor;
+                }
             }
         }
+
+        if (vel.y <= 0.0f)
+        {
+            vel.y = -Mathf.Min(-vel.y, m_MaxGravityVelocity);
+        }
+
+        Vector2 hMov = new Vector2(vel.x, vel.z);
+        hMov = hMov.normalized * Mathf.Min(hMov.magnitude, m_MaxMovementVelocity);
+        vel.x = hMov.x;
+        vel.z = hMov.y;
+
+        m_RigidBody.velocity = transform.TransformDirection(vel);
 
         thirdPersonCamera.ManualUpdate();
 
@@ -151,9 +175,10 @@ public class PlayerControllerRB : MonoBehaviour
         // helper to visualise the ground check ray in the scene view
         Debug.DrawLine(transform.position + (Vector3.up * 0.1f), transform.position + (Vector3.up * 0.1f) + (Vector3.down * m_GroundCheckDistance));
 #endif
+
         // 0.1f is a small offset to start the ray from inside the character
         // it is also good to note that the transform position in the sample assets is at the base of the character
-        if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance))
+        if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance, -5, QueryTriggerInteraction.Ignore))
         {
             m_GroundNormal = hitInfo.normal;
             m_IsGrounded = true;
