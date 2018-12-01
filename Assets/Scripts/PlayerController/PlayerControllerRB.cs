@@ -9,11 +9,10 @@ public class PlayerControllerRB : MonoBehaviour
     [SerializeField] float m_GroundCheckDistance = 1.2f;
     [SerializeField] float m_TurnSmoothTime;
 
-    private float m_CurrentSpeed;
-
     private bool m_WantsToJump;
     private bool m_WantsToJetpack;
 
+    private ThirdPersonCamera thirdPersonCamera;
     private Transform m_Cam;
 
     Rigidbody m_RigidBody;
@@ -33,11 +32,14 @@ public class PlayerControllerRB : MonoBehaviour
 
     private List<PlayerControllerExternalForce> externalForces = new List<PlayerControllerExternalForce>();
 
+    private Vector3 m_CurrentVelocity;
+
     void Start()
     {
         m_RigidBody = GetComponent<Rigidbody>();
         jetPack = GetComponentInChildren<Jetpack>();
         m_Cam = Camera.main.transform;
+        thirdPersonCamera = FindObjectOfType<ThirdPersonCamera>();
     }
 
     void Update()
@@ -45,12 +47,10 @@ public class PlayerControllerRB : MonoBehaviour
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 inputDir = input.normalized;
 
-        // if (inputDir != Vector2.zero)
-        {
-            m_TargetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + m_Cam.eulerAngles.y;
-        }
+        m_TargetRotation = m_Cam.eulerAngles.y;
 
-        m_CurrentSpeed = m_Speed * inputDir.magnitude;
+        m_CurrentVelocity = inputDir.x * m_Cam.right - inputDir.y * Vector3.Cross(Vector3.up, m_Cam.right);
+        m_CurrentVelocity = m_Speed * m_CurrentVelocity.normalized;
 
         y = m_RigidBody.velocity.y;
 
@@ -64,6 +64,8 @@ public class PlayerControllerRB : MonoBehaviour
         {
             HandleAirborneInput();
         }
+
+
     }
 
     private void FixedUpdate()
@@ -78,30 +80,26 @@ public class PlayerControllerRB : MonoBehaviour
             m_RigidBody.AddForce(Vector3.up * jetPack.Strength);
         }
 
-        m_RigidBody.rotation = Quaternion.Euler(Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y,
-            m_TargetRotation,
-            ref m_turnSmoothVelocity,
-            m_TurnSmoothTime));
+        m_RigidBody.rotation = Quaternion.Slerp(m_RigidBody.rotation, Quaternion.Euler(0.0f, m_TargetRotation, 0.0f), 15.0f * Time.deltaTime);
 
         if (externalForces.Count == 0)
         {
             m_RigidBody.velocity = new Vector3(
-                transform.forward.x * m_CurrentSpeed,
+                m_CurrentVelocity.x,
                 m_RigidBody.velocity.y,
-                transform.forward.z * m_CurrentSpeed);
+                m_CurrentVelocity.z);
         }
         else
         {
-            m_RigidBody.MovePosition(m_RigidBody.position + new Vector3(
-            transform.forward.x * m_CurrentSpeed * Time.deltaTime,
-            0,
-            transform.forward.z * m_CurrentSpeed * Time.deltaTime));
+            m_RigidBody.MovePosition(m_RigidBody.position + m_CurrentVelocity * Time.deltaTime);
 
             for (int i = 0; i < externalForces.Count; i++)
             {
                 m_RigidBody.AddForce(externalForces[i].force, externalForces[i].mode);
             }
         }
+
+        thirdPersonCamera.ManualUpdate();
 
         externalForces.Clear();
 

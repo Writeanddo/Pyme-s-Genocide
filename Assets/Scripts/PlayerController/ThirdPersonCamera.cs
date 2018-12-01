@@ -13,6 +13,10 @@ public class ThirdPersonCamera : MonoBehaviour
     Vector3 rotationSmoothVelocity;
     Vector3 currentRotation;
 
+    public float positionSmoothTime = .12f;
+    Vector3 positionSmoothVelocity;
+    Vector3 currentPosition;
+
     float yaw;
     float pitch;
 
@@ -25,7 +29,7 @@ public class ThirdPersonCamera : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    public void ManualUpdate()
     {
         yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
         pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
@@ -34,6 +38,7 @@ public class ThirdPersonCamera : MonoBehaviour
         currentRotation = Vector3.SmoothDamp(currentRotation, new Vector3(pitch, yaw), ref rotationSmoothVelocity, rotationSmoothTime);
         transform.eulerAngles = currentRotation;
 
-        transform.position = target.position - transform.forward * dstFromTarget;
+        currentPosition = Vector3.SmoothDamp(currentPosition, target.position - transform.forward * dstFromTarget, ref positionSmoothVelocity, positionSmoothTime);
+        transform.position = currentPosition;
     }
 }
