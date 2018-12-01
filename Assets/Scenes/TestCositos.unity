@@ -261,6 +261,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114784917303312070, guid: 94951ac64ae4a304c96d17c56f7155f3,
+        type: 2}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 1515208001019978, guid: 1cf2190e8a7c0b64f933f80ed2dc8f7e,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94951ac64ae4a304c96d17c56f7155f3, type: 2}
   m_IsPrefabAsset: 0
@@ -369,6 +375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 100
   type: 0
+  bullet: {fileID: 0}
 --- !u!136 &1440451321
 CapsuleCollider:
   m_ObjectHideFlags: 0
