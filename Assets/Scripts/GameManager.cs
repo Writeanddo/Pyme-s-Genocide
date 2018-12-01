@@ -3,20 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
-    private int ammo = 0;
+    [SerializeField] float maxAmmo = 100.0f;
+    [SerializeField] float ammo;
+
     public Text text;
 
-    public void DecreaseAmmo() {
-        ammo--;
+    public void DecreaseAmmo(float ammount = 1.0f)
+    {
+        ammo = Mathf.Max(0, ammo - ammount);
         SetText();
     }
-    public void IncreaseAmmo() {
-        ammo++;
-        SetText();
-    }
-    private void SetText() { text.text = "Ammo: " + ammo; }
 
-    public int GetAmmo() { return ammo; }
+    public void IncreaseAmmo(int ammount = 1)
+    {
+        ammo = Mathf.Max(maxAmmo, ammo++);
+        SetText();
+    }
+
+    private void SetText() { text.text = "Ammo: " + Mathf.CeilToInt(ammo); }
+
+    public float GetAmmo() { return ammo; }
 }

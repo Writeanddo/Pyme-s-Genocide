@@ -82,7 +82,7 @@ public class PlayerControllerRB : MonoBehaviour
 
         if (m_WantsToJetpack && gameManager.GetAmmo() > 0) 
         {
-            gameManager.DecreaseAmmo();
+            gameManager.DecreaseAmmo(jetPack.AmmoPerSecond * Time.deltaTime);
             m_RigidBody.AddForce(Vector3.up * jetPack.Strength);
         }
 

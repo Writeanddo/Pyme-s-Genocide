@@ -11,7 +11,7 @@ public class Absorber : MonoBehaviour {
     public GameObject bullet;
 
     private void Start() {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update() {
