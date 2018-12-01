@@ -25,7 +25,7 @@ public class MinionSpawner : MonoBehaviour {
         else type = Minion.Type.Follower;
 
         enemy.GetComponent<Minion>().type = type;
-        enemy.GetComponent<Minion>().detectionDist = Random.Range(6, 10);
+        enemy.GetComponent<Minion>().detectionDist = Random.Range(10, 20);
 
         Vector3 position = transform.position;
             position = position + transform.forward * Random.Range(0, 10);
