@@ -6,8 +6,9 @@ public class Absorber : MonoBehaviour
 {
 
     GameManager gameManager;
-    [SerializeField] int force = 100;
-    [SerializeField] float torque;
+    [SerializeField] float pushForce = 2000.0f;
+    [SerializeField] float pullForce = 100.0f;
+    [SerializeField] float torque = 100.0f;
 
     [SerializeField] MeshRenderer rayRenderer;
 
@@ -74,7 +75,7 @@ public class Absorber : MonoBehaviour
         {
             Vector3 heading = other.transform.position - transform.position;
             Rigidbody r = other.gameObject.GetComponent<Rigidbody>();
-            if (r) r.AddForce(heading * -force, ForceMode.Force);
+            if (r) r.AddForce(heading * -pullForce, ForceMode.Force);
         }
     }
 
@@ -114,7 +115,7 @@ public class Absorber : MonoBehaviour
         Vector2 noise = 0.05f * Random.insideUnitCircle;
         Vector3 direction = transform.forward + transform.right * noise.x + transform.up * noise.y;
 
-        newBullet.GetComponent<Rigidbody>().AddForce(direction * force);
+        newBullet.GetComponent<Rigidbody>().AddForce(direction * pushForce);
         newBullet.GetComponent<Rigidbody>().AddTorque(torque * Random.insideUnitSphere);
     }
 }
