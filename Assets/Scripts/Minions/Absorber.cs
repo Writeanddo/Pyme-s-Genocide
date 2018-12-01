@@ -17,6 +17,7 @@ public class Absorber : MonoBehaviour
 
     bool absorbiendo;
 
+    bool canFire = true;
     bool firing;
     Coroutine fireCoroutine;
 
@@ -35,12 +36,13 @@ public class Absorber : MonoBehaviour
         {
             if (Input.GetButton("Fire1"))
             {
-                if (!firing)
+                if (!firing && canFire)
                 {
                     if (gameManager.GetAmmo() > 0)
                     {
                         firing = true;
                         fireRatePerSecond = baseFireRatePerSecond;
+                        StartCoroutine(RestartFireDelay());
                         fireCoroutine = StartCoroutine(Fire());
                     }
                     else
@@ -85,6 +87,13 @@ public class Absorber : MonoBehaviour
         }
     }
 
+    IEnumerator RestartFireDelay()
+    {
+        canFire = false;
+        yield return new WaitForSeconds(baseFireRatePerSecond);
+        canFire = true;
+    }
+
     IEnumerator Fire()
     {
         InstantiateBullet();
@@ -92,7 +101,7 @@ public class Absorber : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(fireRatePerSecond);
-            fireRatePerSecond = Mathf.Max(maxFireRatePerSecond, fireRatePerSecond * 0.5f);
+            fireRatePerSecond = Mathf.Max(maxFireRatePerSecond, fireRatePerSecond * 0.7f);
             InstantiateBullet();
         }
     }
