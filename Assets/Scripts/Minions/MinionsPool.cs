@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MinionsPool : MonoBehaviour
 {
-    [SerializeField] int poolSize = 1500;
+    [SerializeField] bool showDebugLogs = false;
+    [SerializeField] int poolSize = 1000;
     List<Minion> minions;
 
     Transform _transform;
@@ -53,17 +55,30 @@ public class MinionsPool : MonoBehaviour
         }
     }
 
-    public Minion Get()
+    public Minion Get(bool forceInstantiate = false)
     {
         lock (syncLock)
         {
-            if (minions.Count > 0)
+            if (minions.Count == 0)
+            {
+                if (forceInstantiate)
+                {
+                    if (showDebugLogs) Debug.LogWarning("La pool está vacía. Se instanciará uno y se añadirá a la pool");
+                }
+                else
+                {
+                    if (showDebugLogs) Debug.LogWarning("La pool está vacía. No pueden instanciarse más minions");
+                }
+            }
+            else
             {
                 Minion minion = minions[0];
+                minion.transform.parent = null;
                 minion.gameObject.SetActive(true);
                 minions.RemoveAt(0);
 
-                Debug.Log("Solicitado minion. Tamaño del pool: " + minions.Count);
+                if (showDebugLogs) Debug.Log("Solicitado minion. Tamaño del pool: " + minions.Count);
+
                 return minion;
             }
             return null;
@@ -75,10 +90,11 @@ public class MinionsPool : MonoBehaviour
         lock (syncLock)
         {
             minion.gameObject.SetActive(false);
+            minion.GetComponent<Rigidbody>().velocity = Vector3.zero;
             minion.transform.position = new Vector3(10000.0f, 10000.0f, 10000.0f);
             minion.transform.SetParent(_transform, true);
 
-            Debug.Log("Devolviendo minion. Tamaño del pool: " + minions.Count);
+            if (showDebugLogs) Debug.Log("Devolviendo minion. Tamaño del pool: " + minions.Count);
 
             minions.Add(minion);
         }

@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class MinionSpawner : MonoBehaviour
 {
-    public float spawnTime = 3f;
-    public float range = 10f;
-    public MinionCounter minionCounter;
+    [SerializeField] float spawnTime = 3.0f;
+    [SerializeField] float range = 10.0f;
 
     void Start()
     {
@@ -15,9 +14,6 @@ public class MinionSpawner : MonoBehaviour
 
     void Spawn()
     {
-        if (!minionCounter.canCreate()) return;
-
-        minionCounter.numOfMinions++;
         Vector3 randomPos = new Vector3(Random.Range(-10, 10), transform.position.y, Random.Range(-10, 10));
         transform.LookAt(randomPos);
 
@@ -32,7 +28,6 @@ public class MinionSpawner : MonoBehaviour
         Minion enemy = MinionsPool.Instance.Get();
         if (enemy == null)
         {
-            Debug.LogWarning("La pool está vacía. No pueden instanciarse más minions");
             return;
         }
 
