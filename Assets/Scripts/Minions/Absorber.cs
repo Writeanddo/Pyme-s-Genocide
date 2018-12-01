@@ -83,8 +83,12 @@ public class Absorber : MonoBehaviour
     {
         if (type == Type.delete && gameManager.GetAmmo() < gameManager.MaxAmmo)
         {
-            col.gameObject.SetActive(false);
-            gameManager.IncreaseAmmo();
+            Minion m = col.GetComponent<Minion>();
+            if (m)
+            {
+                MinionsPool.Instance.Put(m);
+                gameManager.IncreaseAmmo();
+            }
         }
     }
 
