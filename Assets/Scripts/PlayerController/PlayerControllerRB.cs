@@ -6,6 +6,9 @@ public class PlayerControllerRB : MonoBehaviour
     [SerializeField] float m_Speed = 5.0f;
     [SerializeField] float m_JumpForce = 4000.0f;
     [SerializeField] float m_GroundCheckDistance = 1.2f;
+    [SerializeField] float m_TurnSmoothTime;
+
+    private float m_CurrentSpeed;
 
     private bool m_WantsToJump;
     private bool m_WantsToJetpack;
@@ -24,7 +27,9 @@ public class PlayerControllerRB : MonoBehaviour
     private Jetpack jetPack;
     private bool readyForJetpack;
 
-    private Quaternion m_TargetRotation;
+    private float m_turnSmoothVelocity;
+
+    private float m_TargetRotation;
 
     void Start()
     {
@@ -35,9 +40,16 @@ public class PlayerControllerRB : MonoBehaviour
 
     void Update()
     {
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 inputDir = input.normalized;
+
+        if (inputDir != Vector2.zero)
+        {
+            m_TargetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + m_Cam.eulerAngles.y;
+        }
+
         m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
-        m_movement = Input.GetAxisRaw("Vertical") * m_CamForward + Input.GetAxisRaw("Horizontal") * m_Cam.right;
-        m_movement *= m_Speed;
+        m_CurrentSpeed = m_Speed * inputDir.magnitude;
 
         y = m_RigidBody.velocity.y;
 
@@ -50,11 +62,6 @@ public class PlayerControllerRB : MonoBehaviour
         else
         {
             HandleAirborneInput();
-        }
-
-        if (m_movement.x != 0.0f || m_movement.y != 0.0f)
-        {
-            m_TargetRotation = Quaternion.Euler(0.0f, Mathf.Rad2Deg * Mathf.Atan2(m_movement.x, m_movement.z), 0.0f);
         }
     }
 
@@ -70,8 +77,15 @@ public class PlayerControllerRB : MonoBehaviour
             m_RigidBody.AddForce(Vector3.up * jetPack.Strength);
         }
 
-        m_RigidBody.MoveRotation(Quaternion.RotateTowards(m_RigidBody.rotation, m_TargetRotation, 240.0f * Time.deltaTime));
-        m_RigidBody.velocity = new Vector3(m_movement.x, y, m_movement.z);
+        m_RigidBody.rotation = Quaternion.Euler(Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y,
+            m_TargetRotation,
+            ref m_turnSmoothVelocity,
+            m_TurnSmoothTime));
+
+        m_RigidBody.velocity = new Vector3(
+            transform.forward.x * m_CurrentSpeed,
+            y,
+            transform.forward.z * m_CurrentSpeed);
 
         m_WantsToJump = false;
         m_WantsToJetpack = false;
