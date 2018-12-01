@@ -4,8 +4,11 @@ using UnityEngine;
 public class PlayerControllerRB : MonoBehaviour
 {
     [SerializeField] float m_Speed = 5.0f;
-    [SerializeField] float m_Jump = 15.0f;
-    [SerializeField] float m_GroundCheckDistance = 0.1f;
+    [SerializeField] float m_JumpForce = 4000.0f;
+    [SerializeField] float m_GroundCheckDistance = 1.2f;
+
+    private bool m_WantsToJump;
+    private bool m_WantsToJetpack;
 
     private Transform m_Cam;
     private Vector3 m_CamForward;
@@ -32,10 +35,8 @@ public class PlayerControllerRB : MonoBehaviour
 
     void Update()
     {
-        m_movement = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
-
         m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
-        m_movement = Input.GetAxis("Vertical") * m_CamForward + Input.GetAxis("Horizontal") * m_Cam.right;
+        m_movement = Input.GetAxisRaw("Vertical") * m_CamForward + Input.GetAxisRaw("Horizontal") * m_Cam.right;
         m_movement *= m_Speed;
 
         y = m_RigidBody.velocity.y;
@@ -55,19 +56,34 @@ public class PlayerControllerRB : MonoBehaviour
         {
             m_TargetRotation = Quaternion.Euler(0.0f, Mathf.Rad2Deg * Mathf.Atan2(m_movement.x, m_movement.z), 0.0f);
         }
+    }
 
-        m_RigidBody.rotation =Quaternion.Lerp(m_RigidBody.rotation,
-            m_TargetRotation,
-            5.0f * Time.deltaTime);
+    private void FixedUpdate()
+    {
+        if (m_WantsToJump)
+        {
+            m_RigidBody.AddForce(Vector3.up * m_JumpForce);
+        }
+
+        if (m_WantsToJetpack)
+        {
+            m_RigidBody.AddForce(Vector3.up * jetPack.Strength);
+        }
+
+        m_RigidBody.rotation = Quaternion.Slerp(m_RigidBody.rotation,
+            m_TargetRotation, 10.0f * Time.deltaTime);
 
         m_RigidBody.velocity = new Vector3(m_movement.x, y, m_movement.z);
+
+        m_WantsToJump = false;
+        m_WantsToJetpack = false;
     }
 
     private void HandleGroundedInput()
     {
         if (Input.GetButtonDown("Jump"))
         {
-            m_RigidBody.AddForce(Vector3.up * m_Jump);
+            m_WantsToJump = true;
         }
 
         readyForJetpack = false;
@@ -82,7 +98,7 @@ public class PlayerControllerRB : MonoBehaviour
 
         if (readyForJetpack && Input.GetButton("Jump"))
         {
-            m_RigidBody.AddForce(Vector3.up * jetPack.Strength);
+            m_WantsToJetpack = true;
         }
     }
 
