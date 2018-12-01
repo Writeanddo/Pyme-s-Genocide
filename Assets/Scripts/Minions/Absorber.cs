@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class Absorber : MonoBehaviour {
 
+    GameManager gameManager;
     public int force = 100;
     public enum Type { detele, force };
     public Type type;
     public GameObject bullet;
 
+    private void Start() {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
     void Update() {
-        if (Input.GetMouseButtonDown(0) && type == Type.force) {
+        if (Input.GetMouseButtonDown(0) && type == Type.force && gameManager.GetAmmo() > 0) {
+            gameManager.DecreaseAmmo();
             GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
             newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * force * 20);
         }
-
-        /* if (Input.GetMouseButtonDown(1))
-             Debug.Log("Pressed secondary button.");
-
-         if (Input.GetMouseButtonDown(2))
-             Debug.Log("Pressed middle click.");*/
     }
 
     private void OnTriggerStay(Collider other) {
@@ -31,7 +31,9 @@ public class Absorber : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider col) {
-        if (type == Type.detele)
+        if (type == Type.detele) {
             col.gameObject.SetActive(false);
+            gameManager.IncreaseAmmo();
+        }
     }
 }
