@@ -70,9 +70,7 @@ public class PlayerControllerRB : MonoBehaviour
             m_RigidBody.AddForce(Vector3.up * jetPack.Strength);
         }
 
-        m_RigidBody.rotation = Quaternion.Slerp(m_RigidBody.rotation,
-            m_TargetRotation, 10.0f * Time.deltaTime);
-
+        m_RigidBody.MoveRotation(Quaternion.RotateTowards(m_RigidBody.rotation, m_TargetRotation, 240.0f * Time.deltaTime));
         m_RigidBody.velocity = new Vector3(m_movement.x, y, m_movement.z);
 
         m_WantsToJump = false;
