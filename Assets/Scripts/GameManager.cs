@@ -6,13 +6,16 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
-    [SerializeField] float maxAmmo = 100.0f;
+    [SerializeField] float maxAmmo = 10000.0f;
+    public float MaxAmmo { get { return maxAmmo; } }
+
     [SerializeField] float ammo;
 
     public Text text;
 
     private void Start()
     {
+        ammo = maxAmmo;
         SetText();
     }
 
@@ -24,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseAmmo(int ammount = 1)
     {
-        ammo = Mathf.Max(maxAmmo, ammo++);
+        ammo = Mathf.Min(maxAmmo, ammo + 1);
         SetText();
     }
 

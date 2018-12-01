@@ -92,10 +92,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4711133646104872}
-  - component: {fileID: 33135519216098630}
-  - component: {fileID: 23140382459276012}
-  - component: {fileID: 136458740444960680}
-  - component: {fileID: 114784917303312070}
+  - component: {fileID: 114082915056685484}
+  - component: {fileID: 136779545655575464}
   m_Layer: 11
   m_Name: Absorbedor
   m_TagString: Untagged
@@ -239,41 +237,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!23 &23140382459276012
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1795274408753002}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!23 &23324764046093080
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -379,13 +342,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33135519216098630
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1795274408753002}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33167391808694700
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -453,6 +409,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114082915056685484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1795274408753002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7402be6cd4046e74bb45df73b902eb6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 100
+  rayRenderer: {fileID: 23139326548689698}
+  type: 1
+  bullet: {fileID: 1515208001019978, guid: 1cf2190e8a7c0b64f933f80ed2dc8f7e, type: 2}
 --- !u!114 &114208763517591528
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -465,6 +436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 100
+  rayRenderer: {fileID: 0}
   type: 0
   bullet: {fileID: 0}
 --- !u!114 &114469579424516202
@@ -488,20 +460,6 @@ MonoBehaviour:
   m_ExtraGravityFactor: 1.05
   m_MaxMovementVelocity: 8
   m_MaxGravityVelocity: 10
---- !u!114 &114784917303312070
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1795274408753002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7402be6cd4046e74bb45df73b902eb6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 100
-  type: 1
-  bullet: {fileID: 1515208001019978, guid: 1cf2190e8a7c0b64f933f80ed2dc8f7e, type: 2}
 --- !u!114 &114896589620612868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -515,7 +473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_strength: 150
   m_AmmoPerSecond: 15
---- !u!136 &136458740444960680
+--- !u!136 &136779545655575464
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -524,10 +482,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1
-  m_Height: 8
+  m_Radius: 0.63
+  m_Height: 8.36
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 4}
+  m_Center: {x: 0, y: 0, z: 3.9}
 --- !u!136 &136797486680739092
 CapsuleCollider:
   m_ObjectHideFlags: 1

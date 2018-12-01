@@ -971,7 +971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7083907ecc43884997f0556e92d2c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmmo: 100
+  maxAmmo: 10000
   ammo: 100
   text: {fileID: 1600418727}
 --- !u!4 &2093702537
