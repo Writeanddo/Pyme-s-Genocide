@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControllerRB : MonoBehaviour
@@ -14,7 +15,6 @@ public class PlayerControllerRB : MonoBehaviour
     private bool m_WantsToJetpack;
 
     private Transform m_Cam;
-    private Vector3 m_CamForward;
 
     Rigidbody m_RigidBody;
     Vector3 m_movement;
@@ -30,6 +30,8 @@ public class PlayerControllerRB : MonoBehaviour
     private float m_turnSmoothVelocity;
 
     private float m_TargetRotation;
+
+    private List<PlayerControllerExternalForce> externalForces = new List<PlayerControllerExternalForce>();
 
     void Start()
     {
@@ -48,7 +50,6 @@ public class PlayerControllerRB : MonoBehaviour
             m_TargetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + m_Cam.eulerAngles.y;
         }
 
-        m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
         m_CurrentSpeed = m_Speed * inputDir.magnitude;
 
         y = m_RigidBody.velocity.y;
@@ -82,13 +83,35 @@ public class PlayerControllerRB : MonoBehaviour
             ref m_turnSmoothVelocity,
             m_TurnSmoothTime));
 
-        m_RigidBody.velocity = new Vector3(
-            transform.forward.x * m_CurrentSpeed,
-            y,
-            transform.forward.z * m_CurrentSpeed);
+        if (externalForces.Count == 0)
+        {
+            m_RigidBody.velocity = new Vector3(
+                transform.forward.x * m_CurrentSpeed,
+                m_RigidBody.velocity.y,
+                transform.forward.z * m_CurrentSpeed);
+        }
+        else
+        {
+            m_RigidBody.MovePosition(m_RigidBody.position + new Vector3(
+            transform.forward.x * m_CurrentSpeed * Time.deltaTime,
+            0,
+            transform.forward.z * m_CurrentSpeed * Time.deltaTime));
+
+            for (int i = 0; i < externalForces.Count; i++)
+            {
+                m_RigidBody.AddForce(externalForces[i].force, externalForces[i].mode);
+            }
+        }
+
+        externalForces.Clear();
 
         m_WantsToJump = false;
         m_WantsToJetpack = false;
+    }
+
+    public void AddExternalForce(PlayerControllerExternalForce force)
+    {
+        externalForces.Add(force);
     }
 
     private void HandleGroundedInput()
@@ -134,4 +157,10 @@ public class PlayerControllerRB : MonoBehaviour
             m_GroundNormal = Vector3.up;
         }
     }
+}
+
+public class PlayerControllerExternalForce
+{
+    public Vector3 force;
+    public ForceMode mode;
 }
