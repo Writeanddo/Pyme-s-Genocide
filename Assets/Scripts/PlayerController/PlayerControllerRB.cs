@@ -64,8 +64,6 @@ public class PlayerControllerRB : MonoBehaviour
         {
             HandleAirborneInput();
         }
-
-
     }
 
     private void FixedUpdate()
@@ -84,10 +82,17 @@ public class PlayerControllerRB : MonoBehaviour
 
         if (externalForces.Count == 0)
         {
-            m_RigidBody.velocity = new Vector3(
-                m_CurrentVelocity.x,
-                m_RigidBody.velocity.y,
-                m_CurrentVelocity.z);
+            if (m_IsGrounded)
+            {
+                m_RigidBody.velocity = new Vector3(
+                    m_CurrentVelocity.x,
+                    m_RigidBody.velocity.y,
+                    m_CurrentVelocity.z);
+            }
+            else
+            {
+                m_RigidBody.MovePosition(m_RigidBody.position + m_CurrentVelocity * Time.deltaTime);
+            }
         }
         else
         {
@@ -95,6 +100,10 @@ public class PlayerControllerRB : MonoBehaviour
 
             for (int i = 0; i < externalForces.Count; i++)
             {
+                if (externalForces[i].resetVelocity)
+                {
+                    m_RigidBody.velocity = Vector3.zero;
+                }
                 m_RigidBody.AddForce(externalForces[i].force, externalForces[i].mode);
             }
         }
@@ -161,4 +170,5 @@ public class PlayerControllerExternalForce
 {
     public Vector3 force;
     public ForceMode mode;
+    public bool resetVelocity;
 }
