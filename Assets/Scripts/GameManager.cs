@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour
 
     public Text text;
 
+    private void Start()
+    {
+        SetText();
+    }
+
     public void DecreaseAmmo(float ammount = 1.0f)
     {
         ammo = Mathf.Max(0, ammo - ammount);

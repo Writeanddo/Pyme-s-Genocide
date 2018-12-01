@@ -514,7 +514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_strength: 150
-  m_AmmoPerSecond: 3
+  m_AmmoPerSecond: 15
 --- !u!136 &136458740444960680
 CapsuleCollider:
   m_ObjectHideFlags: 1
