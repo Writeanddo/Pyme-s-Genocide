@@ -420,10 +420,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7402be6cd4046e74bb45df73b902eb6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 100
+  force: 2000
+  torque: 100
   rayRenderer: {fileID: 23139326548689698}
   type: 1
   bullet: {fileID: 1515208001019978, guid: 1cf2190e8a7c0b64f933f80ed2dc8f7e, type: 2}
+  maxFireRatePerSecond: 0.1
+  baseFireRatePerSecond: 1
 --- !u!114 &114208763517591528
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -436,9 +439,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 100
+  torque: 0
   rayRenderer: {fileID: 0}
   type: 0
   bullet: {fileID: 0}
+  maxFireRatePerSecond: 0
+  baseFireRatePerSecond: 0
 --- !u!114 &114469579424516202
 MonoBehaviour:
   m_ObjectHideFlags: 1

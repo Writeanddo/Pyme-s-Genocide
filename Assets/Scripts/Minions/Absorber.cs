@@ -7,6 +7,8 @@ public class Absorber : MonoBehaviour
 
     GameManager gameManager;
     [SerializeField] int force = 100;
+    [SerializeField] float torque;
+
     [SerializeField] MeshRenderer rayRenderer;
 
     public enum Type { delete, force };
@@ -15,6 +17,13 @@ public class Absorber : MonoBehaviour
 
     bool absorbiendo;
 
+    bool firing;
+    Coroutine fireCoroutine;
+
+    float fireRatePerSecond;
+    [SerializeField] float maxFireRatePerSecond;
+    [SerializeField] float baseFireRatePerSecond;
+
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -22,11 +31,32 @@ public class Absorber : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && type == Type.force && gameManager.GetAmmo() > 0)
+        if (type == Type.force)
         {
-            gameManager.DecreaseAmmo();
-            GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
-            newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * force * 20);
+            if (Input.GetButton("Fire1"))
+            {
+                if (!firing)
+                {
+                    if (gameManager.GetAmmo() > 0)
+                    {
+                        firing = true;
+                        fireRatePerSecond = baseFireRatePerSecond;
+                        fireCoroutine = StartCoroutine(Fire());
+                    }
+                    else
+                    {
+                        firing = false;
+                        fireRatePerSecond = baseFireRatePerSecond;
+                        if (fireCoroutine != null) { StopCoroutine(fireCoroutine); }
+                    }
+                }
+            }
+            else
+            {
+                firing = false;
+                fireRatePerSecond = baseFireRatePerSecond;
+                if (fireCoroutine != null) { StopCoroutine(fireCoroutine); }
+            }
         }
 
         absorbiendo = Input.GetButton("Fire2") && type == Type.force;
@@ -53,5 +83,29 @@ public class Absorber : MonoBehaviour
             col.gameObject.SetActive(false);
             gameManager.IncreaseAmmo();
         }
+    }
+
+    IEnumerator Fire()
+    {
+        InstantiateBullet();
+
+        while (true)
+        {
+            yield return new WaitForSeconds(fireRatePerSecond);
+            fireRatePerSecond = Mathf.Max(maxFireRatePerSecond, fireRatePerSecond * 0.5f);
+            InstantiateBullet();
+        }
+    }
+
+    private void InstantiateBullet()
+    {
+        gameManager.DecreaseAmmo();
+        GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
+
+        Vector2 noise = 0.05f * Random.insideUnitCircle;
+        Vector3 direction = transform.forward + transform.right * noise.x + transform.up * noise.y;
+
+        newBullet.GetComponent<Rigidbody>().AddForce(direction * force);
+        newBullet.GetComponent<Rigidbody>().AddTorque(torque * Random.insideUnitSphere);
     }
 }
