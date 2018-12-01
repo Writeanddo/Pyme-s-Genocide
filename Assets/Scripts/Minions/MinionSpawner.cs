@@ -7,12 +7,16 @@ public class MinionSpawner : MonoBehaviour {
     public GameObject enemy;
     public float spawnTime = 3f;
     public float range = 10f;
+    public MinionCounter minionCounter;
 
     void Start() {
         InvokeRepeating("Spawn", spawnTime, spawnTime);
     }
 
     void Spawn() {
+        if (!minionCounter.canCreate()) return;
+
+        minionCounter.numOfMinions++;
         Vector3 randomPos = new Vector3(Random.Range(-10, 10), transform.position.y, Random.Range(-10, 10));
         transform.LookAt(randomPos);
 
@@ -30,5 +34,5 @@ public class MinionSpawner : MonoBehaviour {
         Vector3 position = transform.position;
             position = position + transform.forward * Random.Range(0, 10);
             Instantiate(enemy, position, transform.rotation);
-        }
+    }
 }
