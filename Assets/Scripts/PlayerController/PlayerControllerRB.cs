@@ -45,7 +45,7 @@ public class PlayerControllerRB : MonoBehaviour
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 inputDir = input.normalized;
 
-        if (inputDir != Vector2.zero)
+        // if (inputDir != Vector2.zero)
         {
             m_TargetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + m_Cam.eulerAngles.y;
         }
