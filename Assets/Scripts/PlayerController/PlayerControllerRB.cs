@@ -15,6 +15,8 @@ public class PlayerControllerRB : MonoBehaviour
     [SerializeField] float m_MaxMovementVelocity;
     [SerializeField] float m_MaxGravityVelocity;
 
+    private GameManager gameManager;
+
     private bool m_WantsToJump;
     private bool m_WantsToJetpack;
 
@@ -44,6 +46,7 @@ public class PlayerControllerRB : MonoBehaviour
         jetPack = GetComponentInChildren<Jetpack>();
         m_Cam = Camera.main.transform;
         thirdPersonCamera = FindObjectOfType<ThirdPersonCamera>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
@@ -77,8 +80,9 @@ public class PlayerControllerRB : MonoBehaviour
             m_RigidBody.AddForce(Vector3.up * m_JumpForce);
         }
 
-        if (m_WantsToJetpack)
+        if (m_WantsToJetpack && gameManager.GetAmmo() > 0) 
         {
+            gameManager.DecreaseAmmo();
             m_RigidBody.AddForce(Vector3.up * jetPack.Strength);
         }
 
