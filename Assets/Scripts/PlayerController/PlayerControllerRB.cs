@@ -91,7 +91,7 @@ public class PlayerControllerRB : MonoBehaviour
             {
                 m_RigidBody.velocity = Vector3.zero;
             }
-            if (m_IsGrounded)
+            if (externalForces[i].scale && m_IsGrounded)
             {
                 m_RigidBody.AddForce(externalForces[i].force * 200.0f, externalForces[i].mode);
             }
@@ -118,7 +118,7 @@ public class PlayerControllerRB : MonoBehaviour
             {
                 if (m_WantsToJetpack)
                 {
-                    vel.y *= 0.95f;
+                    vel.y *= 0.99f;
                 }
                 else
                 {
@@ -203,4 +203,5 @@ public class PlayerControllerExternalForce
     public Vector3 force;
     public ForceMode mode;
     public bool resetVelocity;
+    public bool scale;
 }

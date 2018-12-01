@@ -181,8 +181,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1535856303948880}
-  m_LocalRotation: {x: 0, y: 0.9885335, z: 0, w: 0.15100208}
-  m_LocalPosition: {x: 3.24, y: 2.35, z: -1.57}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.27, y: 2.35, z: -2.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4928151176806740}
@@ -478,15 +478,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bff99c53748882b4aab8ecbf5a9f7792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GroundSpeed: 60
-  m_AirSpeed: 7
+  m_GroundSpeed: 70
+  m_AirSpeed: 5
   m_JumpForce: 4000
   m_GroundCheckDistance: 1.2
   m_TurnSmoothTime: 10
   m_GroundFriction: 0.75
   m_AirFriction: 1
   m_ExtraGravityFactor: 1.05
-  m_MaxMovementVelocity: 10
+  m_MaxMovementVelocity: 8
   m_MaxGravityVelocity: 10
 --- !u!114 &114784917303312070
 MonoBehaviour:

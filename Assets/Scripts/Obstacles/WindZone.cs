@@ -18,7 +18,8 @@ public class WindZone : MonoBehaviour
                 PlayerControllerExternalForce force = new PlayerControllerExternalForce
                 {
                     force = transform.forward * Random.Range(minPower, maxPower) * Time.deltaTime,
-                    mode = ForceMode.Force
+                    mode = ForceMode.Force,
+                    scale = true
                 };
                 playerController.AddExternalForce(force);
             }
