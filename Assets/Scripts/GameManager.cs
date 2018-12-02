@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        ammo = maxAmmo;
+        // ammo = maxAmmo;
         SetText();
     }
 

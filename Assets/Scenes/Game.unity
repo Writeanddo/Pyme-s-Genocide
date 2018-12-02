@@ -745,12 +745,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 114784917303312070, guid: 94951ac64ae4a304c96d17c56f7155f3,
-        type: 2}
-      propertyPath: bullet
-      value: 
-      objectReference: {fileID: 1515208001019978, guid: 1cf2190e8a7c0b64f933f80ed2dc8f7e,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94951ac64ae4a304c96d17c56f7155f3, type: 2}
   m_IsPrefabAsset: 0
@@ -786,7 +780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a237a567f58aa946b2eef2157f4ad21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTime: 0.1
+  spawnTime: 1
   range: 10
 --- !u!4 &1126522074
 Transform:
@@ -1061,6 +1055,11 @@ Prefab:
       propertyPath: text
       value: 
       objectReference: {fileID: 1438516261}
+    - target: {fileID: 114418020951765192, guid: 87c8d213c94ede84ab3f8a117563dbe7,
+        type: 2}
+      propertyPath: ammo
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87c8d213c94ede84ab3f8a117563dbe7, type: 2}
   m_IsPrefabAsset: 0

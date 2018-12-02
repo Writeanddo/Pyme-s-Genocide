@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class MinionsPool : MonoBehaviour
 {
-    [SerializeField] bool showDebugLogs = false;
-    [SerializeField] int poolSize = 1000;
+    [SerializeField] bool showDebugLogs = true;
+    [SerializeField] int poolSize = 500;
     List<Minion> minions;
 
     Transform _transform;
@@ -38,13 +38,7 @@ public class MinionsPool : MonoBehaviour
 
             for (int i = 0; i < poolSize; i++)
             {
-                if (minionPrefab == null)
-                {
-                    minionPrefab = Resources.Load<Minion>("Minion");
-                }
-                Minion copy = Instantiate(minionPrefab, new Vector3(10000.0f, 10000.0f, 10000.0f), Quaternion.identity, _transform);
-                copy.gameObject.SetActive(false);
-                minions.Add(copy);
+                InstantiateCopy();
             }
 
             instance = this;
@@ -59,19 +53,18 @@ public class MinionsPool : MonoBehaviour
     {
         lock (syncLock)
         {
-            if (minions.Count == 0)
+            if (minions.Count == 0 && !forceInstantiate)
             {
-                if (forceInstantiate)
-                {
-                    if (showDebugLogs) Debug.LogWarning("La pool está vacía. Se instanciará uno y se añadirá a la pool");
-                }
-                else
-                {
-                    if (showDebugLogs) Debug.LogWarning("La pool está vacía. No pueden instanciarse más minions");
-                }
+                if (showDebugLogs) Debug.LogWarning("La pool está vacía. No pueden instanciarse más minions");
             }
             else
             {
+                if (minions.Count == 0)
+                {
+                    if (showDebugLogs) Debug.LogWarning("La pool está vacía. Se instanciará uno y se añadirá a la pool");
+                    InstantiateCopy();
+                }
+
                 Minion minion = minions[0];
                 minion.transform.parent = null;
                 minion.gameObject.SetActive(true);
@@ -98,5 +91,18 @@ public class MinionsPool : MonoBehaviour
 
             minions.Add(minion);
         }
+    }
+
+    private void InstantiateCopy()
+    {
+        if (minionPrefab == null)
+        {
+            minionPrefab = Resources.Load<Minion>("Minion");
+        }
+        Minion copy = Instantiate(minionPrefab, new Vector3(10000.0f, 10000.0f, 10000.0f), Quaternion.identity, _transform);
+        copy.gameObject.name = "MINION " + minions.Count.ToString().PadLeft(4, '0');
+        copy.gameObject.SetActive(false);
+
+        minions.Add(copy);
     }
 }

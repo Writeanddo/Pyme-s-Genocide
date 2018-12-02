@@ -39,9 +39,9 @@ GameObject:
   - component: {fileID: 4554333939857918}
   - component: {fileID: 33818917127504796}
   - component: {fileID: 23475707600612622}
-  - component: {fileID: 136644731066563864}
   - component: {fileID: 114651335921383204}
   - component: {fileID: 54733058629846992}
+  - component: {fileID: 65814183874789606}
   m_Layer: 10
   m_Name: Minion
   m_TagString: Untagged
@@ -168,13 +168,25 @@ Rigidbody:
   m_GameObject: {fileID: 1197350300004096}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 0.2
+  m_AngularDrag: 0.2
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!65 &65814183874789606
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1197350300004096}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &114651335921383204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e0926f63e87142956c5eb5ac90a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 15
   detectionDist: 19
   type: 2
 --- !u!136 &136029323174265456
@@ -195,19 +207,6 @@ CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1023383528689218}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!136 &136644731066563864
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1197350300004096}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

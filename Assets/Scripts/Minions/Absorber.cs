@@ -6,17 +6,17 @@ public class Absorber : MonoBehaviour
 {
 
     GameManager gameManager;
+    [SerializeField] float pushAngle = 15.0f;
     [SerializeField] float pushForce = 2000.0f;
     [SerializeField] float pullForce = 100.0f;
     [SerializeField] float torque = 100.0f;
 
     [SerializeField] MeshRenderer rayRenderer;
 
-    public enum Type { delete, force };
-    public Type type;
     public GameObject bullet;
+    public Transform spawnPoint;
 
-    bool absorbiendo;
+    bool absorbing;
 
     bool canFire = true;
     bool firing;
@@ -33,61 +33,45 @@ public class Absorber : MonoBehaviour
 
     void Update()
     {
-        if (type == Type.force)
+        if (Input.GetButton("Fire1"))
         {
-            if (Input.GetButton("Fire1"))
+            if (!firing && canFire)
             {
-                if (!firing && canFire)
+                if (gameManager.GetAmmo() > 0)
                 {
-                    if (gameManager.GetAmmo() > 0)
-                    {
-                        firing = true;
-                        fireRatePerSecond = baseFireRatePerSecond;
-                        StartCoroutine(RestartFireDelay());
-                        fireCoroutine = StartCoroutine(Fire());
-                    }
-                    else
-                    {
-                        firing = false;
-                        fireRatePerSecond = baseFireRatePerSecond;
-                        if (fireCoroutine != null) { StopCoroutine(fireCoroutine); }
-                    }
+                    firing = true;
+                    fireRatePerSecond = baseFireRatePerSecond;
+                    StartCoroutine(RestartFireDelay());
+                    fireCoroutine = StartCoroutine(Fire());
+                }
+                else
+                {
+                    firing = false;
+                    fireRatePerSecond = baseFireRatePerSecond;
+                    if (fireCoroutine != null) { StopCoroutine(fireCoroutine); }
                 }
             }
-            else
-            {
-                firing = false;
-                fireRatePerSecond = baseFireRatePerSecond;
-                if (fireCoroutine != null) { StopCoroutine(fireCoroutine); }
-            }
+        }
+        else
+        {
+            firing = false;
+            fireRatePerSecond = baseFireRatePerSecond;
+            if (fireCoroutine != null) { StopCoroutine(fireCoroutine); }
         }
 
-        absorbiendo = Input.GetButton("Fire2") && type == Type.force;
-        if (type == Type.force)
-        {
-            rayRenderer.enabled = absorbiendo;
-        }
+        absorbing = Input.GetButton("Fire2");
+        rayRenderer.enabled = absorbing;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (type == Type.force && absorbiendo)
+        if (absorbing)
         {
-            Vector3 heading = other.transform.position - transform.position;
-            Rigidbody r = other.gameObject.GetComponent<Rigidbody>();
-            if (r) r.AddForce(heading * -pullForce, ForceMode.Force);
-        }
-    }
-
-    private void OnTriggerEnter(Collider col)
-    {
-        if (type == Type.delete && gameManager.GetAmmo() < gameManager.MaxAmmo)
-        {
-            Minion m = col.GetComponent<Minion>();
+            Minion m = other.GetComponent<Minion>();
             if (m)
             {
-                MinionsPool.Instance.Put(m);
-                gameManager.IncreaseAmmo();
+                Vector3 heading = other.transform.position - transform.position;
+                m.AddForce(heading * -pullForce * Time.deltaTime, ForceMode.Force);
             }
         }
     }
@@ -114,12 +98,15 @@ public class Absorber : MonoBehaviour
     private void InstantiateBullet()
     {
         gameManager.DecreaseAmmo();
-        GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
+
+        Minion newBullet = MinionsPool.Instance.Get(true);
+        newBullet.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
 
         Vector2 noise = 0.05f * Random.insideUnitCircle;
-        Vector3 direction = transform.forward + transform.right * noise.x + transform.up * noise.y;
+        Vector3 direction = Quaternion.AngleAxis(-pushAngle, spawnPoint.right) * spawnPoint.forward + spawnPoint.right * noise.x + spawnPoint.up * noise.y;
+        Debug.DrawRay(spawnPoint.position, direction, Color.red, 1.0f);
 
-        newBullet.GetComponent<Rigidbody>().AddForce(direction * pushForce);
-        newBullet.GetComponent<Rigidbody>().AddTorque(torque * Random.insideUnitSphere);
+        newBullet.AddForce(direction * pushForce, ForceMode.Impulse);
+        newBullet.AddTorque(torque * Random.insideUnitSphere, ForceMode.Impulse);
     }
 }

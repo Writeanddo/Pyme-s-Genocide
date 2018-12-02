@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// !!!! IMPORTANTE - NO MOVER DE LA CARPETA RESOURCES !!!!
+// Este prefab se carga de forma dinámica
+
 public class Minion : MonoBehaviour
 {
 
@@ -18,35 +21,81 @@ public class Minion : MonoBehaviour
     Vector3 randomPos;
 
     Transform _transform;
+    Rigidbody rb;
+
+    bool wasAwake;
+    BoxCollider boxCollider;
+
+    private void Awake()
+    {
+        _transform = transform;
+        rb = GetComponent<Rigidbody>();
+        boxCollider = GetComponent<BoxCollider>();
+    }
 
     void Start()
     {
-        _transform = transform;
         playerTransform = GameObject.FindWithTag("Player").transform;
+    }
+
+    public void EnterPhysicsMode()
+    {
+        // rb.isKinematic = false;
+        rb.constraints = RigidbodyConstraints.None;
+    }
+
+    public void EnterTransformMode()
+    {
+        // rb.isKinematic = true;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        rb.rotation = Quaternion.identity;
+    }
+
+    // Shortcut
+    public void AddForce(Vector3 force, ForceMode forceMode)
+    {
+        EnterPhysicsMode();
+        rb.AddForce(force, forceMode);
+    }
+
+    public void AddTorque(Vector3 torque, ForceMode forceMode)
+    {
+        EnterPhysicsMode();
+        rb.AddTorque(torque, forceMode);
     }
 
     void Update()
     {
+
+        if (Mathf.Abs(rb.velocity.y) < 0.1f)
+        {
+            EnterTransformMode();
+        }
+        else
+        {
+            EnterPhysicsMode();
+            return;
+        }
 
         float sqrDistance = (playerTransform.position - _transform.position).sqrMagnitude;
 
         if (sqrDistance < detectionDist * detectionDist)
         {
             Vector3 targetPos = new Vector3(playerTransform.position.x, _transform.position.y, playerTransform.position.z);
-            // Debug.DrawLine(playerTransform.position, _transform.position, Color.red, Time.deltaTime, false);
+
+
             switch (type)
             {
                 case Type.Follower:
-                    transform.rotation = Quaternion.Lerp(_transform.rotation,
+                    transform.rotation = Quaternion.Slerp(_transform.rotation,
                     Quaternion.LookRotation(targetPos - _transform.position), rotationSpeed * Time.deltaTime);
-                    _transform.position += _transform.forward * moveSpeed * Time.deltaTime;
                     break;
-                case Type.Coward:
-                    _transform.rotation = Quaternion.Lerp(_transform.rotation,
-                    Quaternion.LookRotation(_transform.position - targetPos), rotationSpeed * Time.deltaTime);
 
-                    _transform.position += _transform.forward * moveSpeed * Time.deltaTime;
+                case Type.Coward:
+                    _transform.rotation = Quaternion.Slerp(_transform.rotation,
+                    Quaternion.LookRotation(_transform.position - targetPos), rotationSpeed * Time.deltaTime);
                     break;
+
                 case Type.Crazy:
                     counter += Time.deltaTime;
                     if (counter > 0.5f)
@@ -56,16 +105,43 @@ public class Minion : MonoBehaviour
                     }
 
                     Quaternion rotation = Quaternion.LookRotation(randomPos - _transform.position, Vector3.up);
-                    transform.rotation = Quaternion.Lerp(_transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+                    transform.rotation = Quaternion.Slerp(_transform.rotation, rotation, rotationSpeed * Time.deltaTime);
 
                     Vector3 heading = randomPos - _transform.position;
                     heading.y = 0;
                     float distance = heading.magnitude;
                     Vector3 direction = heading / distance;
 
-                    _transform.position += _transform.forward * moveSpeed * Time.deltaTime;
                     break;
             }
+
+            rb.AddForce(_transform.forward * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
+
+            Vector2 hMov = new Vector2(rb.velocity.x, rb.velocity.z);
+            hMov = hMov.normalized * Mathf.Min(hMov.magnitude, moveSpeed);
+            rb.velocity = new Vector3(hMov.x, rb.velocity.y, hMov.y);
         }
+    }
+
+    bool SnapToGround()
+    {
+        RaycastHit hitInfo;
+
+        bool grounded = Physics.Raycast(
+            _transform.position,
+            Vector3.down,
+            out hitInfo,
+            _transform.localScale.y * (0.5f * boxCollider.size.y + 0.15f),
+            -5,
+            QueryTriggerInteraction.Ignore);
+
+        if (grounded)
+        {
+            Vector3 pos = _transform.position;
+            pos.y = hitInfo.point.y + _transform.localScale.y * (0.5f * boxCollider.size.y);
+            _transform.position = pos;
+        }
+
+        return grounded;
     }
 }
