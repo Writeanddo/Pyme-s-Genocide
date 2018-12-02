@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,13 +29,15 @@ public class Minion : MonoBehaviour
     bool wasAwake;
     BoxCollider boxCollider;
 
-    [NonSerialized]
+    [System.NonSerialized]
     public bool explosive = false;
     [SerializeField] ParticleSystem ps;
 
     [Header("Explosion")]
     [SerializeField] float explosionRadius;
     [SerializeField] float explosionForce;
+
+    bool walkEnabled = false;
 
     private void Awake()
     {
@@ -50,12 +51,14 @@ public class Minion : MonoBehaviour
 
     void Start()
     {
+        if(Mathf.RoundToInt(Random.Range(0, 2)) == 1)
+            walkEnabled = true;
         playerTransform = GameObject.FindWithTag("Player").transform;
 
         float percent = UnityEngine.Random.Range(0, 100);
         if (percent < 70)
             type = Type.Coward;
-        else if (percent < 90)
+        else if (percent < 99)
             type = Type.Crazy;
         else type = Type.Follower;
     }
@@ -144,6 +147,35 @@ public class Minion : MonoBehaviour
             Vector2 hMov = new Vector2(rb.velocity.x, rb.velocity.z);
             hMov = hMov.normalized * Mathf.Min(hMov.magnitude, moveSpeed);
             rb.velocity = new Vector3(hMov.x, rb.velocity.y, hMov.y);
+
+            if (Random.Range(0, 2) > 1.8) {
+                rb.AddForce(_transform.up * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
+            }
+        }
+        else if (walkEnabled) {
+            counter += Time.deltaTime;
+            if (counter > 0.5f) {
+                randomPos = new Vector3(UnityEngine.Random.Range(-10, 10), _transform.position.y, UnityEngine.Random.Range(-10, 10));
+                counter = 0;
+            }
+
+            Quaternion rotation = Quaternion.LookRotation(randomPos - _transform.position, Vector3.up);
+            transform.rotation = Quaternion.Lerp(_transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+
+            Vector3 heading = randomPos - _transform.position;
+            heading.y = 0;
+            float distance = heading.magnitude;
+            Vector3 direction = heading / distance;
+
+            rb.AddForce(_transform.forward * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
+
+            Vector2 hMov = new Vector2(rb.velocity.x, rb.velocity.z);
+            hMov = hMov.normalized * Mathf.Min(hMov.magnitude, moveSpeed);
+            rb.velocity = new Vector3(hMov.x, rb.velocity.y, hMov.y);
+
+            if(Random.Range(0, 2) > 1.8) {
+                rb.AddForce(_transform.up * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
+            }
         }
         else if (animator) animator.SetBool("Running", false);
     }
