@@ -10,7 +10,7 @@ public class Minion : MonoBehaviour
 {
 
     [SerializeField] int moveSpeed = 3;
-    [SerializeField] float realScale = 0.2f;
+    float realScale = 1f;
 
     [SerializeField] float minDetectionDistance;
     [SerializeField] float maxDetectionDistance;
