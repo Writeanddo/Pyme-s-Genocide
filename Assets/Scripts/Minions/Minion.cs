@@ -32,6 +32,11 @@ public class Minion : MonoBehaviour
 
     [NonSerialized]
     public bool explosive = false;
+    [SerializeField] ParticleSystem particleSystem;
+
+    [Header("Explosion")]
+    [SerializeField] float explosionRadius;
+    [SerializeField] float explosionForce;
 
     private void Awake()
     {
@@ -46,6 +51,13 @@ public class Minion : MonoBehaviour
     void Start()
     {
         playerTransform = GameObject.FindWithTag("Player").transform;
+
+        float percent = UnityEngine.Random.Range(0, 100);
+        if (percent < 70)
+            type = Type.Coward;
+        else if (percent < 90)
+            type = Type.Crazy;
+        else type = Type.Follower;
     }
 
     public void EnterPhysicsMode()
@@ -93,8 +105,8 @@ public class Minion : MonoBehaviour
         if (sqrDistance < detectionDistance * detectionDistance)
         {
             Vector3 targetPos = new Vector3(playerTransform.position.x, _transform.position.y, playerTransform.position.z);
-            if(animator)
-            animator.SetBool("Running", true);
+            if (animator)
+                animator.SetBool("Running", true);
 
             switch (type)
             {
@@ -132,7 +144,8 @@ public class Minion : MonoBehaviour
             Vector2 hMov = new Vector2(rb.velocity.x, rb.velocity.z);
             hMov = hMov.normalized * Mathf.Min(hMov.magnitude, moveSpeed);
             rb.velocity = new Vector3(hMov.x, rb.velocity.y, hMov.y);
-        } else if (animator) animator.SetBool("Running", false);
+        }
+        else if (animator) animator.SetBool("Running", false);
     }
 
     bool SnapToGround()
@@ -161,7 +174,40 @@ public class Minion : MonoBehaviour
     {
         if (explosive)
         {
+            Vector3 explosionPos = collision.contacts[0].point;
+            Collider[] colliders = Physics.OverlapSphere(explosionPos, explosionRadius);
 
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if (colliders[i].gameObject.GetInstanceID() == playerTransform.gameObject.GetInstanceID())
+                {
+                    PlayerControllerRB rb = colliders[i].GetComponent<PlayerControllerRB>();
+                    if (rb != null)
+                    {
+                        Vector3 dir = (playerTransform.position - explosionPos).normalized;
+                        float distance = Vector3.Distance(playerTransform.position, explosionPos);
+                        float appliedForce = 0.5f * explosionForce * (1.0f - Mathf.Clamp01(distance / explosionRadius));
+
+                        PlayerControllerExternalForce force = new PlayerControllerExternalForce
+                        {
+                            force = appliedForce * dir,
+                            mode = ForceMode.Impulse
+                        };
+
+                        rb.AddExternalForce(force);
+                    }
+                }
+                else
+                {
+                    Rigidbody rb = colliders[i].GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        rb.AddExplosionForce(explosionForce, explosionPos, explosionRadius, 3.0F);
+                    }
+                }
+            }
+
+            ParticleSystemManager.Instance.Play(particleSystem, _transform);
             MinionsPool.Instance.Put(this);
         }
     }

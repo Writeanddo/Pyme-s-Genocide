@@ -18,21 +18,12 @@ public class MinionSpawner : MonoBehaviour
         Vector3 randomPos = new Vector3(Random.Range(-10, 10), transform.position.y, Random.Range(-10, 10));
         transform.LookAt(randomPos);
 
-        Minion.Type type;
-        float percent = Random.Range(0, 100);
-        if (percent < 70)
-            type = Minion.Type.Coward;
-        else if (percent < 90)
-            type = Minion.Type.Crazy;
-        else type = Minion.Type.Follower;
-
         Minion enemy = MinionsPool.Instance.Get();
         if (enemy == null)
         {
             return;
         }
 
-        enemy.type = type;
 
         Vector3 position = transform.position + transform.forward * Random.Range(0, 10);
 
