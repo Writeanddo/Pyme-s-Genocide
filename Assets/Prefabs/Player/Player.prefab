@@ -2330,7 +2330,7 @@ MonoBehaviour:
   torque: 100
   rayRenderer: {fileID: 23369467216852020}
   spawnPoint: {fileID: 4543700562614928}
-  maxFireRatePerSecond: 0.1
+  maxFireRatePerSecond: 0.05
   baseFireRatePerSecond: 1
 --- !u!114 &114777670349385090
 MonoBehaviour:
