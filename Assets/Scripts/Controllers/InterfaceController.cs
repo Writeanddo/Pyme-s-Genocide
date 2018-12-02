@@ -6,17 +6,29 @@ public class InterfaceController : MonoBehaviour {
     private static InterfaceController instance;
     public static InterfaceController GetInterfaceController() { return instance; }
 
+    private int maxMinions;
+
+    //[Header("Menu")]
+
+    [Header("Ingame")]
     public Text textCount;
     public Image imageCount;
+    public Image imageVerticalCount;
 
-	
-	void Awake () {
+
+    void Awake () {
         instance = this;
 	}
+
+
+    public void Initialize(int max, int count = 0) {
+        maxMinions = max;
+        UpdateCounter(count);
+    }
 
     public void UpdateCounter(float count)
     {
         textCount.text = (int)count + "%";
-        imageCount.fillAmount = count/100f;
+        imageVerticalCount.fillAmount = imageCount.fillAmount = count / maxMinions;
     }
 }
