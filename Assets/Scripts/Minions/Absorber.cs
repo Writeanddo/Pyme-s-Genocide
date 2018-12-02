@@ -105,8 +105,10 @@ public class Absorber : MonoBehaviour
         newBullet.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
 
         Vector2 noise = 0.05f * Random.insideUnitCircle;
-        Vector3 direction = Quaternion.AngleAxis(-pushAngle, spawnPoint.right) * spawnPoint.forward + spawnPoint.right * noise.x + spawnPoint.up * noise.y;
-        Debug.DrawRay(spawnPoint.position, direction, Color.red, 1.0f);
+        Vector3 direction =
+            Quaternion.AngleAxis(-pushAngle, spawnPoint.right) * Camera.main.transform.forward +
+            Camera.main.transform.right * noise.x +
+            Camera.main.transform.up * noise.y;
 
         newBullet.AddForce(direction * pushForce, ForceMode.Impulse);
         newBullet.AddTorque(torque * Random.insideUnitSphere, ForceMode.Impulse);
