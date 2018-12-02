@@ -5996,6 +5996,11 @@ Prefab:
       propertyPath: m_PushForce
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114277712043169228, guid: 38ae661cc3083d34abcaa7c5d8ce29a1,
+        type: 2}
+      propertyPath: m_AmmoPerSecond
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38ae661cc3083d34abcaa7c5d8ce29a1, type: 2}
   m_IsPrefabAsset: 0

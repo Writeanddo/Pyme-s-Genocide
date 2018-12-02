@@ -162,9 +162,9 @@ MonoBehaviour:
   minDetectionDistance: 5
   maxDetectionDistance: 10
   type: 0
-  particleSystem: {fileID: 198992492381339124}
+  ps: {fileID: 198992492381339124}
   explosionRadius: 3
-  explosionForce: 450
+  explosionForce: 300
 --- !u!198 &198992492381339124
 ParticleSystem:
   m_ObjectHideFlags: 1
