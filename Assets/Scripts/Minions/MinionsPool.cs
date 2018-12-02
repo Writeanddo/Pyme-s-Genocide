@@ -97,22 +97,18 @@ public class MinionsPool : MonoBehaviour
 
     private void InstantiateCopy()
     {
-        //if (minionPrefab == null)
-       // {
-            int val = Mathf.RoundToInt(Random.Range(0, 3));
-            print(val);
-            switch (val) {
-                case 0:
-                    minionPrefab = Resources.Load<Minion>("Bocado");
-                    break;
-                case 1:
-                    minionPrefab = Resources.Load<Minion>("CJ");
-                    break;
-                case 2:
-                    minionPrefab = Resources.Load<Minion>("Tago");
-                    break;
-            }
-       // }
+        switch (Mathf.RoundToInt(Random.Range(0, 3))) {
+            case 0:
+                minionPrefab = Resources.Load<Minion>("Bocado");
+                break;
+            case 1:
+                minionPrefab = Resources.Load<Minion>("CJ");
+                break;
+            case 2:
+                minionPrefab = Resources.Load<Minion>("Tago");
+                break;
+        }
+
         Minion copy = Instantiate(minionPrefab, new Vector3(10000.0f, 10000.0f, 10000.0f), Quaternion.identity, _transform);
         copy.gameObject.name = "MINION " + minions.Count.ToString().PadLeft(4, '0');
         copy.gameObject.SetActive(false);

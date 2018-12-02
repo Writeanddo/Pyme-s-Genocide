@@ -27,6 +27,7 @@ public class Minion : MonoBehaviour
 
     Transform _transform;
     Rigidbody rb;
+    Animator animator;
 
     bool wasAwake;
     BoxCollider boxCollider;
@@ -37,6 +38,7 @@ public class Minion : MonoBehaviour
     private void Awake()
     {
         _transform = transform;
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
 
@@ -94,7 +96,8 @@ public class Minion : MonoBehaviour
         if (sqrDistance < detectionDistance * detectionDistance)
         {
             Vector3 targetPos = new Vector3(playerTransform.position.x, _transform.position.y, playerTransform.position.z);
-
+            if(animator)
+            animator.SetBool("Running", true);
 
             switch (type)
             {
@@ -132,7 +135,7 @@ public class Minion : MonoBehaviour
             Vector2 hMov = new Vector2(rb.velocity.x, rb.velocity.z);
             hMov = hMov.normalized * Mathf.Min(hMov.magnitude, moveSpeed);
             rb.velocity = new Vector3(hMov.x, rb.velocity.y, hMov.y);
-        }
+        }else if (animator) animator.SetBool("Running", false);
     }
 
     bool SnapToGround()
