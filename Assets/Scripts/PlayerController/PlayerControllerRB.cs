@@ -72,9 +72,13 @@ public class PlayerControllerRB : MonoBehaviour
             HandleAirborneInput();
         }
 
-        if (inputDir.x != 0.0f || inputDir.y != 0.0f)
+        if (!Input.GetButton("Fire3") || inputDir.x != 0.0f || inputDir.y != 0.0f)
         {
             m_TargetRotation = m_Cam.eulerAngles.y;
+        }
+
+        if (inputDir.x != 0.0f || inputDir.y != 0.0f)
+        {
             animator.SetBool("running", true);
         }
         else
