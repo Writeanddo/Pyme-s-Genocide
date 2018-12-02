@@ -125,8 +125,7 @@ public class Minion : MonoBehaviour
 
                 case Type.Crazy:
                     counter += Time.deltaTime;
-                    if (counter > 0.5f)
-                    {
+                    if (counter > 0.1f) {
                         randomPos = new Vector3(UnityEngine.Random.Range(-10, 10), _transform.position.y, UnityEngine.Random.Range(-10, 10));
                         counter = 0;
                     }
@@ -138,7 +137,6 @@ public class Minion : MonoBehaviour
                     heading.y = 0;
                     float distance = heading.magnitude;
                     Vector3 direction = heading / distance;
-
                     break;
             }
 
@@ -147,14 +145,10 @@ public class Minion : MonoBehaviour
             Vector2 hMov = new Vector2(rb.velocity.x, rb.velocity.z);
             hMov = hMov.normalized * Mathf.Min(hMov.magnitude, moveSpeed);
             rb.velocity = new Vector3(hMov.x, rb.velocity.y, hMov.y);
-
-            if (Random.Range(0, 2) > 1.8) {
-                rb.AddForce(_transform.up * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
-            }
         }
         else if (walkEnabled) {
             counter += Time.deltaTime;
-            if (counter > 0.5f) {
+            if (counter > 3f) {
                 randomPos = new Vector3(UnityEngine.Random.Range(-10, 10), _transform.position.y, UnityEngine.Random.Range(-10, 10));
                 counter = 0;
             }
@@ -172,10 +166,6 @@ public class Minion : MonoBehaviour
             Vector2 hMov = new Vector2(rb.velocity.x, rb.velocity.z);
             hMov = hMov.normalized * Mathf.Min(hMov.magnitude, moveSpeed);
             rb.velocity = new Vector3(hMov.x, rb.velocity.y, hMov.y);
-
-            if(Random.Range(0, 2) > 1.8) {
-                rb.AddForce(_transform.up * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
-            }
         }
         else if (animator) animator.SetBool("Running", false);
     }
@@ -191,13 +181,6 @@ public class Minion : MonoBehaviour
             _transform.localScale.y * (0.5f * boxCollider.size.y + 0.15f),
             -5,
             QueryTriggerInteraction.Ignore);
-
-        if (grounded)
-        {
-            Vector3 pos = _transform.position;
-            pos.y = hitInfo.point.y + _transform.localScale.y * (0.5f * boxCollider.size.y);
-            _transform.position = pos;
-        }
 
         return grounded;
     }

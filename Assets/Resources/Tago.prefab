@@ -450,7 +450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522e0926f63e87142956c5eb5ac90a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  moveSpeed: 14
   minDetectionDistance: 5
   maxDetectionDistance: 10
   type: 0
