@@ -59,6 +59,11 @@ public class PlayerControllerRB : MonoBehaviour
         if (inputDir.x != 0.0f || inputDir.y != 0.0f)
         {
             m_TargetRotation = m_Cam.eulerAngles.y;
+            animator.SetBool("running", true);
+        }
+        else
+        {
+            animator.SetBool("running", false);
         }
 
         m_CurrentVelocity = inputDir.x * m_Cam.right - inputDir.y * Vector3.Cross(Vector3.up, m_Cam.right);
@@ -87,6 +92,7 @@ public class PlayerControllerRB : MonoBehaviour
 
         if (m_WantsToJetpack && gameManager.GetAmmo() > 0)
         {
+            jetPack.SpawnMinions();
             gameManager.DecreaseAmmo(jetPack.AmmoPerSecond * Time.deltaTime);
             m_RigidBody.AddForce(Vector3.up * jetPack.Strength);
         }
@@ -131,15 +137,12 @@ public class PlayerControllerRB : MonoBehaviour
                 }
                 else
                 {
-                    vel.y *= m_ExtraGravityFactor;
+                    // vel.y *= m_ExtraGravityFactor;
                 }
             }
         }
 
-        if (vel.y <= 0.0f)
-        {
-            vel.y = -Mathf.Min(-vel.y, m_MaxGravityVelocity);
-        }
+        vel.y = Mathf.Sign(vel.y) * Mathf.Min(Mathf.Abs(vel.y), m_MaxGravityVelocity);
 
         Vector2 hMov = new Vector2(vel.x, vel.z);
         hMov = hMov.normalized * Mathf.Min(hMov.magnitude, m_MaxMovementVelocity);

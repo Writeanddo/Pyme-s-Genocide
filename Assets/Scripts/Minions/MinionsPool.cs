@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MinionsPool : MonoBehaviour
 {
-    [SerializeField] bool showDebugLogs = true;
+    [SerializeField] bool showDebugLogs = false;
     [SerializeField] int poolSize = 500;
     List<Minion> minions;
 
@@ -85,6 +85,7 @@ public class MinionsPool : MonoBehaviour
             minion.gameObject.SetActive(false);
             minion.GetComponent<Rigidbody>().velocity = Vector3.zero;
             minion.transform.position = new Vector3(10000.0f, 10000.0f, 10000.0f);
+            minion.transform.rotation = Quaternion.identity;
             minion.transform.SetParent(_transform, true);
 
             if (showDebugLogs) Debug.Log("Devolviendo minion. Tamaño del pool: " + minions.Count);
