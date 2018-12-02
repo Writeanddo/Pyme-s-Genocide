@@ -179,11 +179,6 @@ public class Minion : MonoBehaviour
 
             for (int i = 0; i < colliders.Length; i++)
             {
-                if (colliders[i].gameObject == null)
-                {
-                    continue;
-                }
-
                 if (colliders[i].gameObject.GetInstanceID() == playerTransform.gameObject.GetInstanceID())
                 {
                     PlayerControllerRB rb = colliders[i].GetComponent<PlayerControllerRB>();
