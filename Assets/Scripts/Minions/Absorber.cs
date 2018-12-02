@@ -16,6 +16,8 @@ public class Absorber : MonoBehaviour
     public GameObject bullet;
     public Transform spawnPoint;
 
+    Capturer capturer;
+
     bool absorbing;
 
     bool canFire = true;
@@ -29,6 +31,7 @@ public class Absorber : MonoBehaviour
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        capturer = GetComponentInChildren<Capturer>();
     }
 
     void Update()
@@ -70,7 +73,7 @@ public class Absorber : MonoBehaviour
             Minion m = other.GetComponent<Minion>();
             if (m)
             {
-                Vector3 heading = other.transform.position - transform.position;
+                Vector3 heading = other.transform.position - capturer.transform.position;
                 m.AddForce(heading * -pullForce * Time.deltaTime, ForceMode.Force);
             }
         }

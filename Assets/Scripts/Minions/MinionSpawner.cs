@@ -32,7 +32,7 @@ public class MinionSpawner : MonoBehaviour
         }
 
         enemy.type = type;
-        enemy.detectionDist = Random.Range(10, 20);
+        enemy.detectionDist = Random.Range(15, 20);
         Vector3 position = transform.position + transform.forward * Random.Range(0, 10);
 
         enemy.transform.SetPositionAndRotation(position, transform.rotation);

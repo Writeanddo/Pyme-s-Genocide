@@ -87,12 +87,12 @@ public class Minion : MonoBehaviour
             switch (type)
             {
                 case Type.Follower:
-                    transform.rotation = Quaternion.Slerp(_transform.rotation,
+                    transform.rotation = Quaternion.Lerp(_transform.rotation,
                     Quaternion.LookRotation(targetPos - _transform.position), rotationSpeed * Time.deltaTime);
                     break;
 
                 case Type.Coward:
-                    _transform.rotation = Quaternion.Slerp(_transform.rotation,
+                    _transform.rotation = Quaternion.Lerp(_transform.rotation,
                     Quaternion.LookRotation(_transform.position - targetPos), rotationSpeed * Time.deltaTime);
                     break;
 
@@ -105,7 +105,7 @@ public class Minion : MonoBehaviour
                     }
 
                     Quaternion rotation = Quaternion.LookRotation(randomPos - _transform.position, Vector3.up);
-                    transform.rotation = Quaternion.Slerp(_transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+                    transform.rotation = Quaternion.Lerp(_transform.rotation, rotation, rotationSpeed * Time.deltaTime);
 
                     Vector3 heading = randomPos - _transform.position;
                     heading.y = 0;
