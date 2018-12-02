@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public enum gameState { menu, ingame, paused}
+    public enum gameState { menu, ingame, paused }
     private gameState currentGameState = gameState.ingame;
 
     public InterfaceController interfaceController;
@@ -17,10 +17,68 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] float ammo;
 
+    bool gamePaused;
+
+    PauseCanvas pauseCanvas;
+
     private void Start()
     {
         // ammo = maxAmmo;
         interfaceController.Initialize((int)maxAmmo, (int)ammo);
+
+        pauseCanvas = FindObjectOfType<PauseCanvas>();
+
+        if (pauseCanvas == null)
+        {
+            PauseCanvas pauseCanvasPrefab = Resources.Load<PauseCanvas>("pauseCanvas");
+            pauseCanvas = Instantiate(pauseCanvasPrefab);
+            pauseCanvas.gameObject.name = "[PauseCanvas]";
+            pauseCanvas.gameObject.SetActive(false);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Exit"))
+        {
+            gamePaused = !gamePaused;
+            if (gamePaused)
+            {
+                Time.timeScale = 0.0f;
+                pauseCanvas.gameObject.SetActive(true);
+            }
+            else
+            {
+                Time.timeScale = 1.0f;
+                pauseCanvas.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void SwapPauseState()
+    {
+        if (gamePaused)
+        {
+            UnPause();
+        }
+        else
+        {
+            Pause();
+        }
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0.0f;
+        pauseCanvas.gameObject.SetActive(true);
+        gamePaused = true;
+    }
+
+    public void UnPause()
+    {
+        Time.timeScale = 1.0f;
+        pauseCanvas.gameObject.SetActive(false);
+        gamePaused = false;
     }
 
     public void DecreaseAmmo(float ammount = 1.0f)
