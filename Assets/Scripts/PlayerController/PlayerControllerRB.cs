@@ -39,6 +39,7 @@ public class PlayerControllerRB : MonoBehaviour
     private List<PlayerControllerExternalForce> externalForces = new List<PlayerControllerExternalForce>();
 
     private Vector3 m_CurrentVelocity;
+    private Animator animator;
 
     void Start()
     {
@@ -47,6 +48,7 @@ public class PlayerControllerRB : MonoBehaviour
         m_Cam = Camera.main.transform;
         thirdPersonCamera = FindObjectOfType<ThirdPersonCamera>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
