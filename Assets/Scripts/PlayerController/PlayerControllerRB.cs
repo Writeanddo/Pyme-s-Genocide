@@ -187,13 +187,14 @@ public class PlayerControllerRB : MonoBehaviour
 
     private void HandleAirborneInput()
     {
-        if (!readyForJetpack && m_RigidBody.velocity.y <= 0.0f)
+        if (!readyForJetpack && jetPack.Ready && m_RigidBody.velocity.y <= 0.0f)
         {
             readyForJetpack = true;
         }
 
         if (readyForJetpack && Input.GetButton("Jump"))
         {
+            jetPack.StartJetpack();
             m_WantsToJetpack = true;
         }
     }

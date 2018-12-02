@@ -16,7 +16,7 @@ public class Capturer : MonoBehaviour
         if (gm.GetAmmo() < gm.MaxAmmo)
         {
             Minion m = other.GetComponent<Minion>();
-            if (m)
+            if (m && !m.explosive)
             {
                 gm.IncreaseAmmo();
                 MinionsPool.Instance.Put(m);

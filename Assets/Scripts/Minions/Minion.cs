@@ -30,6 +30,8 @@ public class Minion : MonoBehaviour
     bool wasAwake;
     BoxCollider boxCollider;
 
+    public bool explosive = true;
+
     private void Awake()
     {
         _transform = transform;
@@ -151,5 +153,13 @@ public class Minion : MonoBehaviour
         }
 
         return grounded;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (explosive)
+        {
+            MinionsPool.Instance.Put(this);
+        }
     }
 }
