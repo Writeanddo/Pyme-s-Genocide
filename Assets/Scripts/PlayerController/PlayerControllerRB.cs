@@ -84,6 +84,8 @@ public class PlayerControllerRB : MonoBehaviour
         if (inputDir.x != 0.0f || inputDir.y != 0.0f)
         {
             animator.SetBool("running", true);
+            animator.SetBool("running_backwards", inputDir.y < 0.0f);
+
             if (inputDir.x != 0.0f)
             {
                 animator.SetBool("strafing", true);
