@@ -35,7 +35,7 @@ public class Absorber : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1") && gameManager.GetAmmo() > 0.0f)
         {
             if (!firing && canFire)
             {
