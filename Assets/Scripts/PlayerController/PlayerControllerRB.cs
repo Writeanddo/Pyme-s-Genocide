@@ -90,7 +90,7 @@ public class PlayerControllerRB : MonoBehaviour
             if (Mathf.Abs(inputDir.x) > 0.3f)
             {
                 animator.SetBool("strafing", true);
-                animator.SetFloat("strafe_direction", inputDir.x);
+                animator.SetFloat("strafe_direction", inputDir.x > 0 ? 1.0f : 0.0f);
             }
         }
 
