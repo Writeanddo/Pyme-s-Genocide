@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114790278242787882}
   - component: {fileID: 54016050047454094}
   - component: {fileID: 65661654905465516}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bocado
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 14
-  realScale: 1
   minDetectionDistance: 5
   maxDetectionDistance: 10
   type: 0

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114712425291974200}
   - component: {fileID: 54831720405244598}
   - component: {fileID: 65271913786115044}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CJ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 14
-  realScale: 1
   minDetectionDistance: 5
   maxDetectionDistance: 10
   type: 0
