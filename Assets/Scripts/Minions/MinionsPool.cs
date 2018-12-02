@@ -88,6 +88,7 @@ public class MinionsPool : MonoBehaviour
             minion.transform.position = new Vector3(10000.0f, 10000.0f, 10000.0f);
             minion.transform.localScale = Vector3.one;
             minion.transform.rotation = Quaternion.identity;
+            minion.gameObject.layer = LayerMask.NameToLayer("Minions");
 
             minion.transform.SetParent(_transform, true);
 
