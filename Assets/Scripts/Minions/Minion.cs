@@ -161,6 +161,7 @@ public class Minion : MonoBehaviour
     {
         if (explosive)
         {
+
             MinionsPool.Instance.Put(this);
         }
     }
