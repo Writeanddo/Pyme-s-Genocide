@@ -39,6 +39,7 @@ public class PlayerControllerRB : MonoBehaviour
     private List<PlayerControllerExternalForce> externalForces = new List<PlayerControllerExternalForce>();
 
     private Vector3 m_CurrentVelocity;
+    private Animator animator;
 
     void Start()
     {
@@ -47,6 +48,7 @@ public class PlayerControllerRB : MonoBehaviour
         m_Cam = Camera.main.transform;
         thirdPersonCamera = FindObjectOfType<ThirdPersonCamera>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -54,7 +56,10 @@ public class PlayerControllerRB : MonoBehaviour
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 inputDir = input.normalized;
 
-        m_TargetRotation = m_Cam.eulerAngles.y;
+        if (inputDir.x != 0.0f || inputDir.y != 0.0f)
+        {
+            m_TargetRotation = m_Cam.eulerAngles.y;
+        }
 
         m_CurrentVelocity = inputDir.x * m_Cam.right - inputDir.y * Vector3.Cross(Vector3.up, m_Cam.right);
 
@@ -80,7 +85,7 @@ public class PlayerControllerRB : MonoBehaviour
             m_RigidBody.AddForce(Vector3.up * m_JumpForce);
         }
 
-        if (m_WantsToJetpack && gameManager.GetAmmo() > 0) 
+        if (m_WantsToJetpack && gameManager.GetAmmo() > 0)
         {
             gameManager.DecreaseAmmo(jetPack.AmmoPerSecond * Time.deltaTime);
             m_RigidBody.AddForce(Vector3.up * jetPack.Strength);

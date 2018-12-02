@@ -19,9 +19,9 @@ public class MinionSpawner : MonoBehaviour
 
         Minion.Type type;
         float percent = Random.Range(0, 100);
-        if (percent < 30)
+        if (percent < 70)
             type = Minion.Type.Coward;
-        else if (percent < 80)
+        else if (percent < 90)
             type = Minion.Type.Crazy;
         else type = Minion.Type.Follower;
 
