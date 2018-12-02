@@ -94,4 +94,9 @@ public class GameManager : MonoBehaviour
     }
 
     public float GetAmmo() { return ammo; }
+
+    public void AllObjectivesCleared()
+    {
+        Debug.Log("WASSUP");
+    }
 }
