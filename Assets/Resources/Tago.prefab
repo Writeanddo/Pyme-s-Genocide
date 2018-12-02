@@ -455,8 +455,8 @@ MonoBehaviour:
   maxDetectionDistance: 10
   type: 0
   particleSystem: {fileID: 198807624026953642}
-  explosionRadius: 5
-  explosionForce: 500
+  explosionRadius: 3
+  explosionForce: 450
 --- !u!137 &137835145244441132
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
