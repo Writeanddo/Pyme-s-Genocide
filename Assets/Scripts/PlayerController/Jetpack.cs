@@ -91,6 +91,7 @@ public class Jetpack : MonoBehaviour
                     m.transform.position = jetpackR.spawnPoint.position;
                 }
 
+                m.transform.localScale = 0.5f * Vector3.one;
                 m.transform.rotation = Random.rotation;
                 m.AddForce(m_PushForce * Vector3.down, ForceMode.Impulse);
                 m.AddTorque(m_PushTorque * Random.insideUnitSphere, ForceMode.Impulse);

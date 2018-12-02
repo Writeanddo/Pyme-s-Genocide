@@ -8,9 +8,7 @@ using UnityEngine;
 
 public class Minion : MonoBehaviour
 {
-
     [SerializeField] int moveSpeed = 3;
-    float realScale = 1f;
 
     [SerializeField] float minDetectionDistance;
     [SerializeField] float maxDetectionDistance;
@@ -47,7 +45,6 @@ public class Minion : MonoBehaviour
 
     void Start()
     {
-        transform.localScale = Vector3.one * Time.deltaTime;
         playerTransform = GameObject.FindWithTag("Player").transform;
     }
 
@@ -79,7 +76,7 @@ public class Minion : MonoBehaviour
 
     void Update()
     {
-        if (transform.localScale.x < realScale) transform.localScale += Vector3.one * realScale * Time.deltaTime;
+        transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one, Time.deltaTime);
 
         if (Mathf.Abs(rb.velocity.y) < 0.1f)
         {
@@ -135,7 +132,7 @@ public class Minion : MonoBehaviour
             Vector2 hMov = new Vector2(rb.velocity.x, rb.velocity.z);
             hMov = hMov.normalized * Mathf.Min(hMov.magnitude, moveSpeed);
             rb.velocity = new Vector3(hMov.x, rb.velocity.y, hMov.y);
-        }else if (animator) animator.SetBool("Running", false);
+        } else if (animator) animator.SetBool("Running", false);
     }
 
     bool SnapToGround()

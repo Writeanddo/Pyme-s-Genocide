@@ -86,7 +86,9 @@ public class MinionsPool : MonoBehaviour
             minion.explosive = false;
             minion.GetComponent<Rigidbody>().velocity = Vector3.zero;
             minion.transform.position = new Vector3(10000.0f, 10000.0f, 10000.0f);
+            minion.transform.localScale = Vector3.one;
             minion.transform.rotation = Quaternion.identity;
+
             minion.transform.SetParent(_transform, true);
 
             if (showDebugLogs) Debug.Log("Devolviendo minion. Tamaño del pool: " + minions.Count);

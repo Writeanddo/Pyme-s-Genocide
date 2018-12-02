@@ -12,6 +12,7 @@ public class MinionSpawner : MonoBehaviour
         InvokeRepeating("Spawn", spawnTime, spawnTime);
     }
 
+
     void Spawn()
     {
         Vector3 randomPos = new Vector3(Random.Range(-10, 10), transform.position.y, Random.Range(-10, 10));
@@ -32,8 +33,10 @@ public class MinionSpawner : MonoBehaviour
         }
 
         enemy.type = type;
+
         Vector3 position = transform.position + transform.forward * Random.Range(0, 10);
 
+        enemy.transform.localScale = Vector3.zero;
         enemy.transform.SetPositionAndRotation(position, transform.rotation);
     }
 }
