@@ -191,7 +191,7 @@ public class Minion : MonoBehaviour
                     {
                         Vector3 dir = (playerTransform.position - explosionPos).normalized;
                         float distance = Vector3.Distance(playerTransform.position, explosionPos);
-                        float appliedForce = 0.5f * explosionForce * (1.0f - Mathf.Clamp01(distance / explosionRadius));
+                        float appliedForce = 0.3f * explosionForce * (1.0f - Mathf.Clamp01(distance / explosionRadius));
 
                         PlayerControllerExternalForce force = new PlayerControllerExternalForce
                         {
