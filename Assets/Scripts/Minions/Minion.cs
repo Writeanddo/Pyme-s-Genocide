@@ -32,7 +32,7 @@ public class Minion : MonoBehaviour
 
     [NonSerialized]
     public bool explosive = false;
-    [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] ParticleSystem ps;
 
     [Header("Explosion")]
     [SerializeField] float explosionRadius;
@@ -212,7 +212,7 @@ public class Minion : MonoBehaviour
                 }
             }
 
-            ParticleSystemManager.Instance.Play(particleSystem, _transform);
+            ParticleSystemManager.Instance.Play(ps, _transform);
             MinionsPool.Instance.Put(this);
         }
     }

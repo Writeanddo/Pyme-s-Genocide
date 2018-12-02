@@ -122,8 +122,22 @@ public class PlayerControllerRB : MonoBehaviour
         {
             if (externalForces[i].resetVelocity)
             {
-                m_RigidBody.velocity = Vector3.zero;
+                Vector3 v = m_RigidBody.velocity;
+                if (externalForces[i].resetVelocityDirection.x != 0)
+                {
+                    v.x = 0.0f;
+                }
+                if (externalForces[i].resetVelocityDirection.y != 0)
+                {
+                    v.y = 0.0f;
+                }
+                if (externalForces[i].resetVelocityDirection.z != 0)
+                {
+                    v.z = 0.0f;
+                }
+                m_RigidBody.velocity = v;
             }
+
             if (externalForces[i].scale && m_IsGrounded)
             {
                 m_RigidBody.AddForce(externalForces[i].force * 200.0f, externalForces[i].mode);
@@ -234,5 +248,6 @@ public class PlayerControllerExternalForce
     public Vector3 force;
     public ForceMode mode;
     public bool resetVelocity;
+    public Vector3 resetVelocityDirection;
     public bool scale;
 }
