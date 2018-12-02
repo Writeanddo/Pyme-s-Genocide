@@ -79,6 +79,7 @@ public class PlayerControllerRB : MonoBehaviour
 
         animator.SetBool("running", false);
         animator.SetBool("strafing", false);
+        animator.SetBool("jump", false);
 
         if (inputDir.x != 0.0f || inputDir.y != 0.0f)
         {
@@ -89,11 +90,11 @@ public class PlayerControllerRB : MonoBehaviour
             }
         }
 
-        animator.SetBool("grounded", m_IsGrounded && m_RigidBody.velocity.y <= 0.0f);
+        animator.SetBool("grounded", m_IsGrounded);
 
         if (m_IsGrounded && m_WantsToJump)
         {
-            animator.SetTrigger("jump");
+            animator.SetBool("jump", true);
         }
     }
 
