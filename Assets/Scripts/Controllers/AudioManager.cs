@@ -7,8 +7,13 @@ public class AudioManager : MonoBehaviour {
     private static AudioManager instance;
     public static AudioManager GetInterfaceController() { return instance; }
 
-    [Header("AmbientMusic")]
     public AudioClip ambienMusic;
+
+    [Header("SFx")]
+    public AudioClip playerJump;
+    public AudioClip[] playerRun;
+    public AudioClip playerShoot;
+    public AudioClip playerJetpack;
 
     //[Header("Scene")]
 
