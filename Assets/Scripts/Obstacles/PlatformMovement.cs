@@ -22,8 +22,8 @@ public class PlatformMovement : MonoBehaviour {
         if (childPositions.Count > 1) nextPosition = currentPosition + 1;
     }
 	
-	// Update is called once per frame
-	void Update () {
+    private void FixedUpdate()
+    {
         transform.position = Vector3.Lerp(transform.position, childPositions[nextPosition], velocity * Time.deltaTime);
         UpdateCurrentPosition();
     }

@@ -13,11 +13,14 @@ public class Jumper : MonoBehaviour
             var playerController = other.GetComponent<PlayerControllerRB>();
             if (playerController)
             {
+                Vector3 forward = transform.forward;
+
                 PlayerControllerExternalForce force = new PlayerControllerExternalForce
                 {
                     force = transform.forward * power,
                     mode = ForceMode.Impulse,
-                    resetVelocity = true
+                    resetVelocity = true,
+                    resetVelocityDirection = forward
                 };
                 playerController.AddExternalForce(force);
             }

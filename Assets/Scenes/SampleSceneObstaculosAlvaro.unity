@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3527,12 +3527,12 @@ Prefab:
     - target: {fileID: 114230857896103960, guid: 68bab2a3175c72a4bbddee59bc1cb780,
         type: 2}
       propertyPath: minPower
-      value: 40
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 114230857896103960, guid: 68bab2a3175c72a4bbddee59bc1cb780,
         type: 2}
       propertyPath: maxPower
-      value: 60
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68bab2a3175c72a4bbddee59bc1cb780, type: 2}
@@ -5990,6 +5990,16 @@ Prefab:
     - target: {fileID: 4207170121587120, guid: 38ae661cc3083d34abcaa7c5d8ce29a1, type: 2}
       propertyPath: m_RootOrder
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114277712043169228, guid: 38ae661cc3083d34abcaa7c5d8ce29a1,
+        type: 2}
+      propertyPath: m_PushForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114277712043169228, guid: 38ae661cc3083d34abcaa7c5d8ce29a1,
+        type: 2}
+      propertyPath: m_AmmoPerSecond
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38ae661cc3083d34abcaa7c5d8ce29a1, type: 2}

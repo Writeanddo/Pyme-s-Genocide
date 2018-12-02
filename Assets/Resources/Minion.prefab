@@ -174,7 +174,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &65814183874789606
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -202,8 +202,9 @@ MonoBehaviour:
   minDetectionDistance: 5
   maxDetectionDistance: 10
   type: 2
-  explosionRadius: 5
-  explosionForce: 500
+  ps: {fileID: 0}
+  explosionRadius: 3
+  explosionForce: 300
 --- !u!136 &136029323174265456
 CapsuleCollider:
   m_ObjectHideFlags: 1

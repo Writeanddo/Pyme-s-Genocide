@@ -32,7 +32,7 @@ public class Minion : MonoBehaviour
 
     [NonSerialized]
     public bool explosive = false;
-    [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] ParticleSystem ps;
 
     [Header("Explosion")]
     [SerializeField] float explosionRadius;
@@ -179,6 +179,11 @@ public class Minion : MonoBehaviour
 
             for (int i = 0; i < colliders.Length; i++)
             {
+                if (colliders[i].gameObject == null)
+                {
+                    continue;
+                }
+
                 if (colliders[i].gameObject.GetInstanceID() == playerTransform.gameObject.GetInstanceID())
                 {
                     PlayerControllerRB rb = colliders[i].GetComponent<PlayerControllerRB>();
@@ -186,7 +191,7 @@ public class Minion : MonoBehaviour
                     {
                         Vector3 dir = (playerTransform.position - explosionPos).normalized;
                         float distance = Vector3.Distance(playerTransform.position, explosionPos);
-                        float appliedForce = 0.5f * explosionForce * (1.0f - Mathf.Clamp01(distance / explosionRadius));
+                        float appliedForce = 0.2f * explosionForce * (1.0f - Mathf.Clamp01(distance / explosionRadius));
 
                         PlayerControllerExternalForce force = new PlayerControllerExternalForce
                         {
@@ -207,7 +212,7 @@ public class Minion : MonoBehaviour
                 }
             }
 
-            ParticleSystemManager.Instance.Play(particleSystem, _transform);
+            ParticleSystemManager.Instance.Play(ps, _transform);
             MinionsPool.Instance.Put(this);
         }
     }
