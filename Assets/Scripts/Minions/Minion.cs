@@ -10,7 +10,10 @@ public class Minion : MonoBehaviour
 
     [SerializeField] int moveSpeed = 3;
 
-    public int detectionDist = 6;
+    [SerializeField] float minDetectionDistance;
+    [SerializeField] float maxDetectionDistance;
+
+    float detectionDistance = 6;
 
     public enum Type { Follower, Coward, Crazy }
     public Type type;
@@ -31,6 +34,8 @@ public class Minion : MonoBehaviour
         _transform = transform;
         rb = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
+
+        detectionDistance = Random.Range(minDetectionDistance, maxDetectionDistance);
     }
 
     void Start()
@@ -79,7 +84,7 @@ public class Minion : MonoBehaviour
 
         float sqrDistance = (playerTransform.position - _transform.position).sqrMagnitude;
 
-        if (sqrDistance < detectionDist * detectionDist)
+        if (sqrDistance < detectionDistance * detectionDistance)
         {
             Vector3 targetPos = new Vector3(playerTransform.position.x, _transform.position.y, playerTransform.position.z);
 

@@ -56,16 +56,6 @@ public class PlayerControllerRB : MonoBehaviour
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 inputDir = input.normalized;
 
-        if (inputDir.x != 0.0f || inputDir.y != 0.0f)
-        {
-            m_TargetRotation = m_Cam.eulerAngles.y;
-            animator.SetBool("running", true);
-        }
-        else
-        {
-            animator.SetBool("running", false);
-        }
-
         m_CurrentVelocity = inputDir.x * m_Cam.right - inputDir.y * Vector3.Cross(Vector3.up, m_Cam.right);
 
         CheckGroundStatus();
@@ -80,6 +70,23 @@ public class PlayerControllerRB : MonoBehaviour
         else
         {
             HandleAirborneInput();
+        }
+
+        if (inputDir.x != 0.0f || inputDir.y != 0.0f)
+        {
+            m_TargetRotation = m_Cam.eulerAngles.y;
+            animator.SetBool("running", true);
+        }
+        else
+        {
+            animator.SetBool("running", false);
+        }
+
+        animator.SetBool("grounded", m_IsGrounded && m_RigidBody.velocity.y <= 0.0f);
+
+        if (m_IsGrounded && m_WantsToJump)
+        {
+            animator.SetTrigger("jump");
         }
     }
 

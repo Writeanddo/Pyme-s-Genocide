@@ -13,7 +13,6 @@ public class Absorber : MonoBehaviour
 
     [SerializeField] MeshRenderer rayRenderer;
 
-    public GameObject bullet;
     public Transform spawnPoint;
 
     Capturer capturer;
