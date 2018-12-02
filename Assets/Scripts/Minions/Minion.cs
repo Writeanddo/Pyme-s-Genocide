@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,7 +31,8 @@ public class Minion : MonoBehaviour
     bool wasAwake;
     BoxCollider boxCollider;
 
-    public bool explosive = true;
+    [NonSerialized]
+    public bool explosive = false;
 
     private void Awake()
     {
@@ -38,7 +40,7 @@ public class Minion : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
 
-        detectionDistance = Random.Range(minDetectionDistance, maxDetectionDistance);
+        detectionDistance = UnityEngine.Random.Range(minDetectionDistance, maxDetectionDistance);
     }
 
     void Start()
@@ -110,7 +112,7 @@ public class Minion : MonoBehaviour
                     counter += Time.deltaTime;
                     if (counter > 0.5f)
                     {
-                        randomPos = new Vector3(Random.Range(-10, 10), _transform.position.y, Random.Range(-10, 10));
+                        randomPos = new Vector3(UnityEngine.Random.Range(-10, 10), _transform.position.y, UnityEngine.Random.Range(-10, 10));
                         counter = 0;
                     }
 

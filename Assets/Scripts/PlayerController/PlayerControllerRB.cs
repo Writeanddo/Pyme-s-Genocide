@@ -77,13 +77,16 @@ public class PlayerControllerRB : MonoBehaviour
             m_TargetRotation = m_Cam.eulerAngles.y;
         }
 
+        animator.SetBool("running", false);
+        animator.SetBool("strafing", false);
+
         if (inputDir.x != 0.0f || inputDir.y != 0.0f)
         {
             animator.SetBool("running", true);
-        }
-        else
-        {
-            animator.SetBool("running", false);
+            if (inputDir.x != 0.0f)
+            {
+                animator.SetBool("strafing", true);
+            }
         }
 
         animator.SetBool("grounded", m_IsGrounded && m_RigidBody.velocity.y <= 0.0f);

@@ -199,9 +199,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 14
+  realScale: 0.2
   minDetectionDistance: 5
   maxDetectionDistance: 10
   type: 2
+  explosive: 0
 --- !u!136 &136029323174265456
 CapsuleCollider:
   m_ObjectHideFlags: 1
