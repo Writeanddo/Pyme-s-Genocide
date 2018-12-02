@@ -9,6 +9,7 @@ public class Minion : MonoBehaviour
 {
 
     [SerializeField] int moveSpeed = 3;
+    [SerializeField] float realScale = 0.2f;
 
     [SerializeField] float minDetectionDistance;
     [SerializeField] float maxDetectionDistance;
@@ -40,6 +41,7 @@ public class Minion : MonoBehaviour
 
     void Start()
     {
+        transform.localScale = Vector3.one * Time.deltaTime;
         playerTransform = GameObject.FindWithTag("Player").transform;
     }
 
@@ -71,6 +73,7 @@ public class Minion : MonoBehaviour
 
     void Update()
     {
+        if (transform.localScale.x < realScale) transform.localScale += Vector3.one * realScale * Time.deltaTime;
 
         if (Mathf.Abs(rb.velocity.y) < 0.1f)
         {
