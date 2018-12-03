@@ -37,6 +37,7 @@ public class Absorber : MonoBehaviour
     bool weaponOut;
 
     [SerializeField] ParticleSystem absorbParticleSystem;
+    [SerializeField] ParticleSystem pushParticleSystem;
 
     RaycastHit[] results = new RaycastHit[15];
 
@@ -245,5 +246,7 @@ public class Absorber : MonoBehaviour
 
         newBullet.AddForce(direction * pushForce, ForceMode.Impulse);
         newBullet.AddTorque(torque * Random.insideUnitSphere, ForceMode.Impulse);
+
+        pushParticleSystem.Play();
     }
 }
