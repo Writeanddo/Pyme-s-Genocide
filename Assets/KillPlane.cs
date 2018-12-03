@@ -6,10 +6,18 @@ public class KillPlane : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Minion m = other.GetComponent<Minion>();
-        if (m)
+        PlayerControllerRB pc = other.GetComponent<PlayerControllerRB>();
+        if (pc)
         {
-            MinionsPool.Instance.Put(m);
+            FindObjectOfType<GameManager>().Respawn();
+        }
+        else
+        {
+            Minion m = other.GetComponent<Minion>();
+            if (m)
+            {
+                MinionsPool.Instance.Put(m);
+            }
         }
     }
 }

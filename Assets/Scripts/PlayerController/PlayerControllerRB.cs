@@ -41,6 +41,10 @@ public class PlayerControllerRB : MonoBehaviour
     private Vector3 m_CurrentVelocity;
     private Animator animator;
 
+    public bool inputEnabled = true;
+
+    public Vector3 RespawnPosition { get; private set; }
+
     void Start()
     {
         m_RigidBody = GetComponent<Rigidbody>();
@@ -49,10 +53,15 @@ public class PlayerControllerRB : MonoBehaviour
         thirdPersonCamera = FindObjectOfType<ThirdPersonCamera>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         animator = GetComponent<Animator>();
+
+        RespawnPosition = transform.position;
     }
 
     void Update()
     {
+
+        if (!inputEnabled) { return; }
+
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         Vector2 inputDir = input.normalized;

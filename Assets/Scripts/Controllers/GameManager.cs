@@ -21,12 +21,15 @@ public class GameManager : MonoBehaviour
 
     PauseCanvas pauseCanvas;
 
+    PlayerControllerRB player;
+    ThirdPersonCamera tpc;
+
     private void Start()
     {
         // ammo = maxAmmo;
-        interfaceController.Initialize((int)maxAmmo, (int)ammo);
 
         pauseCanvas = FindObjectOfType<PauseCanvas>();
+        tpc = FindObjectOfType<ThirdPersonCamera>();
 
         if (pauseCanvas == null)
         {
@@ -35,6 +38,8 @@ public class GameManager : MonoBehaviour
             pauseCanvas.gameObject.name = "[PauseCanvas]";
             pauseCanvas.gameObject.SetActive(false);
         }
+
+        player = FindObjectOfType<PlayerControllerRB>();
     }
 
     private void Update()
@@ -84,13 +89,13 @@ public class GameManager : MonoBehaviour
     public void DecreaseAmmo(float ammount = 1.0f)
     {
         ammo = Mathf.Max(0, ammo - ammount);
-        interfaceController.UpdateCounter(ammo);
+        interfaceController.UpdateCounter();
     }
 
     public void IncreaseAmmo(int ammount = 1)
     {
         ammo = Mathf.Min(maxAmmo, ammo + 1);
-        interfaceController.UpdateCounter(ammo);
+        interfaceController.UpdateCounter();
     }
 
     public float GetAmmo() { return ammo; }
@@ -98,5 +103,31 @@ public class GameManager : MonoBehaviour
     public void AllObjectivesCleared()
     {
         Debug.Log("WASSUP");
+    }
+
+    public void Respawn()
+    {
+        StartCoroutine(RespawnAfterTime());
+    }
+
+    IEnumerator RespawnAfterTime()
+    {
+        player.inputEnabled = false;
+        tpc.target = null;
+
+        yield return new WaitForSeconds(2.0f);
+
+        interfaceController.FadeOutScreen(1.0f);
+        yield return new WaitForSeconds(1.0f);
+
+        ammo = 0.0f;
+        interfaceController.UpdateCounter();
+        player.transform.position = player.RespawnPosition;
+        player.inputEnabled = true;
+        tpc.target = player.transform;
+
+        yield return new WaitForSeconds(1.0f);
+
+        interfaceController.FadeInScreen(1.0f);
     }
 }

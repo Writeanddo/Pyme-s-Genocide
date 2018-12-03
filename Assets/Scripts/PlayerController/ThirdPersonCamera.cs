@@ -20,6 +20,8 @@ public class ThirdPersonCamera : MonoBehaviour
     float yaw;
     float pitch;
 
+    Transform playerTransform;
+
     void Start()
     {
         if (lockCursor)
@@ -27,10 +29,19 @@ public class ThirdPersonCamera : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+
+        playerTransform = FindObjectOfType<PlayerControllerRB>().transform;
     }
 
     public void ManualUpdate()
     {
+
+        if (target == null)
+        {
+            transform.LookAt(playerTransform);
+            return;
+        }
+
         yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
         pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
         pitch = Mathf.Clamp(pitch, pitchMinMax.x, pitchMinMax.y);

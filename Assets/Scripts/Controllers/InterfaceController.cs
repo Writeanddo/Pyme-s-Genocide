@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
@@ -21,6 +22,8 @@ public class InterfaceController : MonoBehaviour
     [SerializeField] Sprite[] lockedObjectivesSprites;
     [SerializeField] Sprite[] unlockedObjectivesSprites;
 
+    [SerializeField] Image fadePanel;
+
     private HashSet<int> unlockedObjectives = new HashSet<int>();
 
     private void Start()
@@ -28,16 +31,12 @@ public class InterfaceController : MonoBehaviour
         gm = FindObjectOfType<GameManager>();
     }
 
-    public void Initialize(int max, int count = 0)
+    public void UpdateCounter()
     {
-        maxMinions = max;
-        UpdateCounter(count);
-    }
+        float factor = gm.GetAmmo() / gm.MaxAmmo;
 
-    public void UpdateCounter(float count)
-    {
-        textCount.text = (int)count + "%";
-        imageVerticalCount.fillAmount = imageCount.fillAmount = count / maxMinions;
+        textCount.text = (int) (100 * factor) + "%";
+        imageVerticalCount.fillAmount = imageCount.fillAmount = factor;
     }
 
     public void UpdateObjective(int objective)
@@ -51,5 +50,45 @@ public class InterfaceController : MonoBehaviour
         {
             gm.AllObjectivesCleared();
         }
+    }
+
+    public void FadeOutScreen(float time)
+    {
+        StartCoroutine(FadeOut(time));
+    }
+
+    public void FadeInScreen(float time)
+    {
+        StartCoroutine(FadeIn(time));
+    }
+
+    private IEnumerator FadeIn(float time)
+    {
+        Color faceColor = fadePanel.color;
+
+        for (float t = 1f; t > 0; t -= Time.deltaTime / time)
+        {
+            faceColor.a = t;
+            fadePanel.color = faceColor;
+            yield return null;
+        }
+
+        faceColor.a = 0;
+        fadePanel.color = faceColor;
+    }
+
+    private IEnumerator FadeOut(float time)
+    {
+        Color faceColor = fadePanel.color;
+
+        for (float t = 0f; t < 1f; t += Time.deltaTime / time)
+        {
+            faceColor.a = t;
+            fadePanel.color = faceColor;
+            yield return null;
+        }
+
+        faceColor.a = 1;
+        fadePanel.color = faceColor;
     }
 }
