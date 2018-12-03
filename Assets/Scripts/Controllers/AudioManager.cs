@@ -14,6 +14,8 @@ public class AudioManager : MonoBehaviour {
     public AudioClip[] playerRun;
     public AudioClip playerShoot;
     public AudioClip playerJetpack;
+    public AudioClip absorberPush;
+    public AudioClip absorberPull;
 
     [Header("Scene")]
     public float m_soundVolume = 1.0f;
@@ -95,5 +97,10 @@ public class AudioManager : MonoBehaviour {
 
     public void ChangeEffectsVolume(float volume) {
         m_soundVolume = volume;
+    }
+
+    public void PlayOneShot(AudioClip clip, Vector3 position)
+    {
+        AudioSource.PlayClipAtPoint(clip, position, m_soundVolume);
     }
 }

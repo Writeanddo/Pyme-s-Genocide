@@ -46,6 +46,10 @@ public class Absorber : MonoBehaviour
 
     PlayerControllerRB playerController;
 
+    [SerializeField] AudioClip pushClip;
+
+    AudioSource audioSource;
+
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -53,12 +57,14 @@ public class Absorber : MonoBehaviour
         animator = GetComponent<Animator>();
         tps = FindObjectOfType<ThirdPersonCamera>();
         playerController = FindObjectOfType<PlayerControllerRB>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
     {
         if (!Input.GetButton("Fire2") || !ReadyToUse)
         {
+            audioSource.Stop();
             absorbParticleSystem.Stop();
             return;
         }
@@ -66,6 +72,11 @@ public class Absorber : MonoBehaviour
         if (!absorbParticleSystem.isPlaying)
         {
             absorbParticleSystem.Play();
+        }
+
+        if (!audioSource.isPlaying)
+        {
+            audioSource.Play();
         }
 
         Ray ray;
@@ -177,6 +188,8 @@ public class Absorber : MonoBehaviour
         {
             absorbParticleSystem.transform.parent.LookAt(tps.FocalPoint);
         }
+
+        audioSource.volume = 0.5f * gameManager.audioManager.m_soundVolume;
     }
 
     private void WeaponHidden()
@@ -247,6 +260,7 @@ public class Absorber : MonoBehaviour
         newBullet.AddForce(direction * pushForce, ForceMode.Impulse);
         newBullet.AddTorque(torque * Random.insideUnitSphere, ForceMode.Impulse);
 
+        gameManager.audioManager.PlayOneShot(gameManager.audioManager.absorberPush, transform.position);
         pushParticleSystem.Play();
     }
 }

@@ -256,7 +256,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1456815073502046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.47, y: -7.5057125, z: 13.895144}
+  m_LocalPosition: {x: -15.069791, y: -7.5057125, z: 13.895144}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4556519837771302}
@@ -563,11 +563,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8da3a4dc23404824fab5cdf0f4e9b236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ambienMusic: {fileID: 8300000, guid: 8b2f71db3c0f8e54c8600302276e5cf9, type: 3}
+  ambienMusic: {fileID: 8300000, guid: bc8326c123a7be34f88fa420237f8083, type: 3}
   playerJump: {fileID: 0}
   playerRun: []
   playerShoot: {fileID: 0}
   playerJetpack: {fileID: 0}
+  absorberPush: {fileID: 8300000, guid: 08a9ea99f199b204cb38961c80b72284, type: 3}
+  absorberPull: {fileID: 0}
   m_soundVolume: 1
   m_musicVolume: 0.1
 --- !u!114 &114632972492490002
