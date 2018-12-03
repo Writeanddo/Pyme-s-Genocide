@@ -23,6 +23,9 @@ public class MinionSpawnerFollow : MonoBehaviour
         spawnRate = Random.Range(spawnRateInSecs * (1 - spawnRateDeviation), spawnRateInSecs * (1 + spawnRateDeviation));
         playerTransform = FindObjectOfType<PlayerControllerRB>().transform;
         _transform = transform;
+
+        _transform.position = new Vector3(playerTransform.position.x, 50.0f, playerTransform.position.z);
+
         StartCoroutine(Spawn());
     }
 
@@ -59,7 +62,7 @@ public class MinionSpawnerFollow : MonoBehaviour
             Vector2 position = radius * Random.insideUnitCircle;
             Ray spawnRay = new Ray(new Vector3(_transform.position.x + position.x, 50.0f, _transform.position.z + position.y), Vector3.down);
 
-            Debug.DrawRay(spawnRay.origin, 100.0f * Vector2.down, Color.red, 1.0f);
+            
 
             RaycastHit hit;
             if (Physics.Raycast(spawnRay.origin, Vector3.down, out hit, 100.0f, -5, QueryTriggerInteraction.Ignore))
@@ -76,7 +79,13 @@ public class MinionSpawnerFollow : MonoBehaviour
                 enemy.transform.localScale = Vector3.zero;
                 enemy.transform.position = hit.point + 0.5f * Vector3.up;
 
+                Debug.DrawRay(spawnRay.origin, 100.0f * Vector2.down, Color.green, 1.0f);
+
                 break;
+            }
+            else
+            {
+                Debug.DrawRay(spawnRay.origin, 100.0f * Vector2.down, Color.red, 1.0f);
             }
         }
     }
