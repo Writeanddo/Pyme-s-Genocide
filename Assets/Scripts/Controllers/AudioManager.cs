@@ -28,7 +28,7 @@ public class AudioManager : MonoBehaviour {
 
     [Header("Scene")]
     public float m_soundVolume = 1.0f;
-    public float m_musicVolume = 0.1f;
+    public float m_musicVolume = 1.0f;
     AudioSource musicAudioSource1;
     AudioSource musicAudioSource2;
     bool isMute;

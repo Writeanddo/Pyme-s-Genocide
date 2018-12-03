@@ -47,6 +47,8 @@ public class Minion : MonoBehaviour
 
     GameManager gm;
 
+    MinionSpawnerFollow spawner;
+
     private void Awake()
     {
         _transform = transform;
@@ -55,22 +57,6 @@ public class Minion : MonoBehaviour
         boxCollider = GetComponent<BoxCollider>();
 
         detectionDistance = Random.Range(minDetectionDistance, maxDetectionDistance);
-    }
-
-    void Start()
-    {
-        gm = FindObjectOfType<GameManager>();
-
-        if (Mathf.RoundToInt(Random.Range(0, 2)) == 1)
-            walkEnabled = true;
-        playerTransform = GameObject.FindWithTag("Player").transform;
-
-        float percent = Random.Range(0, 100);
-        if (percent < 70)
-            type = Type.Coward;
-        else if (percent < 95)
-            type = Type.Crazy;
-        else type = Type.Follower;
     }
 
     Coroutine randomNoiseCoroutine;
@@ -97,6 +83,18 @@ public class Minion : MonoBehaviour
         if (gm == null) { gm = FindObjectOfType<GameManager>(); }
 
         if (playerTransform == null) { playerTransform = GameObject.FindWithTag("Player").transform; }
+
+        if (spawner == null) { spawner = FindObjectOfType<MinionSpawnerFollow>(); }
+
+        if (Mathf.RoundToInt(Random.Range(0, 2)) == 1)
+            walkEnabled = true;
+
+        float percent = Random.Range(0, 100);
+        if (percent < 70)
+            type = Type.Coward;
+        else if (percent < 95)
+            type = Type.Crazy;
+        else type = Type.Follower;
 
         randomNoiseCoroutine = StartCoroutine(RandomNoise());
     }
@@ -162,6 +160,15 @@ public class Minion : MonoBehaviour
         }
 
         float sqrDistance = (playerTransform.position - _transform.position).sqrMagnitude;
+
+        if (spawner != null)
+        {
+            if (sqrDistance > spawner.Radius * spawner.Radius)
+            {
+                MinionsPool.Instance.Put(this);
+                return;
+            }
+        }
 
         if (sqrDistance < detectionDistance * detectionDistance)
         {

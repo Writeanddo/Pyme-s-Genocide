@@ -37,7 +37,17 @@ public class Jumper : MonoBehaviour
             }
             else
             {
-                rigidbody.AddForce(transform.forward * power, ForceMode.Impulse);
+                Minion m = other.gameObject.GetComponent<Minion>();
+                if (m)
+                {
+                    gm.audioManager.PlayOneShot(gm.audioManager.thrownMinion[Random.Range(0, gm.audioManager.thrownMinion.Length)], transform.position);
+                }
+                rigidbody.AddForce(transform.up * 0.1f * power, ForceMode.Impulse);
+
+                if (transform.up == Vector3.up)
+                {
+                    rigidbody.AddForce(transform.right * 0.01f * power, ForceMode.Impulse);
+                }
             }
         }
     }

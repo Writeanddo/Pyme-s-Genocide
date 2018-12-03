@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -23,6 +24,23 @@ public class GameManager : MonoBehaviour
 
     PlayerControllerRB player;
     ThirdPersonCamera tpc;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
+    {
+        if (scene.name == "Menu")
+        {
+            interfaceController.gameObject.SetActive(false);
+        } else
+        {
+            interfaceController.gameObject.SetActive(true);
+        }
+    }
 
     private void Start()
     {
@@ -62,6 +80,10 @@ public class GameManager : MonoBehaviour
 
     public void SwapPauseState()
     {
+        if (SceneManager.GetActiveScene().name == "Menu") {
+            return;
+        }
+
         if (gamePaused)
         {
             UnPause();
@@ -74,6 +96,12 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
+
+        if (SceneManager.GetActiveScene().name == "Menu")
+        {
+            return;
+        }
+
         Time.timeScale = 0.0f;
         pauseCanvas.gameObject.SetActive(true);
         gamePaused = true;
@@ -81,6 +109,12 @@ public class GameManager : MonoBehaviour
 
     public void UnPause()
     {
+
+        if (SceneManager.GetActiveScene().name == "Menu")
+        {
+            return;
+        }
+
         Time.timeScale = 1.0f;
         pauseCanvas.gameObject.SetActive(false);
         gamePaused = false;
