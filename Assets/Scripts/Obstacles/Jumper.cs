@@ -2,7 +2,7 @@
 
 public class Jumper : MonoBehaviour
 {
-
+    public Animator jumperAnim;
     public float power = 150f;
 
     private void OnTriggerEnter(Collider other)
@@ -10,6 +10,7 @@ public class Jumper : MonoBehaviour
         var rigidbody = other.gameObject.GetComponent<Rigidbody>();
         if (rigidbody)
         {
+            GetComponentInChildren<Animator>().Play("Boing");
             var playerController = other.GetComponent<PlayerControllerRB>();
             if (playerController)
             {

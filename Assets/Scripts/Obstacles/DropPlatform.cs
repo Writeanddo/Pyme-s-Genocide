@@ -5,10 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class DropPlatform : MonoBehaviour {
 
-    [SerializeField] float shakeAmount = 0.02f;
+    [SerializeField] float shakeAmount = 0.01f;
     [SerializeField] float cooldownDrop = 0.5f;
     [SerializeField] float cooldownReturnToOrigin = 4f;
-    [SerializeField] float returnVelocity = 1f;
+    [SerializeField] float returnVelocity = 0.1f;
 
     private Vector3 originalPos;
 
@@ -20,22 +20,21 @@ public class DropPlatform : MonoBehaviour {
     {
         originalPos = transform.position;
     }
-       
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            StartShake();
-            Invoke("Drop", cooldownDrop);
-        }
+        if (!canShake && !isReturning)
+            if (collision.gameObject.tag == "Player")
+            {
+                canShake = true;
+                Invoke("Drop", cooldownDrop);
+            }
     }
-    private void StartShake() { canShake = true; }
 
-    private void Update()
-    {
-        if (canShake) transform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
-    }
+    //private void Update()
+    //{
+    //    if (canShake) transform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
+    //}
 
     private void FixedUpdate()
     {
@@ -53,7 +52,8 @@ public class DropPlatform : MonoBehaviour {
             canShake = false;
             droped = true;
             GetComponent<Rigidbody>().isKinematic = false;
-            Invoke("ReturnToOriginPosition", cooldownReturnToOrigin);
+            if (returnVelocity > 0 && cooldownReturnToOrigin > 0) Invoke("ReturnToOriginPosition", cooldownReturnToOrigin);
+            else Destroy(gameObject, 5f);
         }
     }
 
