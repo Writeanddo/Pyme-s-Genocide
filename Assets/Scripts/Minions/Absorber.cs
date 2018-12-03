@@ -260,6 +260,8 @@ public class Absorber : MonoBehaviour
         newBullet.AddTorque(torque * Random.insideUnitSphere, ForceMode.Impulse);
 
         gameManager.audioManager.PlayOneShot(gameManager.audioManager.absorberPush, transform.position);
+        gameManager.audioManager.PlayOneShot(gameManager.audioManager.thrownMinion[Random.Range(0, 3)], transform.position);
+
         pushParticleSystem.Play();
     }
 

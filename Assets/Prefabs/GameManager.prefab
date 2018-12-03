@@ -256,7 +256,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1456815073502046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44, y: -7.5057125, z: 13.895144}
+  m_LocalPosition: {x: 52, y: -7.5057125, z: 13.895144}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4556519837771302}
@@ -575,6 +575,10 @@ MonoBehaviour:
   poof: {fileID: 8300000, guid: 364a2630665a1af45851e19954ed28ec, type: 3}
   boing: {fileID: 8300000, guid: 410dc7a167ea63044ae558744c446d5d, type: 3}
   death: {fileID: 8300000, guid: b32865636e3477444af114a223d5b11a, type: 3}
+  thrownMinion:
+  - {fileID: 8300000, guid: af7bd2c0bf22b1541ba50dd6143d72c2, type: 3}
+  - {fileID: 8300000, guid: e4c62a5c68da0a9459d067be3b3f0a0d, type: 3}
+  - {fileID: 8300000, guid: 2d3f12b8f18c9344e95cdf66241fe1b1, type: 3}
   m_soundVolume: 1
   m_musicVolume: 0.1
 --- !u!114 &114632972492490002
