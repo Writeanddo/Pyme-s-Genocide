@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour {
     public AudioClip boing;
     public AudioClip death;
     public AudioClip[] thrownMinion;
+    public AudioClip absorbed;
 
     [Header("Scene")]
     public float m_soundVolume = 1.0f;

@@ -22,6 +22,8 @@ public class Capturer : MonoBehaviour
             {
                 gm.IncreaseAmmo();
                 MinionsPool.Instance.Put(m);
+
+                gm.audioManager.PlayOneShot(gm.audioManager.absorbed, transform.position);
             }
         }
     }
