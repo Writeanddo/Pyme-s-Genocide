@@ -19,6 +19,9 @@ public class SpaceshipPiece : MonoBehaviour
         {
             gm.interfaceController.UpdateObjective(pieceId);
             gameObject.SetActive(false);
+
+            gm.audioManager.PlayOneShot(gm.audioManager.spaceshipCollected, transform.position);
+            gm.audioManager.PlayOneShotDelayed(gm.audioManager.proud, gm.audioManager.spaceshipCollected.length * 0.5f);
         }
     }
 }
