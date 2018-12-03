@@ -256,7 +256,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1456815073502046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.92, y: -7.5057125, z: 13.895144}
+  m_LocalPosition: {x: -15.069791, y: -7.5057125, z: 13.895144}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4556519837771302}
@@ -582,6 +582,9 @@ MonoBehaviour:
   absorbed: {fileID: 8300000, guid: 1665f735a0ccbfc4d8e1620c8a663b1e, type: 3}
   proud: {fileID: 8300000, guid: bc66390ac754ee54db15e294a786fd8d, type: 3}
   spaceshipCollected: {fileID: 8300000, guid: c6cc1334eb3f7f04d9300ea7d17a67a3, type: 3}
+  squeaks:
+  - {fileID: 8300000, guid: e35c9ce079f027748a233ffa961ecf4b, type: 3}
+  - {fileID: 8300000, guid: e4ad9542e32c30141a152f9855651ba8, type: 3}
   m_soundVolume: 1
   m_musicVolume: 0.1
 --- !u!114 &114632972492490002

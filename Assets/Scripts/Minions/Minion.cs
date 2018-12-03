@@ -238,6 +238,12 @@ public class Minion : MonoBehaviour
         else if (animator) animator.SetBool("Running", false);
     }
 
+    private Vector3 velocityBeforePhysicsUpdate;
+    void FixedUpdate()
+    {
+        velocityBeforePhysicsUpdate = rb.velocity;
+    }
+
     bool SnapToGround()
     {
         RaycastHit hitInfo;
@@ -293,6 +299,13 @@ public class Minion : MonoBehaviour
             gm.audioManager.PlayOneShot(gm.audioManager.poof, transform.position);
             ParticleSystemManager.Instance.Play(ps, _transform);
             MinionsPool.Instance.Put(this);
+        }
+        else
+        {
+            if (velocityBeforePhysicsUpdate.magnitude > 10.0f)
+            {
+                gm.audioManager.PlayOneShot(gm.audioManager.squeaks[Random.Range(0, gm.audioManager.squeaks.Length)], _transform.position);
+            }
         }
     }
 }
