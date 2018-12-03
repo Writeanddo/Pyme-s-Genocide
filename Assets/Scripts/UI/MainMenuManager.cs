@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour {
 
@@ -59,6 +60,10 @@ public class MainMenuManager : MonoBehaviour {
                 m_eventSystem.SetSelectedGameObject(m_previousButton);
             }*/
         }
+    }
+
+    public void Play() {
+        SceneManager.LoadScene("Hermes");
     }
 
     public void ChangeMusicVolume() {
