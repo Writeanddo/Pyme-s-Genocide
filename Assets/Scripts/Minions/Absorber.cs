@@ -77,7 +77,7 @@ public class Absorber : MonoBehaviour
                 float factor = Mathf.Clamp01(1.0f - hit.distance / absorberMaxDistance);
 
                 rb.AddTorque(120.0f * Random.insideUnitSphere * Time.deltaTime, ForceMode.Force);
-                rb.MovePosition(Vector3.MoveTowards(rb.position, P, 0.03f));
+                rb.MovePosition(Vector3.MoveTowards(rb.position, P, 0.01f));
                 rb.AddForce((transform.position - rb.position).normalized * factor * Time.deltaTime * pullForce, ForceMode.Force);
             }
         }
