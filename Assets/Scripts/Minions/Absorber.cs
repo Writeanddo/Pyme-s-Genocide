@@ -11,13 +11,9 @@ public class Absorber : MonoBehaviour
     [SerializeField] float pullForce = 100.0f;
     [SerializeField] float torque = 100.0f;
 
-    [SerializeField] MeshRenderer rayRenderer;
-
     public Transform spawnPoint;
 
     Capturer capturer;
-
-    bool absorbing;
 
     bool canFire = true;
     bool firing;
@@ -26,16 +22,73 @@ public class Absorber : MonoBehaviour
     float fireRatePerSecond;
     [SerializeField] float maxFireRatePerSecond;
     [SerializeField] float baseFireRatePerSecond;
+    [SerializeField] float absorberRadius = 1.0f;
+    [SerializeField] float absorberMaxDistance = 10.0f;
+
+    [SerializeField] float autoDeactivateWeaponTimeInSeconds = 2.0f;
+    private float autoDeactivateWeaponTimer;
+
+    public bool ReadyToUse { get; private set; }
+
+    bool weaponOut;
 
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         capturer = GetComponentInChildren<Capturer>();
+        animator = GetComponent<Animator>();
+    }
+
+    RaycastHit[] results = new RaycastHit[15];
+
+    Animator animator;
+
+    private void FixedUpdate()
+    {
+        if (!Input.GetButton("Fire2"))
+        {
+            return;
+        }
+
+        Ray ray = new Ray(transform.position, transform.forward);
+
+        Debug.DrawRay(ray.origin, absorberMaxDistance * ray.direction, Color.red);
+
+        int ammount = Physics.SphereCastNonAlloc(ray, absorberRadius, results, absorberMaxDistance, 1 << LayerMask.NameToLayer("Minions"));
+        if (ammount > 0)
+        {
+            for (int i = 0; i < ammount; i++)
+            {
+                RaycastHit hit = results[i];
+                Vector3 A = hit.collider.transform.position;
+                Vector3 B = ray.GetPoint(0.0f);
+                Vector3 d = ray.direction.normalized;
+                Vector3 v = A - B;
+
+                Vector3 P = B + Vector3.Dot(v, d) * d;
+
+                Vector3 dir = P - A;
+
+                Transform t = hit.collider.transform;
+                Debug.DrawRay(t.position, dir, Color.blue);
+
+                Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+
+                float factor = Mathf.Clamp01(1.0f - hit.distance / absorberMaxDistance);
+
+                rb.AddTorque(120.0f * Random.insideUnitSphere * Time.deltaTime, ForceMode.Force);
+                rb.MovePosition(Vector3.MoveTowards(rb.position, P, 0.03f));
+                rb.AddForce((transform.position - rb.position).normalized * factor * Time.deltaTime * pullForce, ForceMode.Force);
+            }
+        }
     }
 
     void Update()
     {
-        if (Input.GetButton("Fire1") && gameManager.GetAmmo() > 0.0f)
+        bool absorbing = Input.GetButton("Fire2");
+        bool firingIsDown = Input.GetButton("Fire1");
+
+        if (firingIsDown && gameManager.GetAmmo() > 0.0f)
         {
             if (!firing && canFire)
             {
@@ -61,27 +114,41 @@ public class Absorber : MonoBehaviour
             if (fireCoroutine != null) { StopCoroutine(fireCoroutine); }
         }
 
-        absorbing = Input.GetButton("Fire2");
-        rayRenderer.enabled = absorbing;
+        animator.SetBool("activate", false);
+        animator.SetBool("deactivate", false);
+
+        autoDeactivateWeaponTimer -= Time.deltaTime;
+        if (ReadyToUse && autoDeactivateWeaponTimer <= 0.0f)
+        {
+            DeactivateWeapon();
+        }
+
+        if (ReadyToUse && (absorbing || firingIsDown))
+        {
+            autoDeactivateWeaponTimer = autoDeactivateWeaponTimeInSeconds;
+        }
+        else if (!weaponOut && (absorbing || firingIsDown))
+        {
+            weaponOut = true;
+            animator.SetBool("activate", true);
+        }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void WeaponHidden()
     {
-        if (absorbing)
-        {
-            Minion m = other.GetComponent<Minion>();
-            if (m)
-            {
-                Vector3 heading = other.transform.position - capturer.transform.position;
-                m.AddForce(heading * -pullForce * Time.deltaTime, ForceMode.Force);
-            }
-        }
+        weaponOut = false;
+    }
+
+    private void DeactivateWeapon()
+    {
+        ReadyToUse = false;
+        animator.SetBool("deactivate", true);
     }
 
     IEnumerator RestartFireDelay()
     {
         canFire = false;
-        yield return new WaitForSeconds(baseFireRatePerSecond);
+        yield return new WaitForSeconds(fireRatePerSecond);
         canFire = true;
     }
 
@@ -95,6 +162,12 @@ public class Absorber : MonoBehaviour
             fireRatePerSecond = Mathf.Max(maxFireRatePerSecond, fireRatePerSecond * 0.7f);
             InstantiateBullet();
         }
+    }
+
+    public void WeaponReadyToUse()
+    {
+        ReadyToUse = true;
+        autoDeactivateWeaponTimer = autoDeactivateWeaponTimeInSeconds;
     }
 
     private void InstantiateBullet()
