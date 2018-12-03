@@ -163,6 +163,7 @@ MonoBehaviour:
   ps: {fileID: 198208173516482530}
   explosionRadius: 3
   explosionForce: 300
+  readyToHarvest: 1
 --- !u!198 &198208173516482530
 ParticleSystem:
   m_ObjectHideFlags: 1
