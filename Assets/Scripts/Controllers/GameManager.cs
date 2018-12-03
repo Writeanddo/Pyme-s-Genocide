@@ -115,6 +115,9 @@ public class GameManager : MonoBehaviour
         player.inputEnabled = false;
         tpc.target = null;
 
+        audioManager.PlayOneShot(audioManager.death, tpc.transform.position);
+
+
         yield return new WaitForSeconds(2.0f);
 
         interfaceController.FadeOutScreen(1.0f);

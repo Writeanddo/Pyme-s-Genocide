@@ -265,10 +265,5 @@ public class Absorber : MonoBehaviour
 
     public void BarkBark()
     {
-        // 25%
-        // if (Random.Range(0, 4) == 0)
-        {
-            gameManager.audioManager.PlayOneShot(gameManager.audioManager.absorberBark, transform.position);
-        }
     }
 }
