@@ -215,6 +215,7 @@ public class PlayerControllerRB : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             m_WantsToJump = true;
+            gameManager.audioManager.PlayOneShot(gameManager.audioManager.playerJump, transform.position);
         }
 
         readyForJetpack = false;

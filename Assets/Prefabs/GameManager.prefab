@@ -256,7 +256,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1456815073502046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9, y: -7.5057125, z: 13.895144}
+  m_LocalPosition: {x: 44, y: -7.5057125, z: 13.895144}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4556519837771302}
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ambienMusic: {fileID: 8300000, guid: bc8326c123a7be34f88fa420237f8083, type: 3}
-  playerJump: {fileID: 0}
+  playerJump: {fileID: 8300000, guid: bc43e56d720fc1841a71332873439737, type: 3}
   playerRun: []
   playerShoot: {fileID: 0}
   playerJetpack: {fileID: 0}

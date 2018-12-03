@@ -54,7 +54,7 @@ public class Jetpack : MonoBehaviour
             CancelJetpack();
         }
 
-        if (failureSoundReady && Input.GetButton("Jump") && gm.GetAmmo() <= 0.0f)
+        if (Ready && failureSoundReady && Input.GetButton("Jump") && gm.GetAmmo() <= 0.0f)
         {
             if (audioSourceJetpackNoise.isPlaying)
             {
