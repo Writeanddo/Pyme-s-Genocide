@@ -45,12 +45,12 @@ public class Absorber : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!Input.GetButton("Fire2"))
+        if (!Input.GetButton("Fire2") || !ReadyToUse)
         {
             return;
         }
 
-        Ray ray = new Ray(transform.position, transform.forward);
+        Ray ray = new Ray(transform.position, Camera.main.transform.forward);
 
         Debug.DrawRay(ray.origin, absorberMaxDistance * ray.direction, Color.red);
 
@@ -88,7 +88,7 @@ public class Absorber : MonoBehaviour
         bool absorbing = Input.GetButton("Fire2");
         bool firingIsDown = Input.GetButton("Fire1");
 
-        if (firingIsDown && gameManager.GetAmmo() > 0.0f)
+        if (ReadyToUse && firingIsDown && gameManager.GetAmmo() > 0.0f)
         {
             if (!firing && canFire)
             {
@@ -114,8 +114,14 @@ public class Absorber : MonoBehaviour
             if (fireCoroutine != null) { StopCoroutine(fireCoroutine); }
         }
 
+        animator.SetBool("pull", false);
         animator.SetBool("activate", false);
         animator.SetBool("deactivate", false);
+
+        if (absorbing)
+        {
+            animator.SetBool("pull", true);
+        }
 
         autoDeactivateWeaponTimer -= Time.deltaTime;
         if (ReadyToUse && autoDeactivateWeaponTimer <= 0.0f)
@@ -173,6 +179,8 @@ public class Absorber : MonoBehaviour
     private void InstantiateBullet()
     {
         gameManager.DecreaseAmmo();
+
+        animator.SetTrigger("throw");
 
         Minion newBullet = MinionsPool.Instance.Get(true);
         newBullet.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
