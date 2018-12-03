@@ -57,3 +57,4 @@ MonoBehaviour:
   m_panelMenu: {fileID: 0}
   m_musicVolume: {fileID: 0}
   m_effectsVolume: {fileID: 0}
+  splineController: {fileID: 0}
