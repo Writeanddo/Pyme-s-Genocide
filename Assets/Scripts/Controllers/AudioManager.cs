@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour {
     public AudioClip absorberIn;
     public AudioClip absorberBark;
     public AudioClip poof;
+    public AudioClip boing;
 
     [Header("Scene")]
     public float m_soundVolume = 1.0f;

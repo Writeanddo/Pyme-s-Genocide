@@ -2,23 +2,33 @@
 
 public class Jumper : MonoBehaviour
 {
-    public Animator jumperAnim;
+    Animator animator;
     public float power = 150f;
+
+    GameManager gm;
+
+    private void Start()
+    {
+        gm = FindObjectOfType<GameManager>();
+        animator = GetComponent<Animator>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         var rigidbody = other.gameObject.GetComponent<Rigidbody>();
         if (rigidbody)
         {
-            jumperAnim.Play("Boing");
+            animator.Play("Boing");
+            gm.audioManager.PlayOneShot(gm.audioManager.boing, transform.position);
+
             var playerController = other.GetComponent<PlayerControllerRB>();
             if (playerController)
             {
-                Vector3 forward = transform.forward;
+                Vector3 forward = transform.up;
 
                 PlayerControllerExternalForce force = new PlayerControllerExternalForce
                 {
-                    force = transform.forward * power,
+                    force = transform.up * power,
                     mode = ForceMode.Impulse,
                     resetVelocity = true,
                     resetVelocityDirection = forward
