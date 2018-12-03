@@ -43,12 +43,15 @@ public class Absorber : MonoBehaviour
     Animator animator;
     ThirdPersonCamera tps;
 
+    PlayerControllerRB playerController;
+
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         capturer = GetComponentInChildren<Capturer>();
         animator = GetComponent<Animator>();
         tps = FindObjectOfType<ThirdPersonCamera>();
+        playerController = FindObjectOfType<PlayerControllerRB>();
     }
 
     private void FixedUpdate()
@@ -64,7 +67,15 @@ public class Absorber : MonoBehaviour
             absorbParticleSystem.Play();
         }
 
-        Ray ray = new Ray(head.position, Camera.main.transform.forward);
+        Ray ray;
+        if (playerController.FreeCamera)
+        {
+            ray = new Ray(head.position, absorbParticleSystem.transform.parent.forward);
+        }
+        else
+        {
+            ray = new Ray(head.position, (tps.FocalPoint - head.position).normalized);
+        }
 
         Debug.DrawRay(ray.origin, absorberMaxDistance * ray.direction, Color.red);
 
@@ -161,7 +172,10 @@ public class Absorber : MonoBehaviour
             animator.SetBool("activate", true);
         }
 
-        absorbParticleSystem.transform.parent.LookAt(tps.FocalPoint);
+        if (!playerController.FreeCamera)
+        {
+            absorbParticleSystem.transform.parent.LookAt(tps.FocalPoint);
+        }
     }
 
     private void WeaponHidden()
@@ -212,10 +226,22 @@ public class Absorber : MonoBehaviour
         newBullet.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
 
         Vector2 noise = 0.05f * Random.insideUnitCircle;
-        Vector3 direction =
-            Quaternion.AngleAxis(-pushAngle, spawnPoint.right) * (tps.FocalPoint - transform.position).normalized +
+
+        Vector3 direction;
+        if (playerController.FreeCamera)
+        {
+            direction = absorbParticleSystem.transform.parent.forward +
+            absorbParticleSystem.transform.parent.right * noise.x +
+            absorbParticleSystem.transform.parent.up * noise.y;
+        }
+        else
+        {
+            direction =
+            Quaternion.AngleAxis(-pushAngle, absorbParticleSystem.transform.parent.right) * absorbParticleSystem.transform.parent.forward +
             Camera.main.transform.right * noise.x +
             Camera.main.transform.up * noise.y;
+
+        }
 
         newBullet.AddForce(direction * pushForce, ForceMode.Impulse);
         newBullet.AddTorque(torque * Random.insideUnitSphere, ForceMode.Impulse);
