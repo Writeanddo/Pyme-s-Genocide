@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinionsPool : MonoBehaviour {
+public class MinionsPool : MonoBehaviour
+{
     [SerializeField] bool showDebugLogs = false;
     [SerializeField] int poolSize = 100;
     List<Minion> minions;
@@ -13,11 +14,13 @@ public class MinionsPool : MonoBehaviour {
     [SerializeField] List<Minion> minionPrefabs = new List<Minion>();
 
 
-    class MinionTexture {
+    class MinionTexture
+    {
         public int num;
         public Texture tex;
 
-        public MinionTexture(int num, Texture tex) {
+        public MinionTexture(int num, Texture tex)
+        {
             this.num = num;
             this.tex = tex;
         }
@@ -111,13 +114,16 @@ public class MinionsPool : MonoBehaviour {
         }
     }
 
-    private void LoadMinions() {
-        if(minionPrefabs.Count == 0) {
+    private void LoadMinions()
+    {
+        if (minionPrefabs.Count == 0)
+        {
             minionPrefabs.Add(Resources.Load<Minion>("Bocado"));
             minionPrefabs.Add(Resources.Load<Minion>("CJ"));
             minionPrefabs.Add(Resources.Load<Minion>("Tago"));
         }
-        if(minionTextures.Count == 0) {
+        if (minionTextures.Count == 0)
+        {
 
             minionTextures.Add(new MinionTexture(0, Resources.Load("Textures/CJ/bocado_tex") as Texture));
             minionTextures.Add(new MinionTexture(0, Resources.Load("Textures/CJ/bocado_tex2") as Texture));
@@ -133,9 +139,11 @@ public class MinionsPool : MonoBehaviour {
         }
     }
 
-    private List<MinionTexture> GetTexturesOf(int num) {
+    private List<MinionTexture> GetTexturesOf(int num)
+    {
         List<MinionTexture> ret = new List<MinionTexture>();
-        for(int i = 0; i < minionTextures.Count; i++) {
+        for (int i = 0; i < minionTextures.Count; i++)
+        {
             if (minionTextures[i].num == num)
                 ret.Add(minionTextures[i]);
         }
@@ -152,8 +160,13 @@ public class MinionsPool : MonoBehaviour {
 
         Minion copy = Instantiate(minionPrefab, new Vector3(10000.0f, 10000.0f, 10000.0f), Quaternion.identity, _transform);
         copy.gameObject.name = "MINION " + minions.Count.ToString().PadLeft(4, '0');
-        if(rand == 2) //Esto es porque solo va en Tago
+
+        if (rand == 1)
+            copy.GetComponentInChildren<SkinnedMeshRenderer>().materials[0].mainTexture = GetTexturesOf(rand)[Random.Range(0, 3)].tex;
+
+        if (rand == 2) //Esto es porque solo va en Tago
             copy.GetComponentInChildren<SkinnedMeshRenderer>().materials[2].mainTexture = GetTexturesOf(rand)[Random.Range(0, 3)].tex;
+
         copy.gameObject.SetActive(false);
 
         minions.Add(copy);
