@@ -1375,6 +1375,10 @@ MonoBehaviour:
   ps: {fileID: 198963251295698416}
   explosionRadius: 3
   explosionForce: 300
+  sfxs:
+  - {fileID: 8300000, guid: 0dc2ef9b5a567404a957c552f635afc3, type: 3}
+  - {fileID: 8300000, guid: f9000f82610b958488bcf72ed7b56af3, type: 3}
+  minMaxTalkDelayValues: {x: 3, y: 50}
   readyToHarvest: 1
 --- !u!137 &137110224571571338
 SkinnedMeshRenderer:

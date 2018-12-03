@@ -37,6 +37,10 @@ public class Minion : MonoBehaviour
     [SerializeField] float explosionRadius;
     [SerializeField] float explosionForce;
 
+    [SerializeField] AudioClip[] sfxs;
+    float talkDelayValue;
+    [SerializeField] Vector2 minMaxTalkDelayValues;
+
     bool walkEnabled = false;
 
     public bool readyToHarvest = true;
@@ -57,16 +61,52 @@ public class Minion : MonoBehaviour
     {
         gm = FindObjectOfType<GameManager>();
 
-        if(Mathf.RoundToInt(Random.Range(0, 2)) == 1)
+        if (Mathf.RoundToInt(Random.Range(0, 2)) == 1)
             walkEnabled = true;
         playerTransform = GameObject.FindWithTag("Player").transform;
 
-        float percent = UnityEngine.Random.Range(0, 100);
+        float percent = Random.Range(0, 100);
         if (percent < 70)
             type = Type.Coward;
-        else if (percent < 99)
+        else if (percent < 95)
             type = Type.Crazy;
         else type = Type.Follower;
+    }
+
+    Coroutine randomNoiseCoroutine;
+
+    IEnumerator RandomNoise()
+    {
+        talkDelayValue = Random.Range(minMaxTalkDelayValues.x, minMaxTalkDelayValues.y);
+        yield return new WaitForSeconds(talkDelayValue);
+
+        while (true)
+        {
+            if (sfxs != null)
+            {
+                gm.audioManager.PlayOneShot(sfxs[Random.Range(0, sfxs.Length)], transform.position);
+            }
+
+            talkDelayValue = Random.Range(minMaxTalkDelayValues.x, minMaxTalkDelayValues.y);
+            yield return new WaitForSeconds(talkDelayValue);
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (gm == null) { gm = FindObjectOfType<GameManager>(); }
+
+        if (playerTransform == null) { playerTransform = GameObject.FindWithTag("Player").transform; }
+
+        randomNoiseCoroutine = StartCoroutine(RandomNoise());
+    }
+
+    private void OnDisable()
+    {
+        if (randomNoiseCoroutine != null)
+        {
+            StopCoroutine(randomNoiseCoroutine);
+        }
     }
 
     public void DisableHarvestingForSeconds(float seconds)
@@ -143,7 +183,8 @@ public class Minion : MonoBehaviour
 
                 case Type.Crazy:
                     counter += Time.deltaTime;
-                    if (counter > 0.1f) {
+                    if (counter > 0.1f)
+                    {
                         randomPos = new Vector3(UnityEngine.Random.Range(-10, 10), _transform.position.y, UnityEngine.Random.Range(-10, 10));
                         counter = 0;
                     }
@@ -164,9 +205,11 @@ public class Minion : MonoBehaviour
             hMov = hMov.normalized * Mathf.Min(hMov.magnitude, moveSpeed);
             rb.velocity = new Vector3(hMov.x, rb.velocity.y, hMov.y);
         }
-        else if (walkEnabled) {
+        else if (walkEnabled)
+        {
             counter += Time.deltaTime;
-            if (counter > 3f) {
+            if (counter > 3f)
+            {
                 randomPos = new Vector3(UnityEngine.Random.Range(-10, 10), _transform.position.y, UnityEngine.Random.Range(-10, 10));
                 counter = 0;
             }
