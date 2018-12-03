@@ -6,7 +6,7 @@ using UnityEngine;
 public class MinionsPool : MonoBehaviour
 {
     [SerializeField] bool showDebugLogs = false;
-    [SerializeField] int poolSize = 100;
+    [SerializeField] int poolSize = 160;
     List<Minion> minions;
 
     Transform _transform;
