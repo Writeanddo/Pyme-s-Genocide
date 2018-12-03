@@ -2337,6 +2337,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0.99999994}
   m_Children:
   - {fileID: 1050151399}
+  - {fileID: 803182929}
   m_Father: {fileID: 1257784497}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -0.001, z: 36.873}
@@ -4015,7 +4016,7 @@ Transform:
 --- !u!1 &377010667
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1238566635999546, guid: 38ae661cc3083d34abcaa7c5d8ce29a1,
+  m_CorrespondingSourceObject: {fileID: 1730229460196262, guid: 38ae661cc3083d34abcaa7c5d8ce29a1,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 6
@@ -4032,7 +4033,7 @@ GameObject:
 --- !u!4 &377010668
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4546134259782756, guid: 38ae661cc3083d34abcaa7c5d8ce29a1,
+  m_CorrespondingSourceObject: {fileID: 4051942609880714, guid: 38ae661cc3083d34abcaa7c5d8ce29a1,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 377010667}
@@ -4041,12 +4042,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 722643042}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &377010669
 LineRenderer:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 120178552923756364, guid: 38ae661cc3083d34abcaa7c5d8ce29a1,
+  m_CorrespondingSourceObject: {fileID: 120104196308067810, guid: 38ae661cc3083d34abcaa7c5d8ce29a1,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 377010667}
@@ -7534,7 +7535,6 @@ Transform:
   m_Children:
   - {fileID: 815654246}
   - {fileID: 930206692}
-  - {fileID: 803182929}
   - {fileID: 377010668}
   m_Father: {fileID: 246185110}
   m_RootOrder: 1
@@ -7560,7 +7560,7 @@ MonoBehaviour:
   baseFireRatePerSecond: 1
   absorberRadius: 1
   absorberMaxDistance: 20
-  head: {fileID: 0}
+  head: {fileID: 285245008}
   autoDeactivateWeaponTimeInSeconds: 2
 --- !u!95 &722643044
 Animator:
@@ -8036,7 +8036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd29e79278c99d46ba9b4021035463a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jetpack: {fileID: 0}
+  jetpack: {fileID: 120150462}
   spawnPoint: {fileID: 1961417441}
 --- !u!4 &776325389
 Transform:
@@ -8296,12 +8296,12 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 803182928}
-  m_LocalRotation: {x: -0, y: -0, z: -1.1011428e-20, w: 1}
-  m_LocalPosition: {x: 0, y: 0.97105163, z: -0.0028730705}
-  m_LocalScale: {x: 1, y: 0.55, z: 0.25}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.263, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 722643042}
-  m_RootOrder: 2
+  m_Father: {fileID: 285245008}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &803182930
 BoxCollider:
@@ -8314,8 +8314,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5435392, y: 2.2354245, z: 0.66272223}
-  m_Center: {x: -0.00838837, y: -0.8452824, z: 0}
+  m_Size: {x: 0.5435392, y: 1, z: 0.66272223}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &803182931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10749,7 +10749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd29e79278c99d46ba9b4021035463a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jetpack: {fileID: 0}
+  jetpack: {fileID: 120150462}
   spawnPoint: {fileID: 888193469}
 --- !u!1 &1014915867
 GameObject:
