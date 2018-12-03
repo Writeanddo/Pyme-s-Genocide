@@ -2,31 +2,34 @@
 
 public class Piston : MonoBehaviour {
 
+    [SerializeField] bool activable = false;
+
     private enum pistonState { charge, ready, launch}
     private pistonState currentPistonState;
 
-    public float delayedTime = 0f;
+    [SerializeField] float delayedTime = 0f;
     private bool canStart = false;
 
     private Vector3 chargedPosition;
-    private float chargeVelocity = 0.3f;
+    [SerializeField] float chargeVelocity = 0.3f;
 
     private bool isReady = false;
 
     private Vector3 launchPosition;
-    private float launchPower = 10f;
-    private float maxDistance = 3f;
+    [SerializeField] float launchPower = 10f;
+    [SerializeField] float maxDistance = 3f;
 
     // Use this for initialization
     void Start () {
         currentPistonState = pistonState.charge;
         chargedPosition = transform.TransformPoint(-Vector3.forward);
         launchPosition = transform.TransformPoint(Vector3.forward * maxDistance);
-        Invoke("Initiate", delayedTime);
+        if (!activable) Invoke("Initiate", delayedTime);
     }
+
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
         if (!canStart) return;
 

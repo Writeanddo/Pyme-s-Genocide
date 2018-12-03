@@ -22,6 +22,9 @@ public class AudioManager : MonoBehaviour {
     public AudioClip boing;
     public AudioClip death;
     public AudioClip[] thrownMinion;
+    public AudioClip absorbed;
+    public AudioClip proud;
+    public AudioClip spaceshipCollected;
 
     [Header("Scene")]
     public float m_soundVolume = 1.0f;
@@ -109,4 +112,16 @@ public class AudioManager : MonoBehaviour {
     {
         AudioSource.PlayClipAtPoint(clip, position, m_soundVolume);
     }
+
+    public void PlayOneShotDelayed(AudioClip clip, float delay)
+    {
+        StartCoroutine(Delay(clip, delay));
+    }
+
+    IEnumerator Delay(AudioClip clip, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        PlayOneShot(clip, Camera.main.transform.position);
+    }
+
 }
