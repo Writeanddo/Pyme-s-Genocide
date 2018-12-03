@@ -2800,11 +2800,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 021e9b5d9b6f645419255ad11aeefe4f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a92334c7d1051074aa13e30a5b5adfb6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3094,6 +3094,11 @@ MonoBehaviour:
   m_PushTorque: 90
   jetpackL: {fileID: 114777670349385090}
   jetpackR: {fileID: 114560979816166978}
+  audioClipJetpackNoise: {fileID: 8300000, guid: 021e9b5d9b6f645419255ad11aeefe4f,
+    type: 3}
+  audioClipJetpackFailure: {fileID: 8300000, guid: a92334c7d1051074aa13e30a5b5adfb6,
+    type: 3}
+  failureSoundDelay: 2
 --- !u!114 &114327897528940838
 MonoBehaviour:
   m_ObjectHideFlags: 1

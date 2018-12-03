@@ -1,4 +1,5 @@
 ﻿
+using System.Collections;
 using UnityEngine;
 
 public class Jetpack : MonoBehaviour
@@ -23,11 +24,17 @@ public class Jetpack : MonoBehaviour
 
     GameManager gm;
 
+    [SerializeField] AudioClip audioClipJetpackNoise;
+    [SerializeField] AudioClip audioClipJetpackFailure;
+
     AudioSource audioSourceJetpackNoise;
 
     private float autoDeactivateWeaponTimer;
 
     public bool Ready { get; private set; }
+
+    [SerializeField] float failureSoundDelay = 2.0f;
+    bool failureSoundReady = true;
 
     private void Start()
     {
@@ -47,6 +54,18 @@ public class Jetpack : MonoBehaviour
             CancelJetpack();
         }
 
+        if (failureSoundReady && Input.GetButton("Jump") && gm.GetAmmo() <= 0.0f)
+        {
+            if (audioSourceJetpackNoise.isPlaying)
+            {
+                audioSourceJetpackNoise.Stop();
+            }
+            audioSourceJetpackNoise.loop = false;
+            audioSourceJetpackNoise.clip = audioClipJetpackFailure;
+            audioSourceJetpackNoise.Play();
+            StartCoroutine(RestartFailureTimer());
+        }
+
         audioSourceJetpackNoise.volume = gm.audioManager.m_soundVolume;
     }
 
@@ -62,6 +81,12 @@ public class Jetpack : MonoBehaviour
 
         if (!audioSourceJetpackNoise.isPlaying && gm.GetAmmo() > 0.0f)
         {
+            if (audioSourceJetpackNoise.isPlaying)
+            {
+                audioSourceJetpackNoise.Stop();
+            }
+            audioSourceJetpackNoise.loop = true;
+            audioSourceJetpackNoise.clip = audioClipJetpackNoise;
             audioSourceJetpackNoise.Play();
         }
     }
@@ -76,7 +101,7 @@ public class Jetpack : MonoBehaviour
             Ready = false;
         }
 
-        if (audioSourceJetpackNoise.isPlaying)
+        if (audioSourceJetpackNoise.isPlaying && audioSourceJetpackNoise.clip == audioClipJetpackNoise)
         {
             audioSourceJetpackNoise.Stop();
         }
@@ -121,5 +146,12 @@ public class Jetpack : MonoBehaviour
         }
 
         totalMinionsSpawned = (int)Mathf.Ceil(minionsSpawned);
+    }
+
+    IEnumerator RestartFailureTimer()
+    {
+        failureSoundReady = false;
+        yield return new WaitForSeconds(failureSoundDelay);
+        failureSoundReady = true;
     }
 }
