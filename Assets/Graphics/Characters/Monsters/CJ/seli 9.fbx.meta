@@ -101,7 +101,27 @@ ModelImporter:
     7400006: eyebrow_L|Idle
     9500000: //RootNode
     13700000: CJ
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cj
+    second: {fileID: 2100000, guid: bd078b4e8661be3488d198933e066426, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eyeball
+    second: {fileID: 2100000, guid: 2697caa97dccad848a1e60b69bc2b984, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eyebrow
+    second: {fileID: 2100000, guid: 9999aa4925acdc349ac3b4503b7aaa34, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pupil
+    second: {fileID: 2100000, guid: 9999aa4925acdc349ac3b4503b7aaa34, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
