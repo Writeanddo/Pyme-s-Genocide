@@ -23,6 +23,8 @@ public class Jetpack : MonoBehaviour
 
     GameManager gm;
 
+    private float autoDeactivateWeaponTimer;
+
     public bool Ready { get; private set; }
 
     private void Start()
