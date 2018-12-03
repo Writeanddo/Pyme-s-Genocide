@@ -41,6 +41,8 @@ public class Minion : MonoBehaviour
 
     public bool readyToHarvest = true;
 
+    GameManager gm;
+
     private void Awake()
     {
         _transform = transform;
@@ -53,6 +55,8 @@ public class Minion : MonoBehaviour
 
     void Start()
     {
+        gm = FindObjectOfType<GameManager>();
+
         if(Mathf.RoundToInt(Random.Range(0, 2)) == 1)
             walkEnabled = true;
         playerTransform = GameObject.FindWithTag("Player").transform;
@@ -236,6 +240,7 @@ public class Minion : MonoBehaviour
                 }
             }
 
+            gm.audioManager.PlayOneShot(gm.audioManager.poof, transform.position);
             ParticleSystemManager.Instance.Play(ps, _transform);
             MinionsPool.Instance.Put(this);
         }
