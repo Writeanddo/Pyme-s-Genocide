@@ -10,7 +10,7 @@ public class Jumper : MonoBehaviour
         var rigidbody = other.gameObject.GetComponent<Rigidbody>();
         if (rigidbody)
         {
-            GetComponentInChildren<Animator>().Play("Boing");
+            jumperAnim.Play("Boing");
             var playerController = other.GetComponent<PlayerControllerRB>();
             if (playerController)
             {
