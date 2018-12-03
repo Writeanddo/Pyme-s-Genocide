@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlatformMovement : MonoBehaviour {
 
+    public Transform positions;
     public List<Vector3> childPositions;
 
     public float velocity = 0.5f;
@@ -14,9 +15,9 @@ public class PlatformMovement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        foreach (Transform child in transform)
+        foreach (Transform childTransform in positions)
         {
-            childPositions.Add(child.position);
+            childPositions.Add(childTransform.position);
         }
 
         if (childPositions.Count > 1) nextPosition = currentPosition + 1;

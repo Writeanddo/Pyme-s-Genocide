@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 65661654905465516}
   m_Layer: 10
   m_Name: Bocado
-  m_TagString: Untagged
+  m_TagString: Minion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
