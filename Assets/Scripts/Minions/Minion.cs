@@ -92,7 +92,6 @@ public class Minion : MonoBehaviour
     void Update()
     {
         transform.localScale = Vector3.Lerp(transform.localScale, Vector3.one, Time.deltaTime);
-        return;
 
         if (Mathf.Abs(rb.velocity.y) < 0.1f)
         {
