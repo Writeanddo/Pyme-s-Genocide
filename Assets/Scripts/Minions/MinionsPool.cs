@@ -147,7 +147,6 @@ public class MinionsPool : MonoBehaviour {
         LoadMinions();
 
         int rand = Mathf.RoundToInt(Random.Range(0, 3));
-        rand = 2;
 
         Minion minionPrefab = minionPrefabs[rand];
 
