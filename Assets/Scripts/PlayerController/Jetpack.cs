@@ -83,6 +83,7 @@ public class Jetpack : MonoBehaviour
             {
                 Minion m = MinionsPool.Instance.Get(true);
                 m.explosive = true;
+                m.DisableHarvestingForSeconds(1.0f);
 
                 if (lastJetPack)
                 {

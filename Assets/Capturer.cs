@@ -5,18 +5,20 @@ using UnityEngine;
 public class Capturer : MonoBehaviour
 {
     GameManager gm;
+    Absorber absorber;
 
     private void Start()
     {
         gm = FindObjectOfType<GameManager>();
+        absorber = FindObjectOfType<Absorber>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (gm.GetAmmo() < gm.MaxAmmo)
+        if (absorber.Absorbing && gm.GetAmmo() < gm.MaxAmmo)
         {
             Minion m = other.GetComponent<Minion>();
-            if (m && !m.explosive)
+            if (m && !m.explosive && m.readyToHarvest)
             {
                 gm.IncreaseAmmo();
                 MinionsPool.Instance.Put(m);

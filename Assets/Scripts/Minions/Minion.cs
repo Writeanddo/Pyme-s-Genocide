@@ -39,6 +39,8 @@ public class Minion : MonoBehaviour
 
     bool walkEnabled = false;
 
+    public bool readyToHarvest = true;
+
     private void Awake()
     {
         _transform = transform;
@@ -61,6 +63,18 @@ public class Minion : MonoBehaviour
         else if (percent < 99)
             type = Type.Crazy;
         else type = Type.Follower;
+    }
+
+    public void DisableHarvestingForSeconds(float seconds)
+    {
+        StartCoroutine(DisableHarvesting(seconds));
+    }
+
+    IEnumerator DisableHarvesting(float seconds)
+    {
+        readyToHarvest = false;
+        yield return new WaitForSeconds(seconds);
+        readyToHarvest = true;
     }
 
     public void EnterPhysicsMode()
