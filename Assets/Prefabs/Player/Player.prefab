@@ -2847,7 +2847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd29e79278c99d46ba9b4021035463a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jetpack: {fileID: 0}
+  jetpack: {fileID: 114277712043169228}
   spawnPoint: {fileID: 4387449572834600}
 --- !u!114 &114777670349385090
 MonoBehaviour:
@@ -2860,7 +2860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd29e79278c99d46ba9b4021035463a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jetpack: {fileID: 0}
+  jetpack: {fileID: 114277712043169228}
   spawnPoint: {fileID: 4020141888553414}
 --- !u!120 &120178552923756364
 LineRenderer:
