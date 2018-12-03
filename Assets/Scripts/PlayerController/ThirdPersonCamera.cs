@@ -46,12 +46,14 @@ public class ThirdPersonCamera : MonoBehaviour
             return;
         }
 
-        Vector3 rayOrigin = cam.ViewportToWorldPoint(new Vector3(.5f, .5f, 0));
+        Ray ray = cam.ViewportPointToRay(new Vector3(.5f, .5f, 0));
+        ray.origin = ray.GetPoint(3.0f);
 
         int layerMask = ~LayerMask.GetMask("Player");
 
         RaycastHit hit;
-        if (Physics.Raycast(rayOrigin, cam.transform.forward, out hit, 100.0f, layerMask, QueryTriggerInteraction.Ignore))
+        // + forward para ponernos a distancia 0 del player y no colisionar con algo que está detrás
+        if (Physics.Raycast(ray.origin, cam.transform.forward, out hit, 100.0f, layerMask, QueryTriggerInteraction.Ignore))
         {
             FocalPoint = hit.point;
         }

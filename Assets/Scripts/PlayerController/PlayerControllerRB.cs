@@ -45,6 +45,8 @@ public class PlayerControllerRB : MonoBehaviour
 
     public Vector3 RespawnPosition { get; private set; }
 
+    public bool FreeCamera { get; private set; }
+
     void Start()
     {
         m_RigidBody = GetComponent<Rigidbody>();
@@ -82,7 +84,9 @@ public class PlayerControllerRB : MonoBehaviour
             HandleAirborneInput();
         }
 
-        if (!Input.GetButton("Fire3") || inputDir.x != 0.0f || inputDir.y != 0.0f)
+        FreeCamera = Input.GetButton("Fire3") && inputDir.x == 0.0f && inputDir.y == 0.0f;
+
+        if (!FreeCamera)
         {
             m_TargetRotation = m_Cam.eulerAngles.y;
         }
