@@ -36,22 +36,32 @@ public class Absorber : MonoBehaviour
 
     bool weaponOut;
 
+    [SerializeField] ParticleSystem absorbParticleSystem;
+
+    RaycastHit[] results = new RaycastHit[15];
+
+    Animator animator;
+    ThirdPersonCamera tps;
+
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         capturer = GetComponentInChildren<Capturer>();
         animator = GetComponent<Animator>();
+        tps = FindObjectOfType<ThirdPersonCamera>();
     }
-
-    RaycastHit[] results = new RaycastHit[15];
-
-    Animator animator;
 
     private void FixedUpdate()
     {
         if (!Input.GetButton("Fire2") || !ReadyToUse)
         {
+            absorbParticleSystem.Stop();
             return;
+        }
+
+        if (!absorbParticleSystem.isPlaying)
+        {
+            absorbParticleSystem.Play();
         }
 
         Ray ray = new Ray(head.position, Camera.main.transform.forward);
@@ -150,6 +160,8 @@ public class Absorber : MonoBehaviour
             weaponOut = true;
             animator.SetBool("activate", true);
         }
+
+        absorbParticleSystem.transform.parent.LookAt(tps.FocalPoint);
     }
 
     private void WeaponHidden()
@@ -201,7 +213,7 @@ public class Absorber : MonoBehaviour
 
         Vector2 noise = 0.05f * Random.insideUnitCircle;
         Vector3 direction =
-            Quaternion.AngleAxis(-pushAngle, spawnPoint.right) * Camera.main.transform.forward +
+            Quaternion.AngleAxis(-pushAngle, spawnPoint.right) * (tps.FocalPoint - transform.position).normalized +
             Camera.main.transform.right * noise.x +
             Camera.main.transform.up * noise.y;
 

@@ -22,6 +22,8 @@ public class ThirdPersonCamera : MonoBehaviour
 
     Transform playerTransform;
 
+    Camera cam;
+
     void Start()
     {
         if (lockCursor)
@@ -30,16 +32,32 @@ public class ThirdPersonCamera : MonoBehaviour
             Cursor.visible = false;
         }
 
+        cam = Camera.main;
         playerTransform = FindObjectOfType<PlayerControllerRB>().transform;
     }
 
+    public Vector3 FocalPoint { get; private set; }
+
     public void ManualUpdate()
     {
-
         if (target == null)
         {
             transform.LookAt(playerTransform);
             return;
+        }
+
+        Vector3 rayOrigin = cam.ViewportToWorldPoint(new Vector3(.5f, .5f, 0));
+
+        int layerMask = ~LayerMask.GetMask("Player");
+
+        RaycastHit hit;
+        if (Physics.Raycast(rayOrigin, cam.transform.forward, out hit, 100.0f, layerMask, QueryTriggerInteraction.Ignore))
+        {
+            FocalPoint = hit.point;
+        }
+        else
+        {
+            FocalPoint = 100.0f * cam.transform.forward;
         }
 
         yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
