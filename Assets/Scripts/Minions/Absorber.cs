@@ -17,6 +17,8 @@ public class Absorber : MonoBehaviour
 
     bool canFire = true;
     bool firing;
+    public bool Absorbing { get; private set; }
+
     Coroutine fireCoroutine;
 
     float fireRatePerSecond;
@@ -62,6 +64,10 @@ public class Absorber : MonoBehaviour
             for (int i = 0; i < ammount; i++)
             {
                 RaycastHit hit = results[i];
+                Minion m = hit.collider.GetComponent<Minion>();
+
+                if (!m.readyToHarvest) { continue; }
+
                 Vector3 A = hit.collider.transform.position;
                 Vector3 B = ray.GetPoint(0.0f);
                 Vector3 d = ray.direction.normalized;
@@ -91,7 +97,7 @@ public class Absorber : MonoBehaviour
 
     void Update()
     {
-        bool absorbing = Input.GetButton("Fire2");
+        Absorbing = Input.GetButton("Fire2");
         bool firingIsDown = Input.GetButton("Fire1");
 
         if (ReadyToUse && firingIsDown && gameManager.GetAmmo() > 0.0f)
@@ -124,7 +130,7 @@ public class Absorber : MonoBehaviour
         animator.SetBool("activate", false);
         animator.SetBool("deactivate", false);
 
-        if (absorbing)
+        if (Absorbing)
         {
             animator.SetBool("pull", true);
         }
@@ -135,11 +141,11 @@ public class Absorber : MonoBehaviour
             DeactivateWeapon();
         }
 
-        if (ReadyToUse && (absorbing || firingIsDown))
+        if (ReadyToUse && (Absorbing || firingIsDown))
         {
             autoDeactivateWeaponTimer = autoDeactivateWeaponTimeInSeconds;
         }
-        else if (!weaponOut && (absorbing || firingIsDown))
+        else if (!weaponOut && (Absorbing || firingIsDown))
         {
             weaponOut = true;
             animator.SetBool("activate", true);
@@ -189,6 +195,8 @@ public class Absorber : MonoBehaviour
         animator.SetTrigger("throw");
 
         Minion newBullet = MinionsPool.Instance.Get(true);
+        newBullet.DisableHarvestingForSeconds(1.0f);
+
         newBullet.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
 
         Vector2 noise = 0.05f * Random.insideUnitCircle;

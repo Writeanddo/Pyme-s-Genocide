@@ -24,6 +24,7 @@ public class MinionSpawner : MonoBehaviour
             return;
         }
 
+        enemy.DisableHarvestingForSeconds(0.5f);
 
         Vector3 position = transform.position + transform.forward * Random.Range(0, 10);
 
