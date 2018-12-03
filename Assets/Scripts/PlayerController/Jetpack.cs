@@ -23,6 +23,8 @@ public class Jetpack : MonoBehaviour
 
     GameManager gm;
 
+    AudioSource audioSourceJetpackNoise;
+
     private float autoDeactivateWeaponTimer;
 
     public bool Ready { get; private set; }
@@ -33,6 +35,7 @@ public class Jetpack : MonoBehaviour
         gm = FindObjectOfType<GameManager>();
         animatorL = jetpackL.GetComponent<Animator>();
         animatorR = jetpackR.GetComponent<Animator>();
+        audioSourceJetpackNoise = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -43,6 +46,8 @@ public class Jetpack : MonoBehaviour
             totalMinionsSpawned = 0;
             CancelJetpack();
         }
+
+        audioSourceJetpackNoise.volume = gm.audioManager.m_soundVolume;
     }
 
     public void SetReady()
@@ -54,6 +59,11 @@ public class Jetpack : MonoBehaviour
     {
         animatorR.SetBool("active", true);
         animatorL.SetBool("active", true);
+
+        if (!audioSourceJetpackNoise.isPlaying && gm.GetAmmo() > 0.0f)
+        {
+            audioSourceJetpackNoise.Play();
+        }
     }
 
     public void CancelJetpack()
@@ -64,6 +74,11 @@ public class Jetpack : MonoBehaviour
         if (clipInfo[0].clip.name == "LoopJetPack")
         {
             Ready = false;
+        }
+
+        if (audioSourceJetpackNoise.isPlaying)
+        {
+            audioSourceJetpackNoise.Stop();
         }
     }
 

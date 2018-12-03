@@ -569,7 +569,10 @@ MonoBehaviour:
   playerShoot: {fileID: 0}
   playerJetpack: {fileID: 0}
   absorberPush: {fileID: 8300000, guid: 08a9ea99f199b204cb38961c80b72284, type: 3}
-  absorberPull: {fileID: 0}
+  absorberOut: {fileID: 8300000, guid: 1d7edde655290d946bde6b17af4595bd, type: 3}
+  absorberIn: {fileID: 8300000, guid: 5fbff33232d05bc46afeaefadc75067e, type: 3}
+  absorberBark: {fileID: 8300000, guid: d7c6deafcf8d8fe4e989a537e1a22c5f, type: 3}
+  poof: {fileID: 8300000, guid: 364a2630665a1af45851e19954ed28ec, type: 3}
   m_soundVolume: 1
   m_musicVolume: 0.1
 --- !u!114 &114632972492490002

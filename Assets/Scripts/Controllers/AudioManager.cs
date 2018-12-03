@@ -15,7 +15,10 @@ public class AudioManager : MonoBehaviour {
     public AudioClip playerShoot;
     public AudioClip playerJetpack;
     public AudioClip absorberPush;
-    public AudioClip absorberPull;
+    public AudioClip absorberOut;
+    public AudioClip absorberIn;
+    public AudioClip absorberBark;
+    public AudioClip poof;
 
     [Header("Scene")]
     public float m_soundVolume = 1.0f;

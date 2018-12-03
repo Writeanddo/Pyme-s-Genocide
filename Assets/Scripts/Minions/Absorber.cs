@@ -46,8 +46,6 @@ public class Absorber : MonoBehaviour
 
     PlayerControllerRB playerController;
 
-    [SerializeField] AudioClip pushClip;
-
     AudioSource audioSource;
 
     private void Start()
@@ -182,6 +180,7 @@ public class Absorber : MonoBehaviour
         {
             weaponOut = true;
             animator.SetBool("activate", true);
+            gameManager.audioManager.PlayOneShot(gameManager.audioManager.absorberOut, transform.position);
         }
 
         if (!playerController.FreeCamera)
@@ -201,6 +200,7 @@ public class Absorber : MonoBehaviour
     {
         ReadyToUse = false;
         animator.SetBool("deactivate", true);
+        gameManager.audioManager.PlayOneShot(gameManager.audioManager.absorberIn, transform.position);
     }
 
     IEnumerator RestartFireDelay()
@@ -254,7 +254,6 @@ public class Absorber : MonoBehaviour
             Quaternion.AngleAxis(-pushAngle, absorbParticleSystem.transform.parent.right) * absorbParticleSystem.transform.parent.forward +
             Camera.main.transform.right * noise.x +
             Camera.main.transform.up * noise.y;
-
         }
 
         newBullet.AddForce(direction * pushForce, ForceMode.Impulse);
@@ -262,5 +261,14 @@ public class Absorber : MonoBehaviour
 
         gameManager.audioManager.PlayOneShot(gameManager.audioManager.absorberPush, transform.position);
         pushParticleSystem.Play();
+    }
+
+    public void BarkBark()
+    {
+        // 25%
+        // if (Random.Range(0, 4) == 0)
+        {
+            gameManager.audioManager.PlayOneShot(gameManager.audioManager.absorberBark, transform.position);
+        }
     }
 }
