@@ -3066,7 +3066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pushAngle: 15
   pushForce: 20
-  pullForce: 1000
+  pullForce: 600
   torque: 100
   spawnPoint: {fileID: 4543700562614928}
   maxFireRatePerSecond: 0.08
