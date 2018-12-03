@@ -13,10 +13,14 @@ public class MainMenuManager : MonoBehaviour {
     public GameObject m_panelMenu;
     public Slider m_musicVolume;
     public Slider m_effectsVolume;
+    public SplineController splineController;
+
     private bool m_musicSelected = false;
     private bool m_effectsSelected = false;
     private UISoundEffects m_sound;
     private bool waitAnyKey = true;
+
+    float counter = 60f;
 
     void Start () {
         StartCoroutine(UnFading());
@@ -30,8 +34,13 @@ public class MainMenuManager : MonoBehaviour {
         m_musicSelected = false;
         m_effectsSelected = false;
     }
-	
-	void Update () {
+
+    void Update () {
+        counter += Time.deltaTime;
+        if (counter > 70f) {
+            counter = 0;
+            splineController.FollowSpline();
+        }
 
         float axisHorizontal = Input.GetAxis("Horizontal");
         if (m_musicSelected) {

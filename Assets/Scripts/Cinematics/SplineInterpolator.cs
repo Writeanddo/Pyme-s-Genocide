@@ -39,8 +39,8 @@ public class SplineInterpolator : MonoBehaviour
 
 	void Awake()
 	{
-		startPos = transform.position;
-		startRot = transform.rotation;
+		//startPos = transform.position;
+		//startRot = transform.rotation;
 		Reset();
 	}
 
@@ -69,8 +69,8 @@ public class SplineInterpolator : MonoBehaviour
 		mCurrentTime = 0;
 		mRotations = false;
 		mEndPointsMode = eEndPointsMode.AUTO;
-		transform.position = startPos;
-		transform.rotation = startRot;
+	//	transform.position = startPos;
+	//	transform.rotation = startRot;
 	}
 
 	public void AddPoint(Vector3 pos, Quaternion quat, float timeInSeconds, Vector2 easeInOut)
