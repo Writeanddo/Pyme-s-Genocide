@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: CrystalMagicoDesactivado
+  m_Name: CrystalField
   m_Shader: {fileID: 4800000, guid: 9084664a0715deb4488cd579fe420dc3, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
@@ -90,6 +90,6 @@ Material:
     m_Colors:
     - _Color: {r: 0.09803921, g: 0.35686275, b: 0.20793572, a: 1}
     - _EmissionColor: {r: 20.078432, g: 626.4471, b: 766.9961, a: 0}
-    - _Illumi: {r: 0, g: 0.38679248, b: 0.2806141, a: 1}
+    - _Illumi: {r: 0.9417716, g: 1, b: 0.4575472, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
     - _TintColor: {r: 0, g: 1, b: 0.27972865, a: 0.5}
