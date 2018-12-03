@@ -25,6 +25,8 @@ public class Absorber : MonoBehaviour
     [SerializeField] float absorberRadius = 1.0f;
     [SerializeField] float absorberMaxDistance = 10.0f;
 
+    [SerializeField] Transform head;
+
     [SerializeField] float autoDeactivateWeaponTimeInSeconds = 2.0f;
     private float autoDeactivateWeaponTimer;
 
@@ -50,7 +52,7 @@ public class Absorber : MonoBehaviour
             return;
         }
 
-        Ray ray = new Ray(transform.position, Camera.main.transform.forward);
+        Ray ray = new Ray(head.position, Camera.main.transform.forward);
 
         Debug.DrawRay(ray.origin, absorberMaxDistance * ray.direction, Color.red);
 
@@ -76,9 +78,13 @@ public class Absorber : MonoBehaviour
 
                 float factor = Mathf.Clamp01(1.0f - hit.distance / absorberMaxDistance);
 
+                Vector3 vel = rb.velocity;
+                vel.y = 0.0f;
+                rb.velocity = vel;
+
                 rb.AddTorque(120.0f * Random.insideUnitSphere * Time.deltaTime, ForceMode.Force);
-                rb.MovePosition(Vector3.MoveTowards(rb.position, P, 0.01f));
-                rb.AddForce((transform.position - rb.position).normalized * factor * Time.deltaTime * pullForce, ForceMode.Force);
+                rb.MovePosition(Vector3.MoveTowards(rb.position, P, 0.07f));
+                rb.AddForce((head.position - rb.position).normalized * factor * Time.deltaTime * pullForce, ForceMode.Force);
             }
         }
     }
