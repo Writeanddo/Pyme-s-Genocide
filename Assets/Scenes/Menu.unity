@@ -8876,26 +8876,26 @@ Prefab:
     - target: {fileID: 114368654912235004, guid: e1a1200fa88bc7349a3c3556df034edd,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1724285715490788, guid: e1a1200fa88bc7349a3c3556df034edd, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114632620586539930, guid: e1a1200fa88bc7349a3c3556df034edd,
         type: 2}
       propertyPath: m_fontSize
-      value: 9.08
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 114632620586539930, guid: e1a1200fa88bc7349a3c3556df034edd,
         type: 2}
       propertyPath: m_fontSizeBase
-      value: 9.08
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 114632620586539930, guid: e1a1200fa88bc7349a3c3556df034edd,
         type: 2}
       propertyPath: m_firstOverflowCharacterIndex
-      value: 15
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 224513982287453244, guid: e1a1200fa88bc7349a3c3556df034edd,
         type: 2}
@@ -8915,13 +8915,13 @@ Prefab:
     - target: {fileID: 114632620586539930, guid: e1a1200fa88bc7349a3c3556df034edd,
         type: 2}
       propertyPath: m_text
-      value: "P\rrogrammers:\n\nJaime Muela\nAdrian Guevara\nAlvaro Lopez\n\r\nArt\rists:\n\nHermes
-        Escriva\nPaz Gomez"
+      value: "Code:\nJaime Muela\nAdrian Guevara\nAlvaro Lopez\n\r\nArt:\nHermes Escriva\nPaz
+        Gomez\n\nMusic:\nJuan Novella"
       objectReference: {fileID: 0}
     - target: {fileID: 114632620586539930, guid: e1a1200fa88bc7349a3c3556df034edd,
         type: 2}
       propertyPath: m_textInfo.characterCount
-      value: 92
+      value: 98
       objectReference: {fileID: 0}
     - target: {fileID: 114632620586539930, guid: e1a1200fa88bc7349a3c3556df034edd,
         type: 2}
@@ -8931,7 +8931,7 @@ Prefab:
     - target: {fileID: 114368654912235004, guid: e1a1200fa88bc7349a3c3556df034edd,
         type: 2}
       propertyPath: m_padding
-      value: 4.64
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114324035876020442, guid: e1a1200fa88bc7349a3c3556df034edd,
         type: 2}
@@ -9028,6 +9028,21 @@ Prefab:
         type: 2}
       propertyPath: m_AnchoredPosition.y
       value: -237
+      objectReference: {fileID: 0}
+    - target: {fileID: 114632620586539930, guid: e1a1200fa88bc7349a3c3556df034edd,
+        type: 2}
+      propertyPath: m_textInfo.spaceCount
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114632620586539930, guid: e1a1200fa88bc7349a3c3556df034edd,
+        type: 2}
+      propertyPath: m_textInfo.wordCount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114632620586539930, guid: e1a1200fa88bc7349a3c3556df034edd,
+        type: 2}
+      propertyPath: m_textInfo.lineCount
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1a1200fa88bc7349a3c3556df034edd, type: 2}

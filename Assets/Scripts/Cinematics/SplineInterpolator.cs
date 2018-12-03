@@ -197,9 +197,11 @@ public class SplineInterpolator : MonoBehaviour
 			// Calculates the t param between 0 and 1
 			float param = (mCurrentTime - mNodes[mCurrentIdx].Time) / (mNodes[mCurrentIdx + 1].Time - mNodes[mCurrentIdx].Time);
 
-			// Smooth the param
-			param = UnityEditor.MathUtils.Ease(param, mNodes[mCurrentIdx].EaseIO.x, mNodes[mCurrentIdx].EaseIO.y);
-			Vector3 pos = GetHermiteInternal (mCurrentIdx, param);
+            // Smooth the param
+#if UNITY_EDITOR
+            param = UnityEditor.MathUtils.Ease(param, mNodes[mCurrentIdx].EaseIO.x, mNodes[mCurrentIdx].EaseIO.y);
+#endif
+            Vector3 pos = GetHermiteInternal (mCurrentIdx, param);
 			if (!float.IsNaN (pos.x) && !float.IsNaN (pos.y) && !float.IsNaN (pos.z)) 
 			{
 				transform.position = pos;
@@ -229,10 +231,13 @@ public class SplineInterpolator : MonoBehaviour
 		Quaternion Q2 = mNodes[idxFirstPoint + 1].Rot;
 		Quaternion Q3 = mNodes[idxFirstPoint + 2].Rot;
 
-		Quaternion T1 = UnityEditor.MathUtils.GetSquadIntermediate(Q0, Q1, Q2);
+#if UNITY_EDITOR
+        Quaternion T1 = UnityEditor.MathUtils.GetSquadIntermediate(Q0, Q1, Q2);
 		Quaternion T2 = UnityEditor.MathUtils.GetSquadIntermediate(Q1, Q2, Q3);
-
-		return UnityEditor.MathUtils.GetQuatSquad(t, Q1, Q2, T1, T2);
+        return UnityEditor.MathUtils.GetQuatSquad(t, Q1, Q2, T1, T2);
+#else
+        return  Quaternion.identity;
+#endif
 	}
 
 
@@ -275,8 +280,9 @@ public class SplineInterpolator : MonoBehaviour
 
 		int idx = c - 1;
 		float param = (timeParam - mNodes[idx].Time) / (mNodes[idx + 1].Time - mNodes[idx].Time);
-		param = UnityEditor.MathUtils.Ease(param, mNodes[idx].EaseIO.x, mNodes[idx].EaseIO.y);
-
-		return GetHermiteInternal(idx, param);
+#if UNITY_EDITOR
+        param = UnityEditor.MathUtils.Ease(param, mNodes[idx].EaseIO.x, mNodes[idx].EaseIO.y);
+#endif
+        return GetHermiteInternal(idx, param);
 	}
 }

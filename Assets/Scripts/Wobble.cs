@@ -33,6 +33,7 @@ public class Wobble : MonoBehaviour
         t += Time.deltaTime;
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         if (EditorApplication.isPlaying)
@@ -48,4 +49,5 @@ public class Wobble : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position + direction * magnitude, 0.1f);
         }
     }
+#endif
 }

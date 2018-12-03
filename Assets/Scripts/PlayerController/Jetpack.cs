@@ -36,6 +36,8 @@ public class Jetpack : MonoBehaviour
     [SerializeField] float failureSoundDelay = 2.0f;
     bool failureSoundReady = true;
 
+    PlayerControllerRB playerController;
+
     private void Start()
     {
         Ready = true;
@@ -43,6 +45,7 @@ public class Jetpack : MonoBehaviour
         animatorL = jetpackL.GetComponent<Animator>();
         animatorR = jetpackR.GetComponent<Animator>();
         audioSourceJetpackNoise = GetComponent<AudioSource>();
+        playerController = FindObjectOfType<PlayerControllerRB>();
     }
 
     private void Update()
@@ -54,7 +57,8 @@ public class Jetpack : MonoBehaviour
             CancelJetpack();
         }
 
-        if (Ready && failureSoundReady && Input.GetButton("Jump") && gm.GetAmmo() <= 0.0f)
+        if (Ready && failureSoundReady && Input.GetButton("Jump") &&
+            gm.GetAmmo() <= 0.0f && !playerController.IsGrounded && playerController.Rigidbody.velocity.y <= 0.0f)
         {
             if (audioSourceJetpackNoise.isPlaying)
             {
@@ -104,6 +108,14 @@ public class Jetpack : MonoBehaviour
         if (audioSourceJetpackNoise.isPlaying && audioSourceJetpackNoise.clip == audioClipJetpackNoise)
         {
             audioSourceJetpackNoise.Stop();
+
+            if (Input.GetButton("Jump") && gm.GetAmmo() <= 0.0f)
+            {
+                audioSourceJetpackNoise.loop = false;
+                audioSourceJetpackNoise.clip = audioClipJetpackFailure;
+                audioSourceJetpackNoise.Play();
+                StartCoroutine(RestartFailureTimer());
+            }
         }
     }
 

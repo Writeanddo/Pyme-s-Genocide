@@ -23,10 +23,11 @@ public class PlayerControllerRB : MonoBehaviour
     private ThirdPersonCamera thirdPersonCamera;
     private Transform m_Cam;
 
-    Rigidbody m_RigidBody;
-    Vector3 m_movement;
+    public Rigidbody Rigidbody { get; private set; }
 
-    private bool m_IsGrounded;
+    Vector3 m_movement;
+    public bool IsGrounded { get; private set; }
+
     private Vector3 m_GroundNormal;
 
     private Jetpack jetPack;
@@ -49,7 +50,7 @@ public class PlayerControllerRB : MonoBehaviour
 
     void Start()
     {
-        m_RigidBody = GetComponent<Rigidbody>();
+        Rigidbody = GetComponent<Rigidbody>();
         jetPack = GetComponentInChildren<Jetpack>();
         m_Cam = Camera.main.transform;
         thirdPersonCamera = FindObjectOfType<ThirdPersonCamera>();
@@ -72,10 +73,10 @@ public class PlayerControllerRB : MonoBehaviour
 
         CheckGroundStatus();
 
-        float speed = m_IsGrounded ? m_GroundSpeed : m_AirSpeed;
+        float speed = IsGrounded ? m_GroundSpeed : m_AirSpeed;
         m_CurrentVelocity = speed * m_CurrentVelocity.normalized;
 
-        if (m_IsGrounded)
+        if (IsGrounded)
         {
             HandleGroundedInput();
         }
@@ -107,9 +108,9 @@ public class PlayerControllerRB : MonoBehaviour
             }
         }
 
-        animator.SetBool("grounded", m_IsGrounded);
+        animator.SetBool("grounded", IsGrounded);
 
-        if (m_IsGrounded && m_WantsToJump)
+        if (IsGrounded && m_WantsToJump)
         {
             animator.SetBool("jump", true);
         }
@@ -119,24 +120,24 @@ public class PlayerControllerRB : MonoBehaviour
     {
         if (m_WantsToJump)
         {
-            m_RigidBody.AddForce(Vector3.up * m_JumpForce);
+            Rigidbody.AddForce(Vector3.up * m_JumpForce);
         }
 
         if (m_WantsToJetpack && gameManager.GetAmmo() > 0)
         {
             jetPack.SpawnMinions();
             gameManager.DecreaseAmmo(jetPack.AmmoPerSecond * Time.deltaTime);
-            m_RigidBody.AddForce(Vector3.up * jetPack.Strength);
+            Rigidbody.AddForce(Vector3.up * jetPack.Strength);
         }
 
-        m_RigidBody.rotation = Quaternion.Slerp(m_RigidBody.rotation, Quaternion.Euler(0.0f, m_TargetRotation, 0.0f), 15.0f * Time.deltaTime);
-        m_RigidBody.AddForce(m_CurrentVelocity * Time.deltaTime, ForceMode.VelocityChange);
+        Rigidbody.rotation = Quaternion.Slerp(Rigidbody.rotation, Quaternion.Euler(0.0f, m_TargetRotation, 0.0f), 15.0f * Time.deltaTime);
+        Rigidbody.AddForce(m_CurrentVelocity * Time.deltaTime, ForceMode.VelocityChange);
 
         for (int i = 0; i < externalForces.Count; i++)
         {
             if (externalForces[i].resetVelocity)
             {
-                Vector3 v = m_RigidBody.velocity;
+                Vector3 v = Rigidbody.velocity;
                 if (externalForces[i].resetVelocityDirection.x != 0)
                 {
                     v.x = 0.0f;
@@ -149,33 +150,33 @@ public class PlayerControllerRB : MonoBehaviour
                 {
                     v.z = 0.0f;
                 }
-                m_RigidBody.velocity = v;
+                Rigidbody.velocity = v;
             }
 
-            if (externalForces[i].scale && m_IsGrounded)
+            if (externalForces[i].scale && IsGrounded)
             {
-                m_RigidBody.AddForce(externalForces[i].force * 200.0f, externalForces[i].mode);
+                Rigidbody.AddForce(externalForces[i].force * 200.0f, externalForces[i].mode);
             }
             else
             {
-                m_RigidBody.AddForce(externalForces[i].force, externalForces[i].mode);
+                Rigidbody.AddForce(externalForces[i].force, externalForces[i].mode);
             }
         }
 
-        float friction = m_IsGrounded ? m_GroundFriction : m_AirFriction;
-        Vector2 horizontalVelocity = new Vector3(m_RigidBody.velocity.x, m_RigidBody.velocity.z);
+        float friction = IsGrounded ? m_GroundFriction : m_AirFriction;
+        Vector2 horizontalVelocity = new Vector3(Rigidbody.velocity.x, Rigidbody.velocity.z);
         if (friction == 0.0f)
         {
             friction = 1.0f;
         }
 
-        Vector3 vel = transform.InverseTransformDirection(m_RigidBody.velocity);
+        Vector3 vel = transform.InverseTransformDirection(Rigidbody.velocity);
         vel.x *= friction;
         vel.z *= friction;
 
-        if (!m_IsGrounded)
+        if (!IsGrounded)
         {
-            if (m_RigidBody.velocity.y <= 0.0f)
+            if (Rigidbody.velocity.y <= 0.0f)
             {
                 if (m_WantsToJetpack)
                 {
@@ -195,7 +196,7 @@ public class PlayerControllerRB : MonoBehaviour
         vel.x = hMov.x;
         vel.z = hMov.y;
 
-        m_RigidBody.velocity = transform.TransformDirection(vel);
+        Rigidbody.velocity = transform.TransformDirection(vel);
 
         thirdPersonCamera.ManualUpdate();
 
@@ -223,7 +224,7 @@ public class PlayerControllerRB : MonoBehaviour
 
     private void HandleAirborneInput()
     {
-        if (!readyForJetpack && jetPack.Ready && m_RigidBody.velocity.y <= 0.0f)
+        if (!readyForJetpack && jetPack.Ready && Rigidbody.velocity.y <= 0.0f)
         {
             readyForJetpack = true;
         }
@@ -248,11 +249,11 @@ public class PlayerControllerRB : MonoBehaviour
         if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance, -5, QueryTriggerInteraction.Ignore))
         {
             m_GroundNormal = hitInfo.normal;
-            m_IsGrounded = true;
+            IsGrounded = true;
         }
         else
         {
-            m_IsGrounded = false;
+            IsGrounded = false;
             m_GroundNormal = Vector3.up;
         }
     }

@@ -121,6 +121,7 @@ public class MinionsPool : MonoBehaviour
             minionPrefabs.Add(Resources.Load<Minion>("Bocado"));
             minionPrefabs.Add(Resources.Load<Minion>("CJ"));
             minionPrefabs.Add(Resources.Load<Minion>("Tago"));
+            minionPrefabs.Add(Resources.Load<Minion>("fluf"));
         }
         if (minionTextures.Count == 0)
         {
@@ -136,6 +137,10 @@ public class MinionsPool : MonoBehaviour
             minionTextures.Add(new MinionTexture(2, Resources.Load("Textures/Tago/tago_tex") as Texture));
             minionTextures.Add(new MinionTexture(2, Resources.Load("Textures/Tago/tago_tex2") as Texture));
             minionTextures.Add(new MinionTexture(2, Resources.Load("Textures/Tago/tago_tex3") as Texture));
+
+            minionTextures.Add(new MinionTexture(3, Resources.Load("Textures/Fluf/fluf_tex") as Texture));
+            minionTextures.Add(new MinionTexture(3, Resources.Load("Textures/Fluf/fluf_tex2") as Texture));
+            minionTextures.Add(new MinionTexture(3, Resources.Load("Textures/Fluf/fluf_tex3") as Texture));
         }
     }
 
@@ -154,7 +159,7 @@ public class MinionsPool : MonoBehaviour
     {
         LoadMinions();
 
-        int rand = Mathf.RoundToInt(Random.Range(0, 3));
+        int rand = Mathf.RoundToInt(Random.Range(0, minionPrefabs.Count));
 
         Minion minionPrefab = minionPrefabs[rand];
 
@@ -166,6 +171,8 @@ public class MinionsPool : MonoBehaviour
 
         if (rand == 2) //Esto es porque solo va en Tago
             copy.GetComponentInChildren<SkinnedMeshRenderer>().materials[2].mainTexture = GetTexturesOf(rand)[Random.Range(0, 3)].tex;
+        if (rand == 3)
+            copy.GetComponentInChildren<SkinnedMeshRenderer>().materials[0].mainTexture = GetTexturesOf(rand)[Random.Range(0, 3)].tex;
 
         copy.gameObject.SetActive(false);
 
