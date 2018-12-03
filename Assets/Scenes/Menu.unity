@@ -2854,7 +2854,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1544440821}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3232,10 +3232,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1209537010}
   - {fileID: 1062084028}
   m_Father: {fileID: 1544440821}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4386,7 +4385,7 @@ RectTransform:
   - {fileID: 2065291852}
   - {fileID: 1054238525}
   m_Father: {fileID: 832639587}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4579,7 +4578,7 @@ RectTransform:
   m_Children:
   - {fileID: 1712474569}
   m_Father: {fileID: 1544440821}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4825,11 +4824,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1209537009}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4.8534203, y: 1.125, z: 1}
   m_Children: []
-  m_Father: {fileID: 832639587}
+  m_Father: {fileID: 1544440821}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -6252,6 +6251,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1209537010}
   - {fileID: 1137603275}
   - {fileID: 681043868}
   - {fileID: 832639587}
@@ -7139,7 +7139,7 @@ RectTransform:
   - {fileID: 206158895}
   - {fileID: 1038169038}
   m_Father: {fileID: 1544440821}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7256,7 +7256,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeTime: 2
   fadePanel: {fileID: 681043869}
-  pressAnyKey: {fileID: 1137603274}
+  m_panelAnyKey: {fileID: 1137603274}
+  m_panelMenu: {fileID: 832639586}
   m_musicVolume: {fileID: 2134148809}
   m_effectsVolume: {fileID: 206158896}
 --- !u!4 &1774400847
