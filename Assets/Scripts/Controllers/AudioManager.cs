@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour {
-
-    private static AudioManager instance;
-    public static AudioManager GetInterfaceController() { return instance; }
+public class AudioManager : MonoBehaviour
+{
 
     public AudioClip ambienMusic;
 
@@ -38,12 +36,8 @@ public class AudioManager : MonoBehaviour {
     bool m_changeAudioSource = false;
     float m_secondChange;
 
-    void Awake()
+    void Start()
     {
-        instance = this;
-        return;
-
-        DontDestroyOnLoad(this.gameObject);
         AudioSource[] audioSources = GetComponents<AudioSource>();
         musicAudioSource1 = audioSources[0];
         musicAudioSource2 = audioSources[1];
@@ -53,21 +47,18 @@ public class AudioManager : MonoBehaviour {
         m_audioSource1IsPlaying = true;
     }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Update()
+    {
         if (Camera.main != null)
             this.transform.position = Camera.main.transform.position;
-        if (m_changeAudioSource) {
+        if (m_changeAudioSource)
+        {
             AudioSource audioSource1 = m_audioSource1IsPlaying ? musicAudioSource1 : musicAudioSource2;
             AudioSource audioSource2 = m_audioSource1IsPlaying ? musicAudioSource2 : musicAudioSource1;
             audioSource1.volume += Time.deltaTime / m_secondChange * m_musicVolume;
             audioSource2.volume -= Time.deltaTime / m_secondChange * m_musicVolume;
-            if (audioSource2.volume <= 0 || audioSource1.volume >= m_musicVolume) {
+            if (audioSource2.volume <= 0 || audioSource1.volume >= m_musicVolume)
+            {
                 audioSource2.Stop();
                 audioSource2.volume = 0;
                 audioSource1.volume = m_musicVolume;
@@ -77,7 +68,8 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-    public void PlayMusic(AudioClip music, float timeChanged) {
+    public void PlayMusic(AudioClip music, float timeChanged)
+    {
         AudioSource audioSource = m_audioSource1IsPlaying ? musicAudioSource2 : musicAudioSource1;
         audioSource.clip = music;
         audioSource.loop = true;
@@ -89,7 +81,8 @@ public class AudioManager : MonoBehaviour {
     }
 
 
-    public void PlayMusicWithoutLoop(AudioClip music, float timeChanged) {
+    public void PlayMusicWithoutLoop(AudioClip music, float timeChanged)
+    {
         AudioSource audioSource = m_audioSource1IsPlaying ? musicAudioSource2 : musicAudioSource1;
         audioSource.clip = music;
         audioSource.loop = false;
@@ -100,13 +93,15 @@ public class AudioManager : MonoBehaviour {
         m_changeAudioSource = true;
     }
 
-    public void ChangeMusicVolume(float volume) {
+    public void ChangeMusicVolume(float volume)
+    {
         m_musicVolume = volume;
         AudioSource audioSource = m_audioSource1IsPlaying ? musicAudioSource1 : musicAudioSource2;
         audioSource.volume = m_musicVolume;
     }
 
-    public void ChangeEffectsVolume(float volume) {
+    public void ChangeEffectsVolume(float volume)
+    {
         m_soundVolume = volume;
     }
 

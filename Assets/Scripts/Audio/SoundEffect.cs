@@ -13,6 +13,8 @@ public class SoundEffect : MonoBehaviour {
         }
     }
 
+    /*
+     * 
     public void PlaySound(AudioClip clip) {
         AudioManager manager = AudioManager.GetInterfaceController();
         float volume = 1.0f;
@@ -31,6 +33,7 @@ public class SoundEffect : MonoBehaviour {
         m_audio.Play();
         m_audio.volume = volume;
     }
+    */
 
     public void StopSoundLoop() {
         m_audio.Stop();

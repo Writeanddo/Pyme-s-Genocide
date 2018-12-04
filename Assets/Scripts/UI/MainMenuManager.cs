@@ -22,10 +22,15 @@ public class MainMenuManager : MonoBehaviour {
 
     float counter = 60f;
 
+    GameManager gm;
+
     void Start () {
+        gm = FindObjectOfType<GameManager>();
+
         StartCoroutine(UnFading());
 
-        AudioManager audio = AudioManager.GetInterfaceController();
+        AudioManager audio = gm.audioManager;
+
         if (audio != null) {
             m_musicVolume.value = audio.m_musicVolume;
             m_effectsVolume.value = audio.m_soundVolume;
@@ -72,18 +77,18 @@ public class MainMenuManager : MonoBehaviour {
     }
 
     public void Play() {
-        SceneManager.LoadScene("Hermes");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void ChangeMusicVolume() {
-        AudioManager audio = AudioManager.GetInterfaceController();
+        AudioManager audio = gm.audioManager;
         if (audio != null) {
             audio.ChangeMusicVolume(m_musicVolume.value);
         }
     }
 
     public void ChangeEffectsVolume() {
-        AudioManager audio = AudioManager.GetInterfaceController();
+        AudioManager audio = gm.audioManager;
         if (audio != null) {
             audio.ChangeEffectsVolume(m_effectsVolume.value);
         }

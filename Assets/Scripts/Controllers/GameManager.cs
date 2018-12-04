@@ -27,16 +27,11 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
-    {
-        if (scene.name == "Menu")
+        if (SceneManager.GetActiveScene().name == "Menu")
         {
             interfaceController.gameObject.SetActive(false);
-        } else
+        }
+        else
         {
             interfaceController.gameObject.SetActive(true);
         }
