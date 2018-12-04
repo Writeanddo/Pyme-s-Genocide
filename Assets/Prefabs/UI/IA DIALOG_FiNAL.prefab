@@ -69,5 +69,6 @@ MonoBehaviour:
     name: AI Ship
     sentences:
     - One...eternity...later, i have a lot of things to do right now.
-    - Let's get out of here.
+    - Thanks for giving me the parts.
+    - "Treat your next ship better, \xA1\xA1byyyeeeeeeeee!!"
   dialogueManager: {fileID: 0}

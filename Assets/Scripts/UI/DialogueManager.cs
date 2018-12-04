@@ -64,7 +64,8 @@ public class DialogueManager : MonoBehaviour {
 
         if (dialogSource.id == 99)
         {
-            Application.Quit();
+            GameObject.Find("SpaceShip").GetComponent<SpaceShip>().Eject();
+            //Application.Quit();
         }
     }
 
