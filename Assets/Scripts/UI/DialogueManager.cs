@@ -17,7 +17,7 @@ public class DialogueManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetButtonDown("Submit")) {
+        if (Input.GetButtonDown("Fire1")) {
             DisplayNextSentence();
         }
     }
