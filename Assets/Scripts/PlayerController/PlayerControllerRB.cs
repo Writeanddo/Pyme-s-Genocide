@@ -62,8 +62,14 @@ public class PlayerControllerRB : MonoBehaviour
 
     void Update()
     {
+        animator.SetBool("running", false);
+        animator.SetBool("strafing", false);
+        animator.SetBool("jump", false);
 
-        if (!inputEnabled) { return; }
+        if (!inputEnabled) {
+            m_CurrentVelocity = Vector3.zero;
+            return;
+        }
 
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
