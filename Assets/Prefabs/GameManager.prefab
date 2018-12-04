@@ -301,7 +301,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8b2f71db3c0f8e54c8600302276e5cf9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: bc8326c123a7be34f88fa420237f8083, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -660,6 +660,7 @@ MonoBehaviour:
   squeaks:
   - {fileID: 8300000, guid: e35c9ce079f027748a233ffa961ecf4b, type: 3}
   - {fileID: 8300000, guid: e4ad9542e32c30141a152f9855651ba8, type: 3}
+  steps: {fileID: 8300000, guid: 898ee201829ac874a81ae9cf96cbc44f, type: 3}
   m_soundVolume: 1
   m_musicVolume: 0.1
 --- !u!114 &114632972492490002

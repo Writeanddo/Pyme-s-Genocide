@@ -259,6 +259,11 @@ public class PlayerControllerRB : MonoBehaviour
             m_GroundNormal = Vector3.up;
         }
     }
+
+    public void Step()
+    {
+        gameManager.audioManager.PlayOneShot(gameManager.audioManager.steps, transform.position);
+    }
 }
 
 public class PlayerControllerExternalForce

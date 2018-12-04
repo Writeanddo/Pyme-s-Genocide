@@ -26,6 +26,7 @@ public class AudioManager : MonoBehaviour {
     public AudioClip proud;
     public AudioClip spaceshipCollected;
     public AudioClip[] squeaks;
+    public AudioClip steps;
 
     [Header("Scene")]
     public float m_soundVolume = 1.0f;
