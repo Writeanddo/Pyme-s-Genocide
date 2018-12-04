@@ -89,7 +89,9 @@ public class Absorber : MonoBehaviour
 
         Debug.DrawRay(ray.origin, absorberMaxDistance * ray.direction, Color.red);
 
-        int ammount = Physics.SphereCastNonAlloc(ray, absorberRadius, results, absorberMaxDistance, 1 << LayerMask.NameToLayer("Minions"));
+        int ammount = Physics.SphereCastNonAlloc(
+            ray, absorberRadius, results, absorberMaxDistance, 1 << LayerMask.NameToLayer("Minions"), QueryTriggerInteraction.Ignore);
+
         if (ammount > 0)
         {
             for (int i = 0; i < ammount; i++)
