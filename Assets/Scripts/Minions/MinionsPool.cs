@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class MinionsPool : MonoBehaviour
 {
-    [SerializeField] bool showDebugLogs = false;
-    [SerializeField] int poolSize = 160;
+    [SerializeField] bool showDebugLogs = true;
+    [SerializeField] int poolSize = 200;
+    int spawnedMinionsCount;
+
     List<Minion> minions;
 
     Transform _transform;
@@ -101,12 +103,14 @@ public class MinionsPool : MonoBehaviour
         lock (syncLock)
         {
 
-            if (minions.Count >= poolSize)
+            if (spawnedMinionsCount >= poolSize)
             {
 
                 if (showDebugLogs) Debug.Log("Destruyendo el minion (excede el tamaño del pool): " + minions.Count);
 
                 Destroy(minion.gameObject);
+
+                spawnedMinionsCount--;
                 return;
             }
 
@@ -189,5 +193,7 @@ public class MinionsPool : MonoBehaviour
         copy.gameObject.SetActive(false);
 
         minions.Add(copy);
+
+        spawnedMinionsCount++;
     }
 }
