@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] float ammo;
 
-    bool gamePaused;
+    public bool gamePaused { get; private set; }
 
     PauseCanvas pauseCanvas;
 
@@ -86,7 +86,8 @@ public class GameManager : MonoBehaviour
 
     public void SwapPauseState()
     {
-        if (SceneManager.GetActiveScene().name == "Main") {
+        if (SceneManager.GetActiveScene().name == "Main")
+        {
             return;
         }
 
