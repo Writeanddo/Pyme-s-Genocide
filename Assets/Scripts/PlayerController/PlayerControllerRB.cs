@@ -63,7 +63,14 @@ public class PlayerControllerRB : MonoBehaviour
     void Update()
     {
 
-        if (!inputEnabled) { return; }
+        animator.SetBool("running", false);
+        animator.SetBool("strafing", false);
+        animator.SetBool("jump", false);
+
+        if (!inputEnabled) {
+            m_CurrentVelocity = Vector3.zero;
+            return;
+        }
 
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
@@ -91,10 +98,6 @@ public class PlayerControllerRB : MonoBehaviour
         {
             m_TargetRotation = m_Cam.eulerAngles.y;
         }
-
-        animator.SetBool("running", false);
-        animator.SetBool("strafing", false);
-        animator.SetBool("jump", false);
 
         if (inputDir.x != 0.0f || inputDir.y != 0.0f)
         {
