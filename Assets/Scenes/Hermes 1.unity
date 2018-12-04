@@ -17987,6 +17987,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &439379687 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1862752988372610, guid: cea090217ff7b8b4cad684fd05e0eba4,
+    type: 2}
+  m_PrefabInternal: {fileID: 2059367380}
 --- !u!1001 &442120350
 Prefab:
   m_ObjectHideFlags: 0
@@ -27095,6 +27100,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114627496518343434, guid: 87c8d213c94ede84ab3f8a117563dbe7,
+        type: 2}
+      propertyPath: brokenGlass.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4003492761723218, guid: 87c8d213c94ede84ab3f8a117563dbe7, type: 2}
       propertyPath: m_LocalPosition.x
       value: -15.069791
@@ -27347,6 +27357,31 @@ Prefab:
       propertyPath: ammo
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114418020951765192, guid: 87c8d213c94ede84ab3f8a117563dbe7,
+        type: 2}
+      propertyPath: dialogFinal
+      value: 
+      objectReference: {fileID: 439379687}
+    - target: {fileID: 114627496518343434, guid: 87c8d213c94ede84ab3f8a117563dbe7,
+        type: 2}
+      propertyPath: brokenGlass.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: cecdd1b982dc0aa4b99c551f019f4364, type: 3}
+    - target: {fileID: 114627496518343434, guid: 87c8d213c94ede84ab3f8a117563dbe7,
+        type: 2}
+      propertyPath: brokenGlass.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: ee3d3d963f38e1f419cccb33dff27a70, type: 3}
+    - target: {fileID: 114627496518343434, guid: 87c8d213c94ede84ab3f8a117563dbe7,
+        type: 2}
+      propertyPath: brokenGlass.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 72cec3cee52ed5942ad54e00f6af38c2, type: 3}
+    - target: {fileID: 114627496518343434, guid: 87c8d213c94ede84ab3f8a117563dbe7,
+        type: 2}
+      propertyPath: brokenGlass.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 9d97ce97f10f13647a6b5f584c8423c6, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87c8d213c94ede84ab3f8a117563dbe7, type: 2}
   m_IsPrefabAsset: 0
@@ -83251,6 +83286,16 @@ Prefab:
     - target: {fileID: 1862752988372610, guid: cea090217ff7b8b4cad684fd05e0eba4, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114389343059001560, guid: cea090217ff7b8b4cad684fd05e0eba4,
+        type: 2}
+      propertyPath: dialogue.name
+      value: IA Ship
+      objectReference: {fileID: 0}
+    - target: {fileID: 114389343059001560, guid: cea090217ff7b8b4cad684fd05e0eba4,
+        type: 2}
+      propertyPath: dialogue.id
+      value: 99
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cea090217ff7b8b4cad684fd05e0eba4, type: 2}

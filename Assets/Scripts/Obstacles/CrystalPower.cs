@@ -9,13 +9,24 @@ public class CrystalPower : MonoBehaviour {
     private int life = 5;
     private bool destroyed = false;
 
+    GameManager gm;
+
+    private void Start()
+    {
+        gm = FindObjectOfType<GameManager>();
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Minion")
+        Minion m = collision.gameObject.GetComponent<Minion>();
+
+        if (m)
         {
             life--;
+            m.Explode(collision.contacts[0].point);
             Instantiate(particleDamage, transform.position, Quaternion.identity);
-            Destroy(collision.gameObject);
+            gm.audioManager.PlayOneShot(gm.audioManager.brokenGlass[Random.Range(0, gm.audioManager.brokenGlass.Length)], transform.position);
+
             if (!destroyed && life <= 0)
             {
                 destroyed = true;

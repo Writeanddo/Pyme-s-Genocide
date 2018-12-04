@@ -11,6 +11,8 @@ public class DialogueManager : MonoBehaviour {
 
     private Queue<string> sentences;
 
+    public Dialogue dialogSource;
+
     // Use this for initialization
     void Start() {
         sentences = new Queue<string>();
@@ -23,6 +25,9 @@ public class DialogueManager : MonoBehaviour {
     }
 
     public void StartDialogue(Dialogue dialogue) {
+
+        dialogSource = dialogue;
+
         nameText.text = dialogue.name;
 
         sentences.Clear();
@@ -56,6 +61,11 @@ public class DialogueManager : MonoBehaviour {
     void EndDialogue() {
         dialogue.SetActive(false);
         GameObject.Find("Player").GetComponent<PlayerControllerRB>().inputEnabled = true;
+
+        if (dialogSource.id == 99)
+        {
+            Application.Quit();
+        }
     }
 
 }

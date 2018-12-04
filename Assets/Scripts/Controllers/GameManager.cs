@@ -54,11 +54,16 @@ public class GameManager : MonoBehaviour
         }
 
         player = FindObjectOfType<PlayerControllerRB>();
-
     }
 
     private void Update()
     {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            AllObjectivesCleared();
+        }
+#endif
         if (Input.GetButtonDown("Exit"))
         {
             gamePaused = !gamePaused;
@@ -131,10 +136,11 @@ public class GameManager : MonoBehaviour
 
     public float GetAmmo() { return ammo; }
 
+    public GameObject dialogFinal;
+
     public void AllObjectivesCleared()
     {
-        GameObject.Find("IA DIALOG_FiNAL").SetActive(true);
-        Debug.Log("WASSUP");
+        dialogFinal.SetActive(true);
     }
 
     public void Respawn()

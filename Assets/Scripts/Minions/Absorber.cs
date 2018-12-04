@@ -244,21 +244,15 @@ public class Absorber : MonoBehaviour
 
         newBullet.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
 
-        Vector2 noise = 0.05f * Random.insideUnitCircle;
-
         Vector3 direction;
         if (playerController.FreeCamera)
         {
-            direction = absorbParticleSystem.transform.parent.forward +
-            absorbParticleSystem.transform.parent.right * noise.x +
-            absorbParticleSystem.transform.parent.up * noise.y;
+            direction = absorbParticleSystem.transform.parent.forward;
         }
         else
         {
             direction =
-            Quaternion.AngleAxis(-pushAngle, absorbParticleSystem.transform.parent.right) * absorbParticleSystem.transform.parent.forward +
-            Camera.main.transform.right * noise.x +
-            Camera.main.transform.up * noise.y;
+            Quaternion.AngleAxis(-pushAngle, absorbParticleSystem.transform.parent.right) * absorbParticleSystem.transform.parent.forward;
         }
 
         newBullet.AddForce(direction * pushForce, ForceMode.Impulse);

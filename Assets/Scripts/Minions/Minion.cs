@@ -259,46 +259,52 @@ public class Minion : MonoBehaviour
         return grounded;
     }
 
+    public void Explode(Vector3 explosionPos)
+    {
+
+        Collider[] colliders = Physics.OverlapSphere(explosionPos, explosionRadius);
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject.GetInstanceID() == playerTransform.gameObject.GetInstanceID())
+            {
+                PlayerControllerRB rb = colliders[i].GetComponent<PlayerControllerRB>();
+                if (rb != null)
+                {
+                    Vector3 dir = (playerTransform.position - explosionPos).normalized;
+                    float distance = Vector3.Distance(playerTransform.position, explosionPos);
+                    float appliedForce = 0.2f * explosionForce * (1.0f - Mathf.Clamp01(distance / explosionRadius));
+
+                    PlayerControllerExternalForce force = new PlayerControllerExternalForce
+                    {
+                        force = appliedForce * dir,
+                        mode = ForceMode.Impulse
+                    };
+
+                    rb.AddExternalForce(force);
+                }
+            }
+            else
+            {
+                Rigidbody rb = colliders[i].GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.AddExplosionForce(explosionForce, explosionPos, explosionRadius, 3.0F);
+                }
+            }
+        }
+
+        gm.audioManager.PlayOneShot(gm.audioManager.poof, transform.position);
+        ParticleSystemManager.Instance.Play(ps, _transform);
+        MinionsPool.Instance.Put(this);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (explosive)
         {
             Vector3 explosionPos = collision.contacts[0].point;
-            Collider[] colliders = Physics.OverlapSphere(explosionPos, explosionRadius);
-
-            for (int i = 0; i < colliders.Length; i++)
-            {
-                if (colliders[i].gameObject.GetInstanceID() == playerTransform.gameObject.GetInstanceID())
-                {
-                    PlayerControllerRB rb = colliders[i].GetComponent<PlayerControllerRB>();
-                    if (rb != null)
-                    {
-                        Vector3 dir = (playerTransform.position - explosionPos).normalized;
-                        float distance = Vector3.Distance(playerTransform.position, explosionPos);
-                        float appliedForce = 0.2f * explosionForce * (1.0f - Mathf.Clamp01(distance / explosionRadius));
-
-                        PlayerControllerExternalForce force = new PlayerControllerExternalForce
-                        {
-                            force = appliedForce * dir,
-                            mode = ForceMode.Impulse
-                        };
-
-                        rb.AddExternalForce(force);
-                    }
-                }
-                else
-                {
-                    Rigidbody rb = colliders[i].GetComponent<Rigidbody>();
-                    if (rb != null)
-                    {
-                        rb.AddExplosionForce(explosionForce, explosionPos, explosionRadius, 3.0F);
-                    }
-                }
-            }
-
-            gm.audioManager.PlayOneShot(gm.audioManager.poof, transform.position);
-            ParticleSystemManager.Instance.Play(ps, _transform);
-            MinionsPool.Instance.Put(this);
+            Explode(explosionPos);
         }
         else
         {
