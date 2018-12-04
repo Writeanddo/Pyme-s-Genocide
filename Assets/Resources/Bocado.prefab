@@ -853,8 +853,8 @@ MonoBehaviour:
   explosionRadius: 3
   explosionForce: 300
   sfxs:
-  - {fileID: 8300000, guid: f6da4e7b5b5c3f947ba2699b3ea4dad4, type: 3}
-  - {fileID: 8300000, guid: 1e86738677c39f349b590135f144ff80, type: 3}
+  - {fileID: 8300000, guid: 0378f10e87b323c46ad3dbb84005cc84, type: 3}
+  - {fileID: 8300000, guid: 33d343a0864f676429a248e931dfd4d9, type: 3}
   minMaxTalkDelayValues: {x: 1, y: 50}
   readyToHarvest: 1
 --- !u!137 &137768251708108368
