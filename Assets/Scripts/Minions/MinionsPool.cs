@@ -136,9 +136,9 @@ public class MinionsPool : MonoBehaviour
         if (minionTextures.Count == 0)
         {
 
-            minionTextures.Add(new MinionTexture(0, Resources.Load("Textures/CJ/bocado_tex") as Texture));
-            minionTextures.Add(new MinionTexture(0, Resources.Load("Textures/CJ/bocado_tex2") as Texture));
-            minionTextures.Add(new MinionTexture(0, Resources.Load("Textures/CJ/bocado_tex3") as Texture));
+            minionTextures.Add(new MinionTexture(0, Resources.Load("Textures/Bocado/bocado_tex") as Texture));
+            minionTextures.Add(new MinionTexture(0, Resources.Load("Textures/Bocado/bocado_tex2") as Texture));
+            minionTextures.Add(new MinionTexture(0, Resources.Load("Textures/Bocado/bocado_tex3") as Texture));
 
             minionTextures.Add(new MinionTexture(1, Resources.Load("Textures/CJ/seli_tex") as Texture));
             minionTextures.Add(new MinionTexture(1, Resources.Load("Textures/CJ/seli_tex2") as Texture));
