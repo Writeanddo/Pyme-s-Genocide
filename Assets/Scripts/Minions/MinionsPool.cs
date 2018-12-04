@@ -6,7 +6,7 @@ using UnityEngine;
 public class MinionsPool : MonoBehaviour
 {
     [SerializeField] bool showDebugLogs = false;
-    [SerializeField] int poolSize = 100;
+    [SerializeField] int poolSize = 160;
     List<Minion> minions;
 
     Transform _transform;
@@ -166,10 +166,11 @@ public class MinionsPool : MonoBehaviour
         Minion copy = Instantiate(minionPrefab, new Vector3(10000.0f, 10000.0f, 10000.0f), Quaternion.identity, _transform);
         copy.gameObject.name = "MINION " + minions.Count.ToString().PadLeft(4, '0');
 
+        if (rand == 0)
+            copy.GetComponentInChildren<SkinnedMeshRenderer>().materials[0].mainTexture = GetTexturesOf(rand)[Random.Range(0, 3)].tex;
         if (rand == 1)
             copy.GetComponentInChildren<SkinnedMeshRenderer>().materials[0].mainTexture = GetTexturesOf(rand)[Random.Range(0, 3)].tex;
-
-        if (rand == 2) //Esto es porque solo va en Tago
+        if (rand == 2)
             copy.GetComponentInChildren<SkinnedMeshRenderer>().materials[2].mainTexture = GetTexturesOf(rand)[Random.Range(0, 3)].tex;
         if (rand == 3)
             copy.GetComponentInChildren<SkinnedMeshRenderer>().materials[0].mainTexture = GetTexturesOf(rand)[Random.Range(0, 3)].tex;
