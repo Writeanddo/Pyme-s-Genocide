@@ -69,13 +69,11 @@ public class GameManager : MonoBehaviour
             gamePaused = !gamePaused;
             if (gamePaused)
             {
-                Time.timeScale = 0.0f;
-                pauseCanvas.gameObject.SetActive(true);
+                Pause();
             }
             else
             {
-                Time.timeScale = 1.0f;
-                pauseCanvas.gameObject.SetActive(false);
+                UnPause();
             }
         }
     }
@@ -104,6 +102,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        Cursor.lockState = CursorLockMode.None;
+
         Time.timeScale = 0.0f;
         pauseCanvas.gameObject.SetActive(true);
         gamePaused = true;
@@ -116,6 +116,8 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
+
+        Cursor.lockState = CursorLockMode.Locked;
 
         Time.timeScale = 1.0f;
         pauseCanvas.gameObject.SetActive(false);
@@ -163,7 +165,10 @@ public class GameManager : MonoBehaviour
 
         ammo = 0.0f;
         interfaceController.UpdateCounter();
+
         player.transform.position = player.RespawnPosition;
+        tpc.Restart();
+
         player.inputEnabled = true;
         tpc.target = player.transform;
 

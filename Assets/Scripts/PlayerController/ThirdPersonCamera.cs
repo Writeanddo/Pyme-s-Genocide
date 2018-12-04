@@ -34,9 +34,23 @@ public class ThirdPersonCamera : MonoBehaviour
 
         cam = Camera.main;
         playerTransform = FindObjectOfType<PlayerControllerRB>().transform;
+
+        defaultPos = transform.position;
+        defaultRot = transform.rotation;
     }
 
     public Vector3 FocalPoint { get; private set; }
+
+    Vector3 defaultPos;
+    Quaternion defaultRot;
+
+    public void Restart()
+    {
+        transform.position = defaultPos;
+        transform.rotation = defaultRot;
+        yaw = 0.0f;
+        pitch = 0.0f;
+    }
 
     public void ManualUpdate()
     {
