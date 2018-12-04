@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
 
     public void AllObjectivesCleared()
     {
+        GameObject.Find("IA DIALOG_FiNAL").SetActive(true);
         Debug.Log("WASSUP");
     }
 
