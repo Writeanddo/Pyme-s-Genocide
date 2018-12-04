@@ -576,16 +576,9 @@ MonoBehaviour:
   m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  interfaceController: {fileID: 114799157492898536}
-  audioManager: {fileID: 114627496518343434}
-  maxAmmo: 100
-  ammo: 100
-=======
   m_EffectColor: {r: 0.30980393, g: 0.6627451, b: 0.54901963, a: 1}
   m_EffectDistance: {x: 1, y: 1}
   m_UseGraphicAlpha: 1
->>>>>>> f02ce4e9a1e691e2cc3d80375fea5d88d0e4ffe9
 --- !u!114 &114485998811966502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -667,7 +660,6 @@ MonoBehaviour:
   squeaks:
   - {fileID: 8300000, guid: e35c9ce079f027748a233ffa961ecf4b, type: 3}
   - {fileID: 8300000, guid: e4ad9542e32c30141a152f9855651ba8, type: 3}
-  steps: {fileID: 8300000, guid: 898ee201829ac874a81ae9cf96cbc44f, type: 3}
   m_soundVolume: 1
   m_musicVolume: 0.1
 --- !u!114 &114632972492490002
