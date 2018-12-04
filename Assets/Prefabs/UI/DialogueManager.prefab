@@ -46,7 +46,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1090785106373654
 GameObject:
   m_ObjectHideFlags: 1
@@ -356,6 +356,7 @@ MonoBehaviour:
     sentences:
     - Buenas
     - Que tal?
+  dialogueManager: {fileID: 0}
 --- !u!114 &114454027635557250
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -484,6 +485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 114171482681029172}
   dialogueText: {fileID: 114533050316792974}
+  dialogue: {fileID: 1015432726892826}
 --- !u!114 &114737985940773872
 MonoBehaviour:
   m_ObjectHideFlags: 1
