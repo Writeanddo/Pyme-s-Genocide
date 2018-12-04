@@ -9,31 +9,31 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1721456987030974}
+  m_RootGameObject: {fileID: 1862752988372610}
   m_IsPrefabAsset: 1
---- !u!1 &1721456987030974
+--- !u!1 &1862752988372610
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4792626536301014}
-  - component: {fileID: 65443533501461098}
-  - component: {fileID: 114451085506627356}
+  - component: {fileID: 4470101612969904}
+  - component: {fileID: 65608741794770818}
+  - component: {fileID: 114389343059001560}
   m_Layer: 0
-  m_Name: IA DIALOG
+  m_Name: IA DIALOG_FiNAL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4792626536301014
+--- !u!4 &4470101612969904
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1721456987030974}
+  m_GameObject: {fileID: 1862752988372610}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.674, y: 1.534, z: -5.045}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -41,24 +41,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65443533501461098
+--- !u!65 &65608741794770818
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1721456987030974}
+  m_GameObject: {fileID: 1862752988372610}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114451085506627356
+--- !u!114 &114389343059001560
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1721456987030974}
+  m_GameObject: {fileID: 1862752988372610}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5862bc7bdb39e6c48a37ee5b4bbaaf7c, type: 3}
@@ -67,8 +67,6 @@ MonoBehaviour:
   dialogue:
     name: IA Ship
     sentences:
-    - Heeeeeey guuuuuuurl, it seems like you have broke me...again...
-    - Go and find me new parts. You'll need to use your jetpack, but it's out of fuel...
-    - You should try with these little guys, my superpowerfull artificial mind detects
-      that are made of fuel OMG!
+    - One...eternity...later, i have a lot of things to do right know.
+    - Let's get out of here.
   dialogueManager: {fileID: 0}
