@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
@@ -14,9 +15,8 @@ public class InterfaceController : MonoBehaviour
     //[Header("Menu")]
 
     [Header("Ingame")]
-    public Text textCount;
     public Image imageCount;
-    public Image imageVerticalCount;
+    public TextMeshProUGUI text;
 
     [SerializeField] Image[] objectives;
     [SerializeField] Sprite[] lockedObjectivesSprites;
@@ -34,9 +34,8 @@ public class InterfaceController : MonoBehaviour
     public void UpdateCounter()
     {
         float factor = gm.GetAmmo() / gm.MaxAmmo;
-
-        textCount.text = (int) (100 * factor) + "%";
-        imageVerticalCount.fillAmount = imageCount.fillAmount = factor;
+        imageCount.fillAmount = factor;
+        text.text = ((int)(factor * 100)).ToString();
     }
 
     public void UpdateObjective(int objective)
