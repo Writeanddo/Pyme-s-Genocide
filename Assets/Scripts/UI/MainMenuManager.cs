@@ -20,7 +20,7 @@ public class MainMenuManager : MonoBehaviour {
     private UISoundEffects m_sound;
     private bool waitAnyKey = true;
 
-    float counter = 60f;
+    float counter = 67f;
 
     GameManager gm;
 
