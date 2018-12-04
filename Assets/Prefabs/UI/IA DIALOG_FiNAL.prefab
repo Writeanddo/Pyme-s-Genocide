@@ -65,8 +65,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-    name: IA Ship
+    id: 0
+    name: AI Ship
     sentences:
-    - One...eternity...later, i have a lot of things to do right know.
+    - One...eternity...later, i have a lot of things to do right now.
     - Let's get out of here.
   dialogueManager: {fileID: 0}

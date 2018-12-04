@@ -65,7 +65,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-    name: IA Ship
+    id: 0
+    name: AI Ship
     sentences:
     - Heeeeeey guuuuuuurl, it seems like you have broke me...again...
     - Go and find me new parts. You'll need to use your jetpack, but it's out of fuel...
