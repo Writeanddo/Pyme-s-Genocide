@@ -102,8 +102,6 @@ public class Absorber : MonoBehaviour
                 RaycastHit hit = results[i];
                 Minion m = hit.collider.GetComponent<Minion>();
 
-                if (!m.readyToHarvest) { continue; }
-
                 Vector3 A = hit.collider.transform.position;
                 Vector3 B = ray.GetPoint(0.0f);
                 Vector3 d = ray.direction.normalized;
@@ -133,6 +131,12 @@ public class Absorber : MonoBehaviour
 
     void Update()
     {
+
+        if (!gameManager.gamePaused)
+        {
+            Debug.Log(Camera.main.ScreenToViewportPoint(Input.mousePosition));
+        }
+
         Absorbing = Input.GetButton("Fire2");
         bool firingIsDown = Input.GetButton("Fire1");
 
@@ -266,5 +270,6 @@ public class Absorber : MonoBehaviour
 
     public void BarkBark()
     {
+        gameManager.audioManager.PlayOneShot(gameManager.audioManager.absorberBark, transform.position);
     }
 }

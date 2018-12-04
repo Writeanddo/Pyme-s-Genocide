@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class MinionsPool : MonoBehaviour
 {
-    [SerializeField] bool showDebugLogs = false;
-    [SerializeField] int poolSize = 160;
+    [SerializeField] bool showDebugLogs = true;
+    [SerializeField] int poolSize = 200;
+    int spawnedMinionsCount;
+
     List<Minion> minions;
 
     Transform _transform;
@@ -51,6 +53,8 @@ public class MinionsPool : MonoBehaviour
         {
             minions = new List<Minion>(poolSize);
             _transform = transform;
+
+            LoadMinions();
 
             for (int i = 0; i < poolSize; i++)
             {
@@ -99,17 +103,20 @@ public class MinionsPool : MonoBehaviour
         lock (syncLock)
         {
 
-            if (minions.Count >= poolSize)
+            if (spawnedMinionsCount >= poolSize)
             {
 
                 if (showDebugLogs) Debug.Log("Destruyendo el minion (excede el tamaño del pool): " + minions.Count);
 
-                Destroy(minion);
+                Destroy(minion.gameObject);
+
+                spawnedMinionsCount--;
                 return;
             }
 
             minion.gameObject.SetActive(false);
             minion.explosive = false;
+            minion.readyToHarvest = true;
             minion.GetComponent<Rigidbody>().velocity = Vector3.zero;
             minion.transform.position = new Vector3(10000.0f, 10000.0f, 10000.0f);
             minion.transform.localScale = Vector3.one;
@@ -167,8 +174,6 @@ public class MinionsPool : MonoBehaviour
 
     private void InstantiateCopy()
     {
-        LoadMinions();
-
         int rand = Mathf.RoundToInt(Random.Range(0, minionPrefabs.Count));
 
         Minion minionPrefab = minionPrefabs[rand];
@@ -188,5 +193,7 @@ public class MinionsPool : MonoBehaviour
         copy.gameObject.SetActive(false);
 
         minions.Add(copy);
+
+        spawnedMinionsCount++;
     }
 }
