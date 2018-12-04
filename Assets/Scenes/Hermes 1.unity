@@ -3865,6 +3865,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: bf80a981a3b79b84b88f1427fbe618fa,
     type: 3}
   m_PrefabInternal: {fileID: 358347568}
+--- !u!1 &88102704 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1154183734473686, guid: ff9296a6e46a64f4b99bd8e8f37d1187,
+    type: 2}
+  m_PrefabInternal: {fileID: 1843296802}
+--- !u!135 &88102705
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 88102704}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.35
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &88326598
 Prefab:
   m_ObjectHideFlags: 0
@@ -5954,6 +5971,23 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d08ad8bbbc4c9b4698bf5b94464c93a, type: 3}
   m_IsPrefabAsset: 0
+--- !u!1 &163486594 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1053832587063630, guid: ff9296a6e46a64f4b99bd8e8f37d1187,
+    type: 2}
+  m_PrefabInternal: {fileID: 1843296802}
+--- !u!135 &163486595
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 163486594}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.35
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &166139764
 Prefab:
   m_ObjectHideFlags: 0
@@ -17459,11 +17493,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4094085260822280, guid: 475dd502e2dc9774abd50bc0086a1139, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -6.41
+      value: -4.767
       objectReference: {fileID: 0}
     - target: {fileID: 4094085260822280, guid: 475dd502e2dc9774abd50bc0086a1139, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.32
+      value: 5.334
       objectReference: {fileID: 0}
     - target: {fileID: 4094085260822280, guid: 475dd502e2dc9774abd50bc0086a1139, type: 2}
       propertyPath: m_LocalPosition.z
@@ -17511,7 +17545,8 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 0.10000001
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65446703906616188, guid: 475dd502e2dc9774abd50bc0086a1139, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 475dd502e2dc9774abd50bc0086a1139, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &429603256
@@ -23845,6 +23880,23 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adff3097768af3a4aac055ec85ca6fd8, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &569624137 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1570432191130514, guid: ff9296a6e46a64f4b99bd8e8f37d1187,
+    type: 2}
+  m_PrefabInternal: {fileID: 1843296802}
+--- !u!135 &569624138
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 569624137}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.35
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &570327043
 Prefab:
   m_ObjectHideFlags: 0
@@ -47465,11 +47517,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 1b1fff3086b74b1409855fc5f19de3d6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1b1fff3086b74b1409855fc5f19de3d6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1b1fff3086b74b1409855fc5f19de3d6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -74776,7 +74828,37 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114680300494347872, guid: ff9296a6e46a64f4b99bd8e8f37d1187,
+        type: 2}
+      propertyPath: pieceId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114128083935540662, guid: ff9296a6e46a64f4b99bd8e8f37d1187,
+        type: 2}
+      propertyPath: pieceId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114974358302448402, guid: ff9296a6e46a64f4b99bd8e8f37d1187,
+        type: 2}
+      propertyPath: pieceId
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4074638235487702, guid: ff9296a6e46a64f4b99bd8e8f37d1187, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4165702074868448, guid: ff9296a6e46a64f4b99bd8e8f37d1187, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4687340172370304, guid: ff9296a6e46a64f4b99bd8e8f37d1187, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 65880399793984730, guid: ff9296a6e46a64f4b99bd8e8f37d1187, type: 2}
+    - {fileID: 65221986645113558, guid: ff9296a6e46a64f4b99bd8e8f37d1187, type: 2}
+    - {fileID: 65009482518211410, guid: ff9296a6e46a64f4b99bd8e8f37d1187, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: ff9296a6e46a64f4b99bd8e8f37d1187, type: 2}
   m_IsPrefabAsset: 0
 --- !u!4 &1846884669 stripped
@@ -82286,6 +82368,23 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ef56ed45e052774d8cafc54e31db692, type: 3}
   m_IsPrefabAsset: 0
+--- !u!1 &2039101589 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1849543138802588, guid: 475dd502e2dc9774abd50bc0086a1139,
+    type: 2}
+  m_PrefabInternal: {fileID: 427978259}
+--- !u!135 &2039101590
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2039101589}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.35
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2042680310
 Prefab:
   m_ObjectHideFlags: 0
