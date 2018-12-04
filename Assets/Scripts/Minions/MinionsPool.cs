@@ -98,6 +98,16 @@ public class MinionsPool : MonoBehaviour
     {
         lock (syncLock)
         {
+
+            if (minions.Count >= poolSize)
+            {
+
+                if (showDebugLogs) Debug.Log("Destruyendo el minion (excede el tamaño del pool): " + minions.Count);
+
+                Destroy(minion);
+                return;
+            }
+
             minion.gameObject.SetActive(false);
             minion.explosive = false;
             minion.GetComponent<Rigidbody>().velocity = Vector3.zero;
