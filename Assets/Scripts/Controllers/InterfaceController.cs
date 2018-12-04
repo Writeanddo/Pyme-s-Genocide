@@ -43,6 +43,7 @@ public class InterfaceController : MonoBehaviour
         Assert.IsTrue(objective >= 0 && objective < objectives.Length, "Out of bounds -> " + objective);
 
         objectives[objective].sprite = unlockedObjectivesSprites[objective];
+        objectives[objective].color = new Color(1, 1, 1, 1);
         unlockedObjectives.Add(objective);
 
         if (unlockedObjectives.Count == objectives.Length)
