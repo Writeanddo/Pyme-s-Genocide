@@ -52,6 +52,8 @@ public class MinionsPool : MonoBehaviour
             minions = new List<Minion>(poolSize);
             _transform = transform;
 
+            LoadMinions();
+
             for (int i = 0; i < poolSize; i++)
             {
                 InstantiateCopy();
@@ -104,12 +106,13 @@ public class MinionsPool : MonoBehaviour
 
                 if (showDebugLogs) Debug.Log("Destruyendo el minion (excede el tamaño del pool): " + minions.Count);
 
-                Destroy(minion);
+                Destroy(minion.gameObject);
                 return;
             }
 
             minion.gameObject.SetActive(false);
             minion.explosive = false;
+            minion.readyToHarvest = true;
             minion.GetComponent<Rigidbody>().velocity = Vector3.zero;
             minion.transform.position = new Vector3(10000.0f, 10000.0f, 10000.0f);
             minion.transform.localScale = Vector3.one;
@@ -167,8 +170,6 @@ public class MinionsPool : MonoBehaviour
 
     private void InstantiateCopy()
     {
-        LoadMinions();
-
         int rand = Mathf.RoundToInt(Random.Range(0, minionPrefabs.Count));
 
         Minion minionPrefab = minionPrefabs[rand];
