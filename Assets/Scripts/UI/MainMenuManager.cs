@@ -20,7 +20,7 @@ public class MainMenuManager : MonoBehaviour {
     private UISoundEffects m_sound;
     private bool waitAnyKey = true;
 
-    float counter = 67f;
+    float counter = 72f;
 
     GameManager gm;
 
@@ -42,7 +42,7 @@ public class MainMenuManager : MonoBehaviour {
 
     void Update () {
         counter += Time.deltaTime;
-        if (counter > 70f) {
+        if (counter > 75f) {
             counter = 0;
             splineController.FollowSpline();
         }
