@@ -62,7 +62,6 @@ public class PlayerControllerRB : MonoBehaviour
 
     void Update()
     {
-
         animator.SetBool("running", false);
         animator.SetBool("strafing", false);
         animator.SetBool("jump", false);

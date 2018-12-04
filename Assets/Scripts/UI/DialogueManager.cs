@@ -7,8 +7,7 @@ public class DialogueManager : MonoBehaviour {
 
     public Text nameText;
     public Text dialogueText;
-
- //   public Animator animator;
+    public GameObject dialogue;
 
     private Queue<string> sentences;
 
@@ -18,14 +17,12 @@ public class DialogueManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetButtonDown("Jump")) {
+        if (Input.GetButtonDown("Submit")) {
             DisplayNextSentence();
         }
     }
 
     public void StartDialogue(Dialogue dialogue) {
-       // animator.SetBool("IsOpen", true);
-
         nameText.text = dialogue.name;
 
         sentences.Clear();
@@ -57,7 +54,8 @@ public class DialogueManager : MonoBehaviour {
     }
 
     void EndDialogue() {
-       // animator.SetBool("IsOpen", false);
+        dialogue.SetActive(false);
+        GameObject.Find("Player").GetComponent<PlayerControllerRB>().inputEnabled = true;
     }
 
 }
