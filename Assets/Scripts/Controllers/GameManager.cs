@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // ammo = maxAmmo;
+        interfaceController.UpdateCounter();
 
         pauseCanvas = FindObjectOfType<PauseCanvas>();
         tpc = FindObjectOfType<ThirdPersonCamera>();
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
         }
 
         player = FindObjectOfType<PlayerControllerRB>();
+
     }
 
     private void Update()

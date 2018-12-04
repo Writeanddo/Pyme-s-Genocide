@@ -60,12 +60,15 @@ public class Absorber : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!Input.GetButton("Fire2") || !ReadyToUse)
+
+        if (!playerController.inputEnabled || !Input.GetButton("Fire2") || !ReadyToUse)
         {
             audioSource.Stop();
             absorbParticleSystem.Stop();
             return;
         }
+
+        if (!playerController.inputEnabled) { return; }
 
         if (!absorbParticleSystem.isPlaying)
         {
@@ -133,7 +136,7 @@ public class Absorber : MonoBehaviour
         Absorbing = Input.GetButton("Fire2");
         bool firingIsDown = Input.GetButton("Fire1");
 
-        if (ReadyToUse && firingIsDown && gameManager.GetAmmo() > 0.0f)
+        if (playerController.inputEnabled && ReadyToUse && firingIsDown && gameManager.GetAmmo() > 0.0f)
         {
             if (!firing && canFire)
             {
@@ -163,7 +166,7 @@ public class Absorber : MonoBehaviour
         animator.SetBool("activate", false);
         animator.SetBool("deactivate", false);
 
-        if (Absorbing)
+        if (Absorbing && playerController.inputEnabled)
         {
             animator.SetBool("pull", true);
         }
@@ -178,7 +181,7 @@ public class Absorber : MonoBehaviour
         {
             autoDeactivateWeaponTimer = autoDeactivateWeaponTimeInSeconds;
         }
-        else if (!weaponOut && (Absorbing || firingIsDown))
+        else if (playerController.inputEnabled && !weaponOut && (Absorbing || firingIsDown))
         {
             weaponOut = true;
             animator.SetBool("activate", true);

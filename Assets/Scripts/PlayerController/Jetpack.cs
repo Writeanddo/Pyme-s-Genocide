@@ -50,7 +50,7 @@ public class Jetpack : MonoBehaviour
 
     private void Update()
     {
-        if (!Input.GetButton("Jump") || gm.GetAmmo() <= 0.0f)
+        if (!playerController.inputEnabled || !Input.GetButton("Jump") || gm.GetAmmo() <= 0.0f)
         {
             minionsSpawned = 0;
             totalMinionsSpawned = 0;

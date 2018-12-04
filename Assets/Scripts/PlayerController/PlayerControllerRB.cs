@@ -65,6 +65,7 @@ public class PlayerControllerRB : MonoBehaviour
         animator.SetBool("running", false);
         animator.SetBool("strafing", false);
         animator.SetBool("jump", false);
+        animator.SetBool("grounded", true);
 
         if (!inputEnabled) {
             m_CurrentVelocity = Vector3.zero;
