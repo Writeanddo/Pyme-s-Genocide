@@ -263,7 +263,7 @@ public class PlayerControllerRB : MonoBehaviour
 
     public void Step()
     {
-        gameManager.audioManager.PlayOneShot(gameManager.audioManager.steps, transform.position);
+        // gameManager.audioManager.PlayOneShot(gameManager.audioManager.steps, transform.position);
     }
 }
 

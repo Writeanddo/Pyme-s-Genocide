@@ -64,6 +64,12 @@ public class GameManager : MonoBehaviour
             AllObjectivesCleared();
         }
 #endif
+
+        if (SceneManager.GetActiveScene().name == "Main")
+        {
+            return;
+        }
+
         if (Input.GetButtonDown("Exit"))
         {
             gamePaused = !gamePaused;
@@ -80,7 +86,7 @@ public class GameManager : MonoBehaviour
 
     public void SwapPauseState()
     {
-        if (SceneManager.GetActiveScene().name == "Menu") {
+        if (SceneManager.GetActiveScene().name == "Main") {
             return;
         }
 
@@ -97,7 +103,7 @@ public class GameManager : MonoBehaviour
     public void Pause()
     {
 
-        if (SceneManager.GetActiveScene().name == "Menu")
+        if (SceneManager.GetActiveScene().name == "Main")
         {
             return;
         }
@@ -112,7 +118,7 @@ public class GameManager : MonoBehaviour
     public void UnPause()
     {
 
-        if (SceneManager.GetActiveScene().name == "Menu")
+        if (SceneManager.GetActiveScene().name == "Main")
         {
             return;
         }

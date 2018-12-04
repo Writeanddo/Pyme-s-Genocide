@@ -27382,6 +27382,15 @@ Prefab:
       propertyPath: brokenGlass.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: 9d97ce97f10f13647a6b5f584c8423c6, type: 3}
+    - target: {fileID: 82973047664491060, guid: 87c8d213c94ede84ab3f8a117563dbe7,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bc8326c123a7be34f88fa420237f8083, type: 3}
+    - target: {fileID: 1896120749023932, guid: 87c8d213c94ede84ab3f8a117563dbe7, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87c8d213c94ede84ab3f8a117563dbe7, type: 2}
   m_IsPrefabAsset: 0
