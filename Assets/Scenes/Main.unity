@@ -39116,6 +39116,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114187658559772282, guid: 1ecb8d42d80038c4c8820e52a4f81f37,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ecb8d42d80038c4c8820e52a4f81f37, type: 2}
   m_IsPrefabAsset: 0
@@ -54143,6 +54148,52 @@ Prefab:
     - target: {fileID: 1699125131759630, guid: e1a1200fa88bc7349a3c3556df034edd, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1289223583065280, guid: e1a1200fa88bc7349a3c3556df034edd, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224657075024998236, guid: e1a1200fa88bc7349a3c3556df034edd,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 88
+      objectReference: {fileID: 0}
+    - target: {fileID: 114410557774776932, guid: e1a1200fa88bc7349a3c3556df034edd,
+        type: 2}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9a29ebe1b15c16d4e81e12292c28f2b5,
+        type: 2}
+    - target: {fileID: 114410557774776932, guid: e1a1200fa88bc7349a3c3556df034edd,
+        type: 2}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 21713633099795566, guid: 9a29ebe1b15c16d4e81e12292c28f2b5,
+        type: 2}
+    - target: {fileID: 114410557774776932, guid: e1a1200fa88bc7349a3c3556df034edd,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114410557774776932, guid: e1a1200fa88bc7349a3c3556df034edd,
+        type: 2}
+      propertyPath: m_text
+      value: Pyme's Genocide
+      objectReference: {fileID: 0}
+    - target: {fileID: 114410557774776932, guid: e1a1200fa88bc7349a3c3556df034edd,
+        type: 2}
+      propertyPath: m_textInfo.characterCount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114410557774776932, guid: e1a1200fa88bc7349a3c3556df034edd,
+        type: 2}
+      propertyPath: m_textInfo.wordCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114410557774776932, guid: e1a1200fa88bc7349a3c3556df034edd,
+        type: 2}
+      propertyPath: m_textInfo.spaceCount
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1a1200fa88bc7349a3c3556df034edd, type: 2}

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topLeft: {r: 0.047587514, g: 1, b: 0, a: 1}
   topRight: {r: 1, g: 0.97893786, b: 0, a: 1}
-  bottomLeft: {r: 1, g: 0, b: 0, a: 1}
+  bottomLeft: {r: 0, g: 0.71138644, b: 1, a: 1}
   bottomRight: {r: 1, g: 0, b: 0.9351678, a: 1}
