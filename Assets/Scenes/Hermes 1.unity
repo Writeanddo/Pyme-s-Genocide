@@ -27402,7 +27402,7 @@ Prefab:
     - target: {fileID: 114418020951765192, guid: 87c8d213c94ede84ab3f8a117563dbe7,
         type: 2}
       propertyPath: ammo
-      value: 0
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 114418020951765192, guid: 87c8d213c94ede84ab3f8a117563dbe7,
         type: 2}
@@ -27437,6 +27437,11 @@ Prefab:
     - target: {fileID: 1896120749023932, guid: 87c8d213c94ede84ab3f8a117563dbe7, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114418020951765192, guid: 87c8d213c94ede84ab3f8a117563dbe7,
+        type: 2}
+      propertyPath: maxAmmo
+      value: 10000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87c8d213c94ede84ab3f8a117563dbe7, type: 2}

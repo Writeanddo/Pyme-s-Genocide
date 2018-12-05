@@ -31,7 +31,7 @@ public class PlayerControllerRB : MonoBehaviour
     private Vector3 m_GroundNormal;
 
     private Jetpack jetPack;
-    private bool readyForJetpack;
+    private bool airbourneAndJumpButtonReleased;
 
     private float m_turnSmoothVelocity;
 
@@ -67,7 +67,8 @@ public class PlayerControllerRB : MonoBehaviour
         animator.SetBool("jump", false);
         animator.SetBool("grounded", true);
 
-        if (!inputEnabled) {
+        if (!inputEnabled)
+        {
             m_CurrentVelocity = Vector3.zero;
             return;
         }
@@ -86,10 +87,6 @@ public class PlayerControllerRB : MonoBehaviour
         if (IsGrounded)
         {
             HandleGroundedInput();
-        }
-        else
-        {
-            HandleAirborneInput();
         }
 
         FreeCamera = Input.GetButton("Fire3") && inputDir.x == 0.0f && inputDir.y == 0.0f;
@@ -117,6 +114,44 @@ public class PlayerControllerRB : MonoBehaviour
         {
             animator.SetBool("jump", true);
         }
+
+
+        if (IsGrounded)
+        {
+            airbourneAndJumpButtonReleased = false;
+        }
+        else if (!airbourneAndJumpButtonReleased && (Input.GetButtonUp("Jump") || Rigidbody.velocity.y <= 0.0f))
+        {
+            airbourneAndJumpButtonReleased = true;
+        }
+
+        m_WantsToJetpack = airbourneAndJumpButtonReleased && !IsGrounded && Input.GetButton("Jump");
+
+        if (m_WantsToJetpack)
+        {
+            if (gameManager.GetAmmo() <= 0.0f)
+            {
+                if (jetPack.BeingUsed)
+                {
+                    jetPack.CancelJetpack(true);
+                }
+                else
+                {
+                    jetPack.PlayOutOfAmmoSfx();
+                }
+            }
+            if (!jetPack.BeingUsed)
+            {
+                if (jetPack.Ready)
+                {
+                    jetPack.StartJetpack();
+                }
+            }
+        }
+        else if (jetPack.BeingUsed)
+        {
+            jetPack.CancelJetpack(false);
+        }
     }
 
     private void FixedUpdate()
@@ -124,6 +159,7 @@ public class PlayerControllerRB : MonoBehaviour
         if (m_WantsToJump)
         {
             Rigidbody.AddForce(Vector3.up * m_JumpForce);
+            m_WantsToJump = false;
         }
 
         if (m_WantsToJetpack && gameManager.GetAmmo() > 0)
@@ -204,9 +240,6 @@ public class PlayerControllerRB : MonoBehaviour
         thirdPersonCamera.ManualUpdate();
 
         externalForces.Clear();
-
-        m_WantsToJump = false;
-        m_WantsToJetpack = false;
     }
 
     public void AddExternalForce(PlayerControllerExternalForce force)
@@ -221,22 +254,6 @@ public class PlayerControllerRB : MonoBehaviour
             m_WantsToJump = true;
             gameManager.audioManager.PlayOneShot(gameManager.audioManager.playerJump, transform.position);
         }
-
-        readyForJetpack = false;
-    }
-
-    private void HandleAirborneInput()
-    {
-        if (!readyForJetpack && jetPack.Ready && Rigidbody.velocity.y <= 0.0f)
-        {
-            readyForJetpack = true;
-        }
-
-        if (readyForJetpack && Input.GetButton("Jump"))
-        {
-            jetPack.StartJetpack();
-            m_WantsToJetpack = true;
-        }
     }
 
     void CheckGroundStatus()
@@ -247,9 +264,11 @@ public class PlayerControllerRB : MonoBehaviour
         Debug.DrawLine(transform.position + (Vector3.up * 0.1f), transform.position + (Vector3.up * 0.1f) + (Vector3.down * m_GroundCheckDistance));
 #endif
 
+        int layerMask = ~LayerMask.GetMask("Minions");
+
         // 0.1f is a small offset to start the ray from inside the character
         // it is also good to note that the transform position in the sample assets is at the base of the character
-        if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance, -5, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance, layerMask, QueryTriggerInteraction.Ignore))
         {
             m_GroundNormal = hitInfo.normal;
             IsGrounded = true;

@@ -32,6 +32,11 @@ public class ParticleSystemManager : MonoBehaviour
 
     public void Play(ParticleSystem ps, Transform parent)
     {
+        if (ReferenceEquals(ps, null) || ps == null || ps.transform == null || ps.transform.parent == null)
+        {
+            Debug.Log("A");
+        }
+
         ps.transform.parent = transform;
         ps.Play();
 
@@ -45,7 +50,7 @@ public class ParticleSystemManager : MonoBehaviour
             yield return null;
         }
 
-        if (parent != null)
+        if (parent == null || ReferenceEquals(parent, null))
         {
             Destroy(ps.gameObject);
         }

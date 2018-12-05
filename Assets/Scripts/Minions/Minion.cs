@@ -303,6 +303,10 @@ public class Minion : MonoBehaviour
     {
         if (explosive)
         {
+            if (collision.gameObject.CompareTag("Minion"))
+            {
+                return;
+            }
             Vector3 explosionPos = collision.contacts[0].point;
             Explode(explosionPos);
         }

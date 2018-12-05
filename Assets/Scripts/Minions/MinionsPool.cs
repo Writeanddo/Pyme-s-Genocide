@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class MinionsPool : MonoBehaviour
 {
-    [SerializeField] bool showDebugLogs = true;
-    [SerializeField] int poolSize = 180;
+    [SerializeField] bool showDebugLogs = false;
+    [SerializeField] int poolSize = 200;
     int spawnedMinionsCount;
 
     List<Minion> minions;
@@ -86,6 +86,7 @@ public class MinionsPool : MonoBehaviour
                 }
 
                 Minion minion = minions[0];
+
                 minion.transform.parent = null;
                 minion.gameObject.SetActive(true);
                 minions.RemoveAt(0);
@@ -122,7 +123,6 @@ public class MinionsPool : MonoBehaviour
             minion.transform.position = new Vector3(10000.0f, 10000.0f, 10000.0f);
             minion.transform.localScale = Vector3.one;
             minion.transform.rotation = Quaternion.identity;
-            minion.gameObject.layer = LayerMask.NameToLayer("Minions");
 
             minion.transform.SetParent(_transform, true);
 

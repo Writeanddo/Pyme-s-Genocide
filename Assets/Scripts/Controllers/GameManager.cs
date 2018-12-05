@@ -72,9 +72,6 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetButtonDown("Exit") && canPause)
         {
-            Debug.Log("ASDFASDF");
-            canPause = false;
-            Invoke("CanPause",0.1f);
             gamePaused = !gamePaused;
             if (gamePaused)
             {
@@ -86,7 +83,6 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    private void CanPause() { canPause = true; }
 
     public void SwapPauseState()
     {

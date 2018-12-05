@@ -38,9 +38,12 @@ public class Jetpack : MonoBehaviour
 
     PlayerControllerRB playerController;
 
+    public bool BeingUsed { get; private set; }
+
     private void Start()
     {
         Ready = true;
+        BeingUsed = false;
         gm = FindObjectOfType<GameManager>();
         animatorL = jetpackL.GetComponent<Animator>();
         animatorR = jetpackR.GetComponent<Animator>();
@@ -50,26 +53,6 @@ public class Jetpack : MonoBehaviour
 
     private void Update()
     {
-        if (!playerController.inputEnabled || !Input.GetButton("Jump") || gm.GetAmmo() <= 0.0f)
-        {
-            minionsSpawned = 0;
-            totalMinionsSpawned = 0;
-            CancelJetpack();
-        }
-
-        if (Ready && failureSoundReady && Input.GetButton("Jump") &&
-            gm.GetAmmo() <= 0.0f && !playerController.IsGrounded && playerController.Rigidbody.velocity.y <= 0.0f)
-        {
-            if (audioSourceJetpackNoise.isPlaying)
-            {
-                audioSourceJetpackNoise.Stop();
-            }
-            audioSourceJetpackNoise.loop = false;
-            audioSourceJetpackNoise.clip = audioClipJetpackFailure;
-            audioSourceJetpackNoise.Play();
-            StartCoroutine(RestartFailureTimer());
-        }
-
         audioSourceJetpackNoise.volume = gm.audioManager.m_soundVolume;
     }
 
@@ -80,6 +63,7 @@ public class Jetpack : MonoBehaviour
 
     public void StartJetpack()
     {
+        BeingUsed = true;
         animatorR.SetBool("active", true);
         animatorL.SetBool("active", true);
 
@@ -95,8 +79,9 @@ public class Jetpack : MonoBehaviour
         }
     }
 
-    public void CancelJetpack()
+    public void CancelJetpack(bool outOfAmmo = false)
     {
+        BeingUsed = false;
         animatorR.SetBool("active", false);
         animatorL.SetBool("active", false);
         AnimatorClipInfo[] clipInfo = animatorR.GetCurrentAnimatorClipInfo(0);
@@ -109,13 +94,20 @@ public class Jetpack : MonoBehaviour
         {
             audioSourceJetpackNoise.Stop();
 
-            if (Input.GetButton("Jump") && gm.GetAmmo() <= 0.0f)
+            if (outOfAmmo)
             {
-                audioSourceJetpackNoise.loop = false;
-                audioSourceJetpackNoise.clip = audioClipJetpackFailure;
-                audioSourceJetpackNoise.Play();
-                StartCoroutine(RestartFailureTimer());
+                PlayOutOfAmmoSfx();
             }
+        }
+    }
+
+    public void PlayOutOfAmmoSfx()
+    {
+        if (!audioSourceJetpackNoise.isPlaying || audioSourceJetpackNoise.clip != audioClipJetpackFailure)
+        {
+            audioSourceJetpackNoise.loop = false;
+            audioSourceJetpackNoise.clip = audioClipJetpackFailure;
+            audioSourceJetpackNoise.Play();
         }
     }
 
@@ -146,8 +138,6 @@ public class Jetpack : MonoBehaviour
                     m.transform.position = jetpackR.spawnPoint.position;
                 }
 
-                m.gameObject.layer = LayerMask.NameToLayer("Minions jetpack");
-
                 m.transform.localScale = 0.5f * Vector3.one;
                 m.transform.rotation = Random.rotation;
                 m.AddForce(m_PushForce * Vector3.down, ForceMode.Impulse);
@@ -158,12 +148,5 @@ public class Jetpack : MonoBehaviour
         }
 
         totalMinionsSpawned = (int)Mathf.Ceil(minionsSpawned);
-    }
-
-    IEnumerator RestartFailureTimer()
-    {
-        failureSoundReady = false;
-        yield return new WaitForSeconds(failureSoundDelay);
-        failureSoundReady = true;
     }
 }
