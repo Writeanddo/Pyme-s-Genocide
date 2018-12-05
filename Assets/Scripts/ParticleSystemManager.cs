@@ -44,6 +44,14 @@ public class ParticleSystemManager : MonoBehaviour
         {
             yield return null;
         }
-        ps.transform.parent = parent;
+
+        if (parent != null)
+        {
+            Destroy(ps.gameObject);
+        }
+        else
+        {
+            ps.transform.parent = parent;
+        }
     }
 }

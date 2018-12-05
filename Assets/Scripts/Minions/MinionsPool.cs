@@ -6,7 +6,7 @@ using UnityEngine;
 public class MinionsPool : MonoBehaviour
 {
     [SerializeField] bool showDebugLogs = true;
-    [SerializeField] int poolSize = 200;
+    [SerializeField] int poolSize = 180;
     int spawnedMinionsCount;
 
     List<Minion> minions;
@@ -108,6 +108,7 @@ public class MinionsPool : MonoBehaviour
 
                 if (showDebugLogs) Debug.Log("Destruyendo el minion (excede el tamaño del pool): " + minions.Count);
 
+                minions.Remove(minion);
                 Destroy(minion.gameObject);
 
                 spawnedMinionsCount--;
