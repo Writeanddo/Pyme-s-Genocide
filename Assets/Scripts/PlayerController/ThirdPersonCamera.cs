@@ -54,6 +54,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
     public void ManualUpdate()
     {
+
         if (target == null)
         {
             transform.LookAt(playerTransform);
@@ -67,13 +68,13 @@ public class ThirdPersonCamera : MonoBehaviour
 
         RaycastHit hit;
         // + forward para ponernos a distancia 0 del player y no colisionar con algo que está detrás
-        if (Physics.Raycast(ray.origin, cam.transform.forward, out hit, 100.0f, layerMask, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(ray.origin, cam.transform.forward, out hit, Mathf.Infinity, layerMask, QueryTriggerInteraction.Ignore))
         {
             FocalPoint = hit.point;
         }
         else
         {
-            FocalPoint = 100.0f * cam.transform.forward;
+            FocalPoint = 10000.0f * cam.transform.forward;
         }
 
         yaw += Input.GetAxis("Mouse X") * mouseSensitivity;

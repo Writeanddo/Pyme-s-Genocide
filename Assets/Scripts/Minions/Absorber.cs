@@ -60,7 +60,7 @@ public class Absorber : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+
         if (!playerController.inputEnabled || !(Input.GetButton("Fire2") || (Input.GetAxis("Fire2") > 0.5f)) || !ReadyToUse)
         {
             audioSource.Stop();
@@ -89,8 +89,6 @@ public class Absorber : MonoBehaviour
         {
             ray = new Ray(head.position, (tps.FocalPoint - head.position).normalized);
         }
-
-        Debug.DrawRay(ray.origin, absorberMaxDistance * ray.direction, Color.red);
 
         int ammount = Physics.SphereCastNonAlloc(
             ray, absorberRadius, results, absorberMaxDistance, 1 << LayerMask.NameToLayer("Minions"), QueryTriggerInteraction.Ignore);
@@ -131,13 +129,6 @@ public class Absorber : MonoBehaviour
 
     void Update()
     {
-
-        //if (!gameManager.gamePaused)
-        //{
-        //    Debug.Log(Camera.main.ScreenToViewportPoint(Input.mousePosition));
-        //}
-
-
         bool fire1Axis = Input.GetAxis("Fire1") < -0.5f;
         bool fire2Axis = Input.GetAxis("Fire2") > 0.5f;
 
@@ -259,8 +250,7 @@ public class Absorber : MonoBehaviour
         }
         else
         {
-            direction =
-            Quaternion.AngleAxis(-pushAngle, absorbParticleSystem.transform.parent.right) * absorbParticleSystem.transform.parent.forward;
+            direction = (tps.FocalPoint - spawnPoint.position).normalized;
         }
 
         newBullet.AddForce(direction * pushForce, ForceMode.Impulse);
