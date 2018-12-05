@@ -17,7 +17,6 @@ public class SpaceShip : MonoBehaviour {
     private void FixedUpdate() {
         if (isEjecting) {
             velocity = velocity + (Time.deltaTime * acceleration);
-            //this line feeds the ever-growing force to the object, propelling it faster and faster over time
             transform.Translate(0, 0, velocity);
         }
     }
