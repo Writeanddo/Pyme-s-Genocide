@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class Minion : MonoBehaviour
 {
+    public string minionID;
     [SerializeField] int moveSpeed = 3;
 
     [SerializeField] float minDetectionDistance;

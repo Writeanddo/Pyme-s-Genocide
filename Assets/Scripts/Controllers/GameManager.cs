@@ -183,4 +183,6 @@ public class GameManager : MonoBehaviour
 
         interfaceController.FadeInScreen(1.0f);
     }
+
+    public void AddMinionCounterToPauseMenu(string id) { pauseCanvas.minionCounter(id); }
 }

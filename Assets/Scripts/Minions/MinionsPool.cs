@@ -136,10 +136,10 @@ public class MinionsPool : MonoBehaviour
     {
         if (minionPrefabs.Count == 0)
         {
-            minionPrefabs.Add(Resources.Load<Minion>("Bocado"));
-            minionPrefabs.Add(Resources.Load<Minion>("CJ"));
-            minionPrefabs.Add(Resources.Load<Minion>("Tago"));
-            minionPrefabs.Add(Resources.Load<Minion>("fluf"));
+            minionPrefabs.Add(Resources.Load<Minion>("Bocado")); minionPrefabs[(minionPrefabs.Count - 1)].minionID = "Bocado";
+            minionPrefabs.Add(Resources.Load<Minion>("CJ")); minionPrefabs[(minionPrefabs.Count - 1)].minionID = "CJ";
+            minionPrefabs.Add(Resources.Load<Minion>("Tago")); minionPrefabs[(minionPrefabs.Count - 1)].minionID = "Tago";
+            minionPrefabs.Add(Resources.Load<Minion>("fluf")); minionPrefabs[(minionPrefabs.Count - 1)].minionID = "fluf";
         }
         if (minionTextures.Count == 0)
         {

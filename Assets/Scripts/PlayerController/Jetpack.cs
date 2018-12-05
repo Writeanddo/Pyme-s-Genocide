@@ -126,6 +126,7 @@ public class Jetpack : MonoBehaviour
             for (int i = 0; i < spawnAmmount; i++)
             {
                 Minion m = MinionsPool.Instance.Get(true);
+                gm.AddMinionCounterToPauseMenu(m.minionID);
                 m.explosive = true;
                 m.DisableHarvestingForSeconds(1.0f);
 
