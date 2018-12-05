@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float ammo;
 
     public bool gamePaused { get; private set; }
-
+    private bool canPause = true;
     PauseCanvas pauseCanvas;
 
     PlayerControllerRB player;
@@ -70,8 +70,11 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (Input.GetButtonDown("Exit"))
+        if (Input.GetButtonDown("Exit") && canPause)
         {
+            Debug.Log("ASDFASDF");
+            canPause = false;
+            Invoke("CanPause",0.1f);
             gamePaused = !gamePaused;
             if (gamePaused)
             {
@@ -83,6 +86,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    private void CanPause() { canPause = true; }
 
     public void SwapPauseState()
     {

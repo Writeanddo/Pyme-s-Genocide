@@ -60,8 +60,8 @@ public class Absorber : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-        if (!playerController.inputEnabled || !Input.GetButton("Fire2") || !ReadyToUse)
+        
+        if (!playerController.inputEnabled || !(Input.GetButton("Fire2") || (Input.GetAxis("Fire2") > 0.5f)) || !ReadyToUse)
         {
             audioSource.Stop();
             absorbParticleSystem.Stop();
@@ -132,13 +132,17 @@ public class Absorber : MonoBehaviour
     void Update()
     {
 
-        if (!gameManager.gamePaused)
-        {
-            Debug.Log(Camera.main.ScreenToViewportPoint(Input.mousePosition));
-        }
+        //if (!gameManager.gamePaused)
+        //{
+        //    Debug.Log(Camera.main.ScreenToViewportPoint(Input.mousePosition));
+        //}
 
-        Absorbing = Input.GetButton("Fire2");
-        bool firingIsDown = Input.GetButton("Fire1");
+
+        bool fire1Axis = Input.GetAxis("Fire1") < -0.5f;
+        bool fire2Axis = Input.GetAxis("Fire2") > 0.5f;
+
+        Absorbing = (Input.GetButton("Fire2") || fire2Axis);
+        bool firingIsDown = (Input.GetButton("Fire1") || fire1Axis);
 
         if (playerController.inputEnabled && ReadyToUse && firingIsDown && gameManager.GetAmmo() > 0.0f)
         {
