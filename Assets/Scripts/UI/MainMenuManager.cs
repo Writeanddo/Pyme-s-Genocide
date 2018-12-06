@@ -93,6 +93,20 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
+    public void PlayButtonSound()
+    {
+        bool gameWasPaused = gm.gamePaused;
+        if (gameWasPaused)
+        {
+            Time.timeScale = 1.0f;
+        }
+        gm.audioManager.PlayOneShot(gm.audioManager.button, Camera.main.transform.position);
+        if (gameWasPaused)
+        {
+            Time.timeScale = 0.0f;
+        }
+    }
+
     public void Play()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

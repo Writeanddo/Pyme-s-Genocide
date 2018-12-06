@@ -282,7 +282,7 @@ public class Minion : MonoBehaviour
                         mode = ForceMode.Impulse
                     };
 
-                    rb.AddExternalForce(force);
+                    // rb.AddExternalForce(force);
                 }
             }
             else
