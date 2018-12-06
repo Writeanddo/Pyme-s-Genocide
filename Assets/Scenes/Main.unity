@@ -5171,6 +5171,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: bf80a981a3b79b84b88f1427fbe618fa,
     type: 3}
   m_PrefabInternal: {fileID: 117227824}
+--- !u!114 &120479836 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114175836581473358, guid: a6c46bc56d92258469013d4e5083c9f5,
+    type: 2}
+  m_PrefabInternal: {fileID: 530356870}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &121185411
 Prefab:
   m_ObjectHideFlags: 0
@@ -23792,6 +23798,21 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114144683524039952, guid: a6c46bc56d92258469013d4e5083c9f5,
+        type: 2}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 120479836}
+    - target: {fileID: 114548443117131996, guid: a6c46bc56d92258469013d4e5083c9f5,
+        type: 2}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 1866105635}
+    - target: {fileID: 114754420439535968, guid: a6c46bc56d92258469013d4e5083c9f5,
+        type: 2}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 1990357240}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6c46bc56d92258469013d4e5083c9f5, type: 2}
   m_IsPrefabAsset: 0
@@ -76817,6 +76838,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: bf80a981a3b79b84b88f1427fbe618fa,
     type: 3}
   m_PrefabInternal: {fileID: 1865290660}
+--- !u!114 &1866105635 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114441753442769618, guid: a6c46bc56d92258469013d4e5083c9f5,
+    type: 2}
+  m_PrefabInternal: {fileID: 530356870}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1868042216
 Prefab:
   m_ObjectHideFlags: 0
@@ -82244,6 +82271,12 @@ Transform:
   m_Father: {fileID: 1565966260}
   m_RootOrder: 89
   m_LocalEulerAnglesHint: {x: 0, y: 184.58199, z: 0}
+--- !u!114 &1990357240 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114796213308947294, guid: a6c46bc56d92258469013d4e5083c9f5,
+    type: 2}
+  m_PrefabInternal: {fileID: 530356870}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1992546126
 GameObject:
   m_ObjectHideFlags: 0
