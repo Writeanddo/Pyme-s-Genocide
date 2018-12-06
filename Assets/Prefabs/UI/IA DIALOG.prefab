@@ -72,6 +72,6 @@ MonoBehaviour:
     - Go and find me new parts. You'll need to use your jetpack, but it's out of fuel...
     - You should try with these little guys, my superpowerfull artificial mind detects
       that are made of fuel OMG!
-    - "They could be use too for break energy crystals that protects the parts. Throw
-      them, \xA1\xA1they are free!!"
+    - "They could be used to break energy crystals that protect the parts too. Throw
+      them, \xA1they are free!\r"
   dialogueManager: {fileID: 0}
