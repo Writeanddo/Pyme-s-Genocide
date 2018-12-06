@@ -44,14 +44,15 @@ public class GameManager : MonoBehaviour
 
         pauseCanvas = FindObjectOfType<PauseCanvas>();
         tpc = FindObjectOfType<ThirdPersonCamera>();
+        pauseCanvas.gameObject.SetActive(false);
 
-        if (pauseCanvas == null)
-        {
-            PauseCanvas pauseCanvasPrefab = Resources.Load<PauseCanvas>("pauseCanvas");
-            pauseCanvas = Instantiate(pauseCanvasPrefab);
-            pauseCanvas.gameObject.name = "[PauseCanvas]";
-            pauseCanvas.gameObject.SetActive(false);
-        }
+        /* if (pauseCanvas == null)
+         {
+             PauseCanvas pauseCanvasPrefab = Resources.Load<PauseCanvas>("pauseCanvas");
+             pauseCanvas = Instantiate(pauseCanvasPrefab);
+             pauseCanvas.gameObject.name = "[PauseCanvas]";
+             pauseCanvas.gameObject.SetActive(false);
+         }*/
 
         player = FindObjectOfType<PlayerControllerRB>();
     }
