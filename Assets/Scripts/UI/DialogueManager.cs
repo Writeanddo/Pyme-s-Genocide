@@ -12,10 +12,12 @@ public class DialogueManager : MonoBehaviour {
     private Queue<string> sentences;
 
     public Dialogue dialogSource;
+    GameManager gm;
 
     // Use this for initialization
     void Start() {
         sentences = new Queue<string>();
+        gm = FindObjectOfType<GameManager>();
     }
 
     private void Update() {
@@ -44,6 +46,8 @@ public class DialogueManager : MonoBehaviour {
             EndDialogue();
             return;
         }
+
+        gm.audioManager.PlayOneShot(gm.audioManager.IA[Random.Range(0, gm.audioManager.IA.Length)], Camera.main.transform.position);
 
         string sentence = sentences.Dequeue();
         StopAllCoroutines();
