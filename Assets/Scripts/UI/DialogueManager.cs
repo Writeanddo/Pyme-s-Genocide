@@ -14,16 +14,26 @@ public class DialogueManager : MonoBehaviour {
     public Dialogue dialogSource;
     GameManager gm;
 
+    AudioSource audioSource;
+
     // Use this for initialization
     void Start() {
         sentences = new Queue<string>();
         gm = FindObjectOfType<GameManager>();
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     private void Update() {
         if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Submit")) {
             DisplayNextSentence();
         }
+
+        audioSource.volume = OptionsObject.Instance.sfxVolumeValue;
     }
 
     public void StartDialogue(Dialogue dialogue) {
@@ -47,7 +57,13 @@ public class DialogueManager : MonoBehaviour {
             return;
         }
 
-        gm.audioManager.PlayOneShot(gm.audioManager.IA[Random.Range(0, gm.audioManager.IA.Length)], Camera.main.transform.position);
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+
+        audioSource.clip = gm.audioManager.IA[Random.Range(0, gm.audioManager.IA.Length)];
+        audioSource.Play();
 
         string sentence = sentences.Dequeue();
         StopAllCoroutines();
@@ -64,6 +80,8 @@ public class DialogueManager : MonoBehaviour {
 
     void EndDialogue() {
         dialogue.SetActive(false);
+        audioSource.Stop();
+
         GameObject.Find("Player").GetComponent<PlayerControllerRB>().inputEnabled = true;
 
         if (dialogSource.id == 99)
