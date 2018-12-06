@@ -54,7 +54,7 @@ public class InterfaceController : MonoBehaviour
         Color c = Color.Lerp(
            new Color(85.0f, 192.0f, 157.0f, 255.0f) / 255.0f,
            //new Color(192.0f, 85.0f, 85.0f, 255.0f) / 255.0f,
-           Color.red,
+           new Color(231.0f, 54.0f, 84.0f, 255.0f) / 255.0f,
            1.0f - factor);
 
         imageCount.color = c;
