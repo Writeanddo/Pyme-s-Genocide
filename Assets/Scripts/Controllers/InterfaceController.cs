@@ -23,19 +23,60 @@ public class InterfaceController : MonoBehaviour
     [SerializeField] Sprite[] unlockedObjectivesSprites;
 
     [SerializeField] Image fadePanel;
+    [SerializeField] GameObject pausePanel;
+    [SerializeField] GameObject inGameOptionsPanel;
+
+    [SerializeField] Slider sliderSfx;
+    [SerializeField] Slider sliderMusic;
+    [SerializeField] Slider sliderSensibility;
 
     private HashSet<int> unlockedObjectives = new HashSet<int>();
 
     private void Start()
     {
         gm = FindObjectOfType<GameManager>();
+        UpdateCounter();
+
+        if (pausePanel != null)
+        {
+            sliderSfx.value = OptionsObject.Instance.sfxVolumeValue;
+            sliderMusic.value = OptionsObject.Instance.musicVolumeValue;
+            sliderSensibility.value = OptionsObject.Instance.sensibility;
+        }
     }
 
     public void UpdateCounter()
     {
         float factor = gm.GetAmmo() / gm.MaxAmmo;
         imageCount.fillAmount = factor;
-        text.text = ((int)(factor * 100)).ToString();
+        text.text = ((int)(factor * 100)).ToString() + "%";
+
+        Color c = Color.Lerp(
+           new Color(85.0f, 192.0f, 157.0f, 255.0f) / 255.0f,
+           //new Color(192.0f, 85.0f, 85.0f, 255.0f) / 255.0f,
+           Color.red,
+           1.0f - factor);
+
+        imageCount.color = c;
+        text.color = c;
+    }
+
+    public void UpdateSfxVolume()
+    {
+        OptionsObject.Instance.sfxVolumeValue = sliderSfx.value;
+    }
+
+    public void UpdateMusicVolume()
+    {
+        OptionsObject.Instance.musicVolumeValue = sliderMusic.value;
+        gm.audioManager.musicAudioSource1.volume = sliderMusic.value;
+        gm.audioManager.musicAudioSource2.volume = sliderMusic.value;
+    }
+
+    // TODO
+    public void UpdateSensibilty()
+    {
+        OptionsObject.Instance.sensibility = sliderSensibility.value;
     }
 
     public void UpdateObjective(int objective)

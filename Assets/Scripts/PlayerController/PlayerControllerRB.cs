@@ -120,7 +120,7 @@ public class PlayerControllerRB : MonoBehaviour
         {
             airbourneAndJumpButtonReleased = false;
         }
-        else if (!airbourneAndJumpButtonReleased && (Input.GetButtonUp("Jump") || Rigidbody.velocity.y <= 0.0f))
+        else if (!airbourneAndJumpButtonReleased)
         {
             airbourneAndJumpButtonReleased = true;
         }
@@ -249,7 +249,7 @@ public class PlayerControllerRB : MonoBehaviour
 
     private void HandleGroundedInput()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (!gameManager.gamePaused && Input.GetButtonDown("Jump"))
         {
             m_WantsToJump = true;
             gameManager.audioManager.PlayOneShot(gameManager.audioManager.playerJump, transform.position);

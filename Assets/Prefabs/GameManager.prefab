@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 224954363283808510}
   - component: {fileID: 222518372404601970}
   - component: {fileID: 114961776988975548}
+  - component: {fileID: 114875650613137534}
   m_Layer: 5
   m_Name: Simple
   m_TagString: Untagged
@@ -646,8 +647,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interfaceController: {fileID: 114799157492898536}
   audioManager: {fileID: 114627496518343434}
-  maxAmmo: 50
-  ammo: 50
+  maxAmmo: 80
+  ammo: 80
   dialogFinal: {fileID: 0}
 --- !u!114 &114424343292644222
 MonoBehaviour:
@@ -774,7 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.30980393, g: 0.6627451, b: 0.54901963, a: 1}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 1, y: 1}
   m_UseGraphicAlpha: 1
 --- !u!114 &114525421254442604
@@ -844,7 +845,7 @@ MonoBehaviour:
   absorberPush: {fileID: 8300000, guid: 08a9ea99f199b204cb38961c80b72284, type: 3}
   absorberOut: {fileID: 8300000, guid: 1d7edde655290d946bde6b17af4595bd, type: 3}
   absorberIn: {fileID: 8300000, guid: 5fbff33232d05bc46afeaefadc75067e, type: 3}
-  absorberBark: {fileID: 8300000, guid: d7c6deafcf8d8fe4e989a537e1a22c5f, type: 3}
+  absorberBark: {fileID: 8300000, guid: c8a4c201182c35f4bbfaaa78ba1e5f11, type: 3}
   poof: {fileID: 8300000, guid: 364a2630665a1af45851e19954ed28ec, type: 3}
   boing: {fileID: 8300000, guid: 410dc7a167ea63044ae558744c446d5d, type: 3}
   death: {fileID: 8300000, guid: b32865636e3477444af114a223d5b11a, type: 3}
@@ -864,8 +865,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ee3d3d963f38e1f419cccb33dff27a70, type: 3}
   - {fileID: 8300000, guid: 72cec3cee52ed5942ad54e00f6af38c2, type: 3}
   - {fileID: 8300000, guid: 9d97ce97f10f13647a6b5f584c8423c6, type: 3}
-  m_soundVolume: 1
-  m_musicVolume: 0.7
+  musicAudioSource1: {fileID: 0}
+  musicAudioSource2: {fileID: 0}
 --- !u!114 &114669009906504988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1014,6 +1015,25 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c8fa81e9b09d65c4faad886cf3d20f80, type: 3}
   - {fileID: 21300000, guid: c8fa81e9b09d65c4faad886cf3d20f80, type: 3}
   fadePanel: {fileID: 114673735382222494}
+  pausePanel: {fileID: 0}
+  inGameOptionsPanel: {fileID: 0}
+  sliderSfx: {fileID: 0}
+  sliderMusic: {fileID: 0}
+  sliderSensibility: {fileID: 0}
+--- !u!114 &114875650613137534
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1160395015643774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114885663691715176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1080,7 +1100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.33333334, g: 0.75294125, b: 0.6156863, a: 1}
+  m_Color: {r: 0.7529412, g: 0.33333334, b: 0.33333334, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

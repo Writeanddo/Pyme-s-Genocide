@@ -53,7 +53,7 @@ public class Jetpack : MonoBehaviour
 
     private void Update()
     {
-        audioSourceJetpackNoise.volume = gm.audioManager.m_soundVolume;
+        audioSourceJetpackNoise.volume = OptionsObject.Instance.sfxVolumeValue;
     }
 
     public void SetReady()

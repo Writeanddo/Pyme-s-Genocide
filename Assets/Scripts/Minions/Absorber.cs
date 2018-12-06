@@ -129,7 +129,7 @@ public class Absorber : MonoBehaviour
 
     void Update()
     {
-        bool fire1Axis = Input.GetAxis("Fire1") < -0.5f;
+        bool fire1Axis = Input.GetAxis("Fire2") < -0.5f;
         bool fire2Axis = Input.GetAxis("Fire2") > 0.5f;
 
         Absorbing = (Input.GetButton("Fire2") || fire2Axis);
@@ -192,7 +192,7 @@ public class Absorber : MonoBehaviour
             absorbParticleSystem.transform.parent.LookAt(tps.FocalPoint);
         }
 
-        audioSource.volume = 0.5f * gameManager.audioManager.m_soundVolume;
+        audioSource.volume = 0.5f * OptionsObject.Instance.sfxVolumeValue;
     }
 
     private void WeaponHidden()

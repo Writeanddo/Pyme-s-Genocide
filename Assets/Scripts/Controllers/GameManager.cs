@@ -39,12 +39,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // ammo = maxAmmo;
-        interfaceController.UpdateCounter();
-
-        pauseCanvas = FindObjectOfType<PauseCanvas>();
         tpc = FindObjectOfType<ThirdPersonCamera>();
-        pauseCanvas.gameObject.SetActive(false);
+        pauseCanvas = FindObjectOfType<PauseCanvas>();
+
+        if (pauseCanvas)
+        {
+            pauseCanvas.gameObject.SetActive(false);
+        }
 
         /* if (pauseCanvas == null)
          {
@@ -130,6 +131,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
         pauseCanvas.gameObject.SetActive(false);
         gamePaused = false;
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 
     public void DecreaseAmmo(float ammount = 1.0f)
