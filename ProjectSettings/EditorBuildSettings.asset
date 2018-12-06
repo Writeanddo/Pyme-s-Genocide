@@ -8,9 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 85b55d78b6ffb7740b4dff0b4266ff51
-  - enabled: 0
-    path: Assets/Scenes/Hermes 1.unity
-    guid: 7d4f95cd07a723b4dae9b00706a6e65c
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 68cf0b714c265f6459501fc3d8c8013a
