@@ -89,7 +89,14 @@ public class PlayerControllerRB : MonoBehaviour
             HandleGroundedInput();
         }
 
-        FreeCamera = Input.GetButton("Fire3") && inputDir.x == 0.0f && inputDir.y == 0.0f;
+        if (Input.GetButtonDown("Fire3"))
+        {
+            FreeCamera = !FreeCamera;
+        }
+        else if (FreeCamera && (inputDir.x != 0.0f || inputDir.y != 0.0f))
+        {
+            FreeCamera = false;
+        }
 
         if (!FreeCamera)
         {

@@ -84,7 +84,7 @@ public class MainMenuManager : MonoBehaviour
 
         if (waitAnyKey)
         {
-            if (Input.anyKey)
+            if (Input.anyKey || Input.GetButtonDown("Fire1") || Input.GetButtonDown("Jump") || Input.GetButtonDown("Fire2") || Input.GetButtonDown("Exit"))
             {
                 waitAnyKey = false;
                 m_panelAnyKey.SetActive(false);

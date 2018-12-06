@@ -32,6 +32,9 @@ public class CrystalPower : MonoBehaviour {
                 destroyed = true;
                 GetComponentInParent<ForceShield>().CrystalDestroyed();
                 Instantiate(particleDestroy, transform.position, Quaternion.identity);
+
+                gm.audioManager.PlayOneShot(gm.audioManager.spaceshipCollected, transform.position);
+
                 Destroy(gameObject);
             }
         }
