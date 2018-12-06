@@ -90,6 +90,6 @@ Material:
     m_Colors:
     - _Color: {r: 0.09803921, g: 0.35686275, b: 0.20793572, a: 1}
     - _EmissionColor: {r: 20.078432, g: 626.4471, b: 766.9961, a: 0}
-    - _Illumi: {r: 0, g: 1, b: 0.72708607, a: 1}
+    - _Illumi: {r: 0, g: 1, b: 0.6774621, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
     - _TintColor: {r: 0, g: 1, b: 0.27972865, a: 0.5}
