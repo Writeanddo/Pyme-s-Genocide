@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Phantom : MonoBehaviour {
 
@@ -23,6 +24,6 @@ public class Phantom : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "Player")
-        Application.Quit();
+            SceneManager.LoadScene(0);
     }
 }
