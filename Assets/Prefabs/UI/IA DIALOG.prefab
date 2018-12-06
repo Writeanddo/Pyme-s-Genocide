@@ -21,6 +21,9 @@ GameObject:
   - component: {fileID: 4792626536301014}
   - component: {fileID: 65443533501461098}
   - component: {fileID: 114451085506627356}
+  - component: {fileID: 65649516302255128}
+  - component: {fileID: 65897358731466946}
+  - component: {fileID: 65594229408649868}
   m_Layer: 0
   m_Name: IA DIALOG
   m_TagString: Untagged
@@ -34,13 +37,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1721456987030974}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.674, y: 1.534, z: -5.045}
+  m_LocalRotation: {x: -0, y: -0.3652496, z: -0, w: 0.9309096}
+  m_LocalPosition: {x: 4.9, y: 1.596, z: -5.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -42.846, z: 0}
 --- !u!65 &65443533501461098
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -51,8 +54,44 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.9999999, y: 20.562471, z: 1}
+  m_Center: {x: 0, y: 9.781236, z: 0}
+--- !u!65 &65594229408649868
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1721456987030974}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 20, z: 20}
+  m_Center: {x: 8.56, y: 9.781236, z: 0}
+--- !u!65 &65649516302255128
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1721456987030974}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 20.562471, z: 1}
+  m_Center: {x: 0, y: 9.781236, z: 0}
+--- !u!65 &65897358731466946
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1721456987030974}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 20, z: 20}
+  m_Center: {x: -7.47, y: 9.781236, z: 0}
 --- !u!114 &114451085506627356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -72,6 +111,8 @@ MonoBehaviour:
     - Go and find me new parts. You'll need to use your jetpack, but it's out of fuel...
     - You should try with these little guys, my superpowerfull artificial mind detects
       that are made of fuel OMG!
+    - Suck'em up with your Vacuum and you'll get fuel, probaly... if you don't explode
+      first.
     - "They could be used to break energy crystals that protect the parts too. Throw
       them, \xA1they are free!\r"
   dialogueManager: {fileID: 0}

@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1264153621922516}
+  m_IsPrefabAsset: 1
+--- !u!1 &1264153621922516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4180988519543854}
+  - component: {fileID: 114068083652171452}
+  - component: {fileID: 65205396381698000}
+  m_Layer: 0
+  m_Name: IA DIALOG_CRYSTALS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4180988519543854
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1264153621922516}
+  m_LocalRotation: {x: -0, y: -0.7039288, z: -0, w: 0.7102705}
+  m_LocalPosition: {x: -71.83, y: 31.8, z: 62.76}
+  m_LocalScale: {x: 5.6014, y: 5.7014, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -89.48601, z: 0}
+--- !u!65 &65205396381698000
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1264153621922516}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 20, z: 20}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114068083652171452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1264153621922516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5862bc7bdb39e6c48a37ee5b4bbaaf7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    id: 0
+    name: AI Ship
+    sentences:
+    - "This creatures could be used to break energy crystals that protect the parts.
+      Throw them all, \xA1they are free!\r"
+  dialogueManager: {fileID: 0}
