@@ -648,7 +648,7 @@ MonoBehaviour:
   interfaceController: {fileID: 114799157492898536}
   audioManager: {fileID: 114627496518343434}
   maxAmmo: 80
-  ammo: 80
+  ammo: 0
   dialogFinal: {fileID: 0}
 --- !u!114 &114424343292644222
 MonoBehaviour:
@@ -865,6 +865,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ee3d3d963f38e1f419cccb33dff27a70, type: 3}
   - {fileID: 8300000, guid: 72cec3cee52ed5942ad54e00f6af38c2, type: 3}
   - {fileID: 8300000, guid: 9d97ce97f10f13647a6b5f584c8423c6, type: 3}
+  button: {fileID: 8300000, guid: 978dba4938152d9448b1e1d65ab5b567, type: 3}
   musicAudioSource1: {fileID: 0}
   musicAudioSource2: {fileID: 0}
 --- !u!114 &114669009906504988

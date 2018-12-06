@@ -4,7 +4,9 @@ using System.Collections;
 public class ThirdPersonCamera : MonoBehaviour
 {
     public bool lockCursor;
-    public float mouseSensitivity = 10;
+
+    [SerializeField] Vector2 mouseSensitivityRange = new Vector2(5.0f, 15.0f);
+
     public Transform target;
     public float dstFromTarget = 2;
     public Vector2 pitchMinMax = new Vector2(-40, 85);
@@ -77,8 +79,8 @@ public class ThirdPersonCamera : MonoBehaviour
             FocalPoint = 10000.0f * cam.transform.forward;
         }
 
-        yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
-        pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+        yaw += Input.GetAxis("Mouse X") * (mouseSensitivityRange.x + OptionsObject.Instance.sensibility * (mouseSensitivityRange.y - mouseSensitivityRange.x));
+        pitch -= Input.GetAxis("Mouse Y") * (mouseSensitivityRange.x + OptionsObject.Instance.sensibility * (mouseSensitivityRange.y - mouseSensitivityRange.x));
         pitch = Mathf.Clamp(pitch, pitchMinMax.x, pitchMinMax.y);
 
         currentRotation = Vector3.SmoothDamp(currentRotation, new Vector3(pitch, yaw), ref rotationSmoothVelocity, rotationSmoothTime);

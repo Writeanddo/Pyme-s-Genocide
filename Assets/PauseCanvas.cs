@@ -58,12 +58,26 @@ public class PauseCanvas : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(button);
     }
 
+    public void PlayButtonSound()
+    {
+        bool gameWasPaused = gm.gamePaused;
+        if (gameWasPaused)
+        {
+            Time.timeScale = 1.0f;
+        }
+        gm.audioManager.PlayOneShot(gm.audioManager.button, Camera.main.transform.position);
+        if (gameWasPaused)
+        {
+            Time.timeScale = 0.0f;
+        }
+    }
+
     public void minionCounter(string id)
     {
         switch (id)
         {
-            case "Bocado": nBocados++;  bocadoText.text = "BOCADOS x" + nBocados;  break;
-            case "CJ": nCJ++;  cjText.text = "CJ x" + nCJ; break;
+            case "Bocado": nBocados++; bocadoText.text = "BOCADOS x" + nBocados; break;
+            case "CJ": nCJ++; cjText.text = "CJ x" + nCJ; break;
             case "Tago": nTago++; tagoText.text = "TAGO x" + nTago; break;
             case "fluf": nFluf++; flufText.text = "FLUF x" + nFluf; break;
             default: break;

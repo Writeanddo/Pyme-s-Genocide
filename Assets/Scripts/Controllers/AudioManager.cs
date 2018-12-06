@@ -25,6 +25,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] squeaks;
     public AudioClip steps;
     public AudioClip[] brokenGlass;
+    public AudioClip button;
 
     [Header("Scene")]
     public AudioSource musicAudioSource1;
