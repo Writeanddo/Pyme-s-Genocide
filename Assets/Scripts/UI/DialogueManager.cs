@@ -48,22 +48,18 @@ public class DialogueManager : MonoBehaviour {
             sentences.Enqueue(sentence);
         }
 
+        audioSource.clip = gm.audioManager.IA[Random.Range(0, gm.audioManager.IA.Length)];
+        audioSource.Play();
+
         DisplayNextSentence();
     }
 
     public void DisplayNextSentence() {
+
         if (sentences.Count == 0) {
             EndDialogue();
             return;
         }
-
-        if (audioSource.isPlaying)
-        {
-            audioSource.Stop();
-        }
-
-        audioSource.clip = gm.audioManager.IA[Random.Range(0, gm.audioManager.IA.Length)];
-        audioSource.Play();
 
         string sentence = sentences.Dequeue();
         StopAllCoroutines();
@@ -76,6 +72,7 @@ public class DialogueManager : MonoBehaviour {
             dialogueText.text += letter;
             yield return null;
         }
+        // audioSource.Stop();
     }
 
     void EndDialogue() {
